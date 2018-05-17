@@ -1,5 +1,6 @@
 package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.R;
+import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
 
 public class MyProfileActivity extends AppCompatActivity implements IMyProfileView, AskNickNameDialog.INickNameListener{
 
@@ -20,6 +22,8 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     TextView nicknameText;
     ImageView noImage; //si no hay nickname o el nickname es invalido
     TextView noNickname;
+
+   // String nickName = "Fenikkel"; //Aço crec que millor plenar-ho en onNickNameInput()
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +36,10 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();*/
             }
         });
 
@@ -45,6 +51,8 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
 
         myProfilePresenter = new MyProfilePresenter(this);
+
+
 
     }
 
@@ -76,8 +84,26 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         askNickNameDialog.show(getFragmentManager(), "AskNickName");
     }
 
+    public void onStatsImageClick(View view){
+        this.switchToShowStats(myProfilePresenter.getNickName());
+    }
+
     @Override
     public void onNickNameInput(String nickname) { //aci li passem del dialogo que pregunta el nickname al presenter
         myProfilePresenter.onNickNameRequested(nickname);
     }
+
+    @Override
+    public void switchToShowStats(String nickName) {
+
+        Intent intent = new Intent(this, ShowStatsActivity.class);
+
+        //Anyadim parametres a ShowStatsActivity
+        intent.putExtra(ShowStatsActivity.NICKNAME, nickName);
+
+        startActivity(intent);
+    }
+
+
+
 }

@@ -6,7 +6,9 @@ package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
 public class MyProfilePresenter {
 
-    IMyProfileView myProfileView;
+    private IMyProfileView myProfileView;
+
+    private String nickNamePresenter;
 
     MyProfilePresenter(IMyProfileView view){
 
@@ -15,6 +17,13 @@ public class MyProfilePresenter {
     }
 
     public void onNickNameRequested(String nickname) {
+
+        nickNamePresenter=nickname;
         //aci tenim el nickname que hem de buscar
+        //myProfileView.switchToShowStats(nickname);
+    }
+
+    public String getNickName() {
+        return nickNamePresenter;
     }
 }
