@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">League Of Fenikkel</string>
     <string name="action_settings">Settings</string>
+    <string name="the_evil">The Evil</string>
+    <string name="insert_nickname">Insert your nickname :</string>
 </resources>

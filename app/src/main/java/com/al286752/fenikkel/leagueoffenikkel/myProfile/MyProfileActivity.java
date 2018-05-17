@@ -1,4 +1,4 @@
-package com.al286752.fenikkel.leagueoffenikkel;
+package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,8 +8,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class MyProfileActivity extends AppCompatActivity {
+import com.al286752.fenikkel.leagueoffenikkel.R;
+
+public class MyProfileActivity extends AppCompatActivity implements IMyProfileView, AskNickNameDialog.INickNameListener{
+
+    MyProfilePresenter myProfilePresenter;
+    ImageView profileImage;
+    TextView nicknameText;
+    ImageView noImage; //si no hay nickname o el nickname es invalido
+    TextView noNickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +36,16 @@ public class MyProfileActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+        //Lo meu
+
+
+        nicknameText = findViewById(R.id.nicknameText);
+        profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
+
+        myProfilePresenter = new MyProfilePresenter(this);
+
     }
 
     @Override
@@ -48,5 +68,16 @@ public class MyProfileActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onProfileImageClick(View view){
+
+        AskNickNameDialog askNickNameDialog = new AskNickNameDialog();
+        askNickNameDialog.show(getFragmentManager(), "AskNickName");
+    }
+
+    @Override
+    public void onNickNameInput(String nickname) { //aci li passem del dialogo que pregunta el nickname al presenter
+        myProfilePresenter.onNickNameRequested(nickname);
     }
 }
