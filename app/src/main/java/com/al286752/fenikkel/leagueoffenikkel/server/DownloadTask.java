@@ -32,6 +32,8 @@ public class DownloadTask extends AsyncTask<Void, Void, String> {
         this.headers = headers;
     }
 
+
+
     public DownloadTask(String urlToDownload, File filetoStoreCover, DownloadCallback<String> downloadCallback, String... headers) {
         this.type = Type.FILE;
         this.filetoStoreCover = filetoStoreCover;

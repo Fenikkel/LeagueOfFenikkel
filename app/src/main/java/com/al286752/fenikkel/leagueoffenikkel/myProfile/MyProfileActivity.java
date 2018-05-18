@@ -1,6 +1,8 @@
 package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,6 +18,8 @@ import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
+
+import java.io.File;
 
 public class MyProfileActivity extends AppCompatActivity implements IMyProfileView, AskNickNameDialog.INickNameListener{
 
@@ -123,9 +127,19 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         //Bad JSON in server response
 
         //https://developer.riotgames.com/response-codes.html
+
+        //https://discussion.developer.riotgames.com/questions/3337/how-can-i-load-summoner-icon-images-using-profilei.html
     }
 
     public void setNicknameText(String nicknam) {
         this.nicknameText.setText(nicknam);
+    }
+
+    @Override
+    public void setSummonerIcon(File icono) {
+
+        Bitmap sumIcon = BitmapFactory.decodeFile(icono.getPath());
+
+        profileImage.setImageBitmap(sumIcon);
     }
 }

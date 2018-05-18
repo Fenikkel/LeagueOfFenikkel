@@ -1,5 +1,7 @@
 package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
+import java.io.File;
+
 /**
  * Created by fenikkel on 17/05/18.
  */
@@ -13,4 +15,6 @@ public interface IMyProfileView {
 
 
     void setNicknameText(String text);
+
+    void setSummonerIcon(File icono);
 }

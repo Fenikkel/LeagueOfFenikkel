@@ -24,3 +24,7 @@ worked 2h 45 min
 -Search Summoner works
 
 worked 30 min
+
+-Download icon and save it in cache
+
+worked 3h

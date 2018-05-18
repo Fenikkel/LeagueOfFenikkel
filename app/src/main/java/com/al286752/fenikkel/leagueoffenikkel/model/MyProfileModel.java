@@ -9,6 +9,8 @@ import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+
 /**
  * Created by fenikkel on 17/05/18.
  */
@@ -40,7 +42,9 @@ public class MyProfileModel implements IMyProfileModel {
     }
 
 
-
+    public void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver) { //este sera llamado desde el presenter
+        leagueServer.findIcon(profileIconId,responseReceiver);
+    }
 
     public void findSummoner(String nickname, ResponseReceiver<JSONObject> reciever) { //este sera llamado desde el presenter
         leagueServer.findSummoner(nickname,reciever);
