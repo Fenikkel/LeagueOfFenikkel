@@ -110,8 +110,22 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
     @Override
     public void showError(String message) {
+
+        //eixa view... que tinc que posar? this no funciona
+
+        /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();*/
+
         nicknameText.setText(message); //aci si ha hagut error en el ficar el nickname segurament
+
+        //404 no existe el summoner
+
+        //Bad JSON in server response
+
+        //https://developer.riotgames.com/response-codes.html
     }
 
-
+    public void setNicknameText(String nicknam) {
+        this.nicknameText.setText(nicknam);
+    }
 }

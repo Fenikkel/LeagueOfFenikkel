@@ -20,3 +20,7 @@ worked: 2h
 -Created some sort of conexion with fails
 
 worked 2h 45 min
+
+-Search Summoner works
+
+worked 30 min

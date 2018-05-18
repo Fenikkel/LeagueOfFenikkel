@@ -5,6 +5,7 @@ import com.al286752.fenikkel.leagueoffenikkel.server.ILeagueServer;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -30,9 +31,9 @@ public class MyProfilePresenter {
     public void onNickNameRequested(String nickname) {
 
         //nickNamePresenter=nickname;
-        myProfileModel.findSummoner(nickname,new ResponseReceiver<JSONArray>() {
+        myProfileModel.findSummoner(nickname,new ResponseReceiver<JSONObject>() {
                     @Override
-                    public void onResponseReceived(JSONArray response) {
+                    public void onResponseReceived(JSONObject response) {
 
                         processJSONData(response);
                     }
@@ -48,8 +49,12 @@ public class MyProfilePresenter {
         //myProfileView.switchToShowStats(nickname);
     }
 
-    private void processJSONData(JSONArray response) {
-        //aci ficarem tot a la vista MyProfile
+    private void processJSONData(JSONObject response) {
+        //aci ficarem tot a la vista MyProfil
+        nickNamePresenter = response.optString("name");
+
+        myProfileView.setNicknameText(nickNamePresenter);
+
     }
 
     public String getNickName() {

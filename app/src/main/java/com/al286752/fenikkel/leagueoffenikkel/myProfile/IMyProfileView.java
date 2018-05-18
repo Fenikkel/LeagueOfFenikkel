@@ -10,4 +10,7 @@ public interface IMyProfileView {
     void switchToShowStats(String nickName);
 
     void showError(String message);
+
+
+    void setNicknameText(String text);
 }

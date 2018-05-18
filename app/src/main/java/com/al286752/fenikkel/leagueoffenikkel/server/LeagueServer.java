@@ -6,6 +6,7 @@ import android.net.NetworkInfo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.List;
@@ -15,6 +16,8 @@ import java.util.List;
  */
 
 public class LeagueServer implements ILeagueServer {
+
+    //https://euw1.api.riotgames.com/lol/summoner/v3/summoners/by-name/Fenikkel?api_key=RGAPI-45b77d34-0635-47d4-90ef-3e8336fc89df
 
     //private static final int MAX_RESULTS = 20;
     private static final String BAD_JSON_IN_SERVER_RESPONSE = "Bad JSON in server response";
@@ -32,7 +35,7 @@ public class LeagueServer implements ILeagueServer {
     }
 
     @Override
-    public void findSummoner(String nickName, final ResponseReceiver<JSONArray> responseReceiver) { //este es llamado desde el modelo que sera llamado desde el presenter
+    public void findSummoner(String nickName, final ResponseReceiver<JSONObject> responseReceiver) { //este es llamado desde el modelo que sera llamado desde el presenter
 
         String nickEncoded;
         try {
@@ -47,9 +50,10 @@ public class LeagueServer implements ILeagueServer {
 
         DownloadTask downloadTask =  new DownloadTask(urlPetition, new DownloadCallback<String>() {
             @Override
-            public void updateFromDownload(String result) {
+            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
                 try {
-                    JSONArray json = new JSONArray(result);
+
+                    JSONObject json = new JSONObject(result);
 
                     responseReceiver.onResponseReceived(json); //mos passem un JSON ARRAY pero encara hi ha que processarlo
 
@@ -79,7 +83,7 @@ public class LeagueServer implements ILeagueServer {
 
         });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
 
-        downloadTask.execute();
+        downloadTask.execute(); //aci se fica a fer lo de onpreexecute, doitbackground(on utilitza networkhelper) i onpostexecute
 
     }
 
