@@ -8,4 +8,6 @@ public interface IMyProfileView {
     //aci posarem els metodos de la vista de MyProfile que se neccessita utilitzar en altres classes?
 
     void switchToShowStats(String nickName);
+
+    void showError(String message);
 }

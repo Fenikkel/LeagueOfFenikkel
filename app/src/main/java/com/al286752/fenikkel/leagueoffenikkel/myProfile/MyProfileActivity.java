@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.R;
+import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
+import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
 
 public class MyProfileActivity extends AppCompatActivity implements IMyProfileView, AskNickNameDialog.INickNameListener{
@@ -22,6 +24,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     TextView nicknameText;
     ImageView noImage; //si no hay nickname o el nickname es invalido
     TextView noNickname;
+    MyProfileModel myProfileModel;
 
    // String nickName = "Fenikkel"; //Aço crec que millor plenar-ho en onNickNameInput()
 
@@ -46,11 +49,12 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
         //Lo meu
 
+        myProfileModel = new MyProfileModel(getApplicationContext());
 
         nicknameText = findViewById(R.id.nicknameText);
         profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
 
-        myProfilePresenter = new MyProfilePresenter(this);
+        myProfilePresenter = new MyProfilePresenter(this, myProfileModel);
 
 
 
@@ -104,6 +108,10 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         startActivity(intent);
     }
 
+    @Override
+    public void showError(String message) {
+        nicknameText.setText(message); //aci si ha hagut error en el ficar el nickname segurament
+    }
 
 
 }
