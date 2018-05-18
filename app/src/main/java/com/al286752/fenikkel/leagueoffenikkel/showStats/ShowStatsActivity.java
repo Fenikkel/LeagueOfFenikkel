@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.R;
-import com.al286752.fenikkel.leagueoffenikkel.server.DownloadCallback;
+/*import com.al286752.fenikkel.leagueoffenikkel.server.DownloadCallback;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.server.simpleConection.TaskWithProgress;
 
@@ -18,7 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.util.LinkedList;
-import java.util.List;
+import java.util.List;*/
 
 public class ShowStatsActivity extends AppCompatActivity {
 
