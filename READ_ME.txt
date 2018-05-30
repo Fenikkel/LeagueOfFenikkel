@@ -28,3 +28,15 @@ worked 30 min
 -Download icon and save it in cache
 
 worked 3h
+
+30/05/2018
+
+- Trying to fix download icon and save it in cache
+
+worked 1h
+
+- Show icon using url(works)
+
+worked 50 min
+
+-Message to Riot Games to get a permanent key or one moth use key (actualy i'm working with a 24h key)

@@ -15,5 +15,7 @@ public interface IMyProfileModel {
 
     void findSummoner(String nickname, ResponseReceiver<JSONObject> reciever);
 
-    void findIcon(int profileIconId, ResponseReceiver<File> responseReceiver);
+    //void findIcon(int profileIconId, ResponseReceiver<File> responseReceiver);
+
+    String getUrlIcon(int idIcon);
 }

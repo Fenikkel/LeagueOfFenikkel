@@ -24,7 +24,7 @@ public class LeagueServer implements ILeagueServer {
     private static final String BAD_JSON_IN_SERVER_RESPONSE = "Bad JSON in server response";
 
     private static final String BASE_URL = "https://euw1.api.riotgames.com";
-    private static final String API_KEY = "?api_key=RGAPI-45b77d34-0635-47d4-90ef-3e8336fc89df";
+    private static final String API_KEY = "?api_key=RGAPI-8cbd5b21-3b42-4528-9875-f9630483b05c";
     private static final String SEARCH_SUMMONER = "/lol/summoner/v3/summoners/by-name/"; //aci falta sumarli el nickname + la API_KEY
 
     //icono
@@ -47,7 +47,7 @@ public class LeagueServer implements ILeagueServer {
     }
 
 
-    @Override
+    /*@Override
     public void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver){
 
         String urlIcon = BASE_URL_ICON + VERSION + BASE_URL_ICON2 + profileIconId+PNG;
@@ -85,7 +85,7 @@ public class LeagueServer implements ILeagueServer {
         downloadTask.execute();
 
 
-    }
+    }*/
 
 
     @Override
@@ -139,6 +139,11 @@ public class LeagueServer implements ILeagueServer {
 
         downloadTask.execute(); //aci se fica a fer lo de onpreexecute, doitbackground(on utilitza networkhelper) i onpostexecute
 
+    }
+
+    @Override
+    public String getUrlIcon(int idIcon) {
+        return BASE_URL_ICON + VERSION + BASE_URL_ICON2 + idIcon +PNG;
     }
 
 

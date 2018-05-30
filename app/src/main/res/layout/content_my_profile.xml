@@ -15,6 +15,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/the_evil"
         android:textSize="30dp"
+        android:onClick="onProfileImageClick"
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

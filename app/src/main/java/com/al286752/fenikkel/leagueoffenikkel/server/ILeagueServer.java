@@ -13,6 +13,8 @@ public interface ILeagueServer {
 
     void findSummoner(String nickName, ResponseReceiver<JSONObject> responseReceiver);
 
-    void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver);
+    String getUrlIcon(int idIcon);
+
+    //void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver);
 
 }

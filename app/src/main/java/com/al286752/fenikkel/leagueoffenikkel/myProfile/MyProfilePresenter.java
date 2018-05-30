@@ -66,7 +66,11 @@ public class MyProfilePresenter {
 
         myProfileView.setNicknameText(nickNamePresenter);
 
-        myProfileModel.findIcon(iconIDPresenter, new ResponseReceiver<File>() {
+        String urlIcon = myProfileModel.getUrlIcon(iconIDPresenter);
+
+        myProfileView.setSummonerIcon(urlIcon);
+
+        /*myProfileModel.findIcon(iconIDPresenter, new ResponseReceiver<File>() {
             @Override
             public void onResponseReceived(File response) {
                 myProfileView.setSummonerIcon(response);
@@ -76,7 +80,7 @@ public class MyProfilePresenter {
             public void onErrorReceived(String message) {
                 myProfileView.showError(message);
             }
-        });
+        });*/
 
     }
 

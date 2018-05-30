@@ -16,5 +16,7 @@ public interface IMyProfileView {
 
     void setNicknameText(String text);
 
-    void setSummonerIcon(File icono);
+    //void setSummonerIcon(File icono);
+
+    void setSummonerIcon(String urlIcon);
 }

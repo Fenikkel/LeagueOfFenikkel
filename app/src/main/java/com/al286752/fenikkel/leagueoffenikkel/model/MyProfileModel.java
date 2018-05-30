@@ -42,12 +42,17 @@ public class MyProfileModel implements IMyProfileModel {
     }
 
 
-    public void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver) { //este sera llamado desde el presenter
+    /*public void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver) { //este sera llamado desde el presenter
         leagueServer.findIcon(profileIconId,responseReceiver);
-    }
+    }*/
 
     public void findSummoner(String nickname, ResponseReceiver<JSONObject> reciever) { //este sera llamado desde el presenter
         leagueServer.findSummoner(nickname,reciever);
+    }
+
+    @Override
+    public String getUrlIcon(int idIcon) {
+        return leagueServer.getUrlIcon(idIcon);
     }
 
 

@@ -136,10 +136,16 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     }
 
     @Override
+    public void setSummonerIcon(String urlIcon) {
+
+         new DownloadImageTask(profileImage).execute(urlIcon);
+    }
+
+    /*@Override
     public void setSummonerIcon(File icono) {
 
         Bitmap sumIcon = BitmapFactory.decodeFile(icono.getPath());
 
         profileImage.setImageBitmap(sumIcon);
-    }
+    }*/
 }
