@@ -40,3 +40,13 @@ worked 1h
 worked 50 min
 
 -Message to Riot Games to get a permanent key or one moth use key (actualy i'm working with a 24h key)
+
+01/06/2018
+
+-Riot Games gave me a standard key!
+
+-Implemented error snackbar for search
+
+-Implemented getIconVersion() to always be in the latest version
+
+worked 2h 30 min

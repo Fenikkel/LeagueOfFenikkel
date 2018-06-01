@@ -115,20 +115,38 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     @Override
     public void showError(String message) {
 
-        //eixa view... que tinc que posar? this no funciona
+        int stringLenght = message.length();
+        String error ="" + message.charAt(stringLenght-3)+ message.charAt(stringLenght-2) + message.charAt(stringLenght-1);
+        View parentLayout = findViewById(android.R.id.content);
 
-        /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();*/
-
-        nicknameText.setText(message); //aci si ha hagut error en el ficar el nickname segurament
-
-        //404 no existe el summoner
-
-        //Bad JSON in server response
+        //nicknameText.setText(error);
+        String snackString = "YOLO";
+        if(error.equals("403")){
+            snackString = "Invalid API key";
+        }
+        else if(error.equals("401")){
+            snackString = "Unauthoritzed, your API key can't access to this data";
+        }
+        else if(error.equals("503")){
+            snackString = "Server currently unavaliable";
+        }
+        else if(error.equals("500")){
+            snackString = "Internal server error";
+        }
+        else if(error.equals("404")){
+            snackString = "This summoner doesn't exist(or is an inactive player)";
+        }
+        else if(error.equals("429")){
+            snackString = "We reached the limit of requests! We are sorry :(";
+        }
+        else {
+            snackString = message;
+        }
+       Snackbar.make(parentLayout, snackString, Snackbar.LENGTH_LONG).show();
 
         //https://developer.riotgames.com/response-codes.html
 
-        //https://discussion.developer.riotgames.com/questions/3337/how-can-i-load-summoner-icon-images-using-profilei.html
+
     }
 
     public void setNicknameText(String nicknam) {
@@ -137,7 +155,8 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
     @Override
     public void setSummonerIcon(String urlIcon) {
-
+        //https://discussion.developer.riotgames.com/questions/3337/how-can-i-load-summoner-icon-images-using-profilei.html
+        //https://ddragon.leagueoflegends.com/api/versions.json
          new DownloadImageTask(profileImage).execute(urlIcon);
     }
 
