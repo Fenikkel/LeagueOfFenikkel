@@ -170,6 +170,52 @@ public class LeagueServer implements ILeagueServer {
         return BASE_URL_ICON + iconVersion + BASE_URL_ICON2 + idIcon +PNG;
     }
 
+    @Override
+    public void findMaestries(String sumID, final ResponseReceiver<JSONArray> reciever) {
+        String urlMaestries = BASE_URL+SEARCH_MAESTRIES+sumID+API_KEY;
+
+        DownloadTask downloadTask =  new DownloadTask(urlMaestries, new DownloadCallback<String>() {
+            @Override
+            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
+                try {
+
+                    JSONArray jsonArray = new JSONArray(result);
+
+                    reciever.onResponseReceived(jsonArray); //mos passem un JSON ARRAY pero encara hi ha que processarlo
+
+                    //List<AllGameData> allGameData = processJSON(json);
+                    //receiver.onResponseReceived(allGameData);
+
+
+
+                }catch (JSONException e){
+                    reciever.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public NetworkInfo getActiveNetworkInfo() {
+                return getNetworkInfo();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+                reciever.onErrorReceived(msg);
+            }
+
+
+        });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
+
+        downloadTask.execute(); //aci se fica a fer lo de onpreexecute, doitbackground(on utilitza networkhelper) i onpostexecute
+
+
+
+
+    }
+
     public void getIconVersion(){
 
 

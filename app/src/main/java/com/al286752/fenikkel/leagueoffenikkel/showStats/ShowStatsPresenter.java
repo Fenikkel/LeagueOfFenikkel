@@ -30,22 +30,23 @@ public class ShowStatsPresenter {
 
     }
 
-    public void findMaestries (String idSummoner, ResponseReceiver<ArrayList<ChampionMaestries>> receiver){
-        /*model.findMaestries(idSummoner,new ResponseReceiver<ArrayList<ChampionMaestries>>() {
+    public void findMaestries (String idSummoner, final ResponseReceiver<ArrayList<ChampionMaestries>> receiver){
+        model.findMaestries(idSummoner,new ResponseReceiver<ArrayList<ChampionMaestries>>() {
                     @Override
                     public void onResponseReceived(ArrayList<ChampionMaestries> response) {
 
                         //aci ho passem a la vista per a que ho mostre
+                        receiver.onResponseReceived(response);
 
                     }
 
                     @Override
                     public void onErrorReceived(String message) {
 
-                        view.showError(message);
+                        //view.showError(message);
                     }
                 }
-        );*/
+        );
     }
 
 }

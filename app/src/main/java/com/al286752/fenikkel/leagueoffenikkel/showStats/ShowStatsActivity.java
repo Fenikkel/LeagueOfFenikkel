@@ -1,9 +1,6 @@
 package com.al286752.fenikkel.leagueoffenikkel.showStats;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
@@ -11,7 +8,6 @@ import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
-import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
 import java.util.ArrayList;
@@ -29,7 +25,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
     public static final String NICKNAME = "nickName";//se suposa que se replena al cambiar de activitat, sera el parametre que li passem (esta en MyProfile)
     public static final String ID_SUMMONER = "idSummoner";
-    TextView nickNameStats;
+    TextView champion;
     ProgressBar progressBarProba;
 
     //private IMyProfileModel model;
@@ -48,10 +44,12 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         String nick = intent.getStringExtra(NICKNAME); //no se molt be per a que serveix la final string... es tipo un mediador o uns transportador de paquetes?
         idSum = intent.getStringExtra(ID_SUMMONER);
 
-        nickNameStats = findViewById(R.id.nickNameStats);
-        //nickNameStats.setText(nick); //tindra el que hem escrit en el dialog
-        nickNameStats.setText(idSum);
+        champion = findViewById(R.id.championId);
+        //champion.setText(nick); //tindra el que hem escrit en el dialog
+        //champion.setText(idSum);
         progressBarProba = findViewById(R.id.progressBarProba);
+
+        findMaestries();
 
     }
 
@@ -60,7 +58,9 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         presenter.findMaestries(idSum, new ResponseReceiver<ArrayList<ChampionMaestries>>() {
             @Override
             public void onResponseReceived(ArrayList<ChampionMaestries> response) {
-                //aci fiquem a la vista tot el material
+                long chamId = response.get(0).getChampionId();
+                String champ = ""+chamId; //si no faig aço peta
+                champion.setText(champ);
             }
 
             @Override
