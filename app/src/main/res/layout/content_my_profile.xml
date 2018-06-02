@@ -13,13 +13,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/the_evil"
-        android:textSize="30dp"
         android:onClick="onProfileImageClick"
+        android:text="@string/the_evil"
 
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage"
+        app:layout_constraintTop_toTopOf="parent"
         tools:textColor="@android:color/black" />
 
     <ImageView
@@ -28,14 +28,15 @@
         android:layout_height="120dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:adjustViewBounds="false"
-        android:src="@drawable/teemo_profile"
-        android:onClick="onProfileImageClick"
+        android:contentDescription="@string/over_nine_thousen"
 
+        android:onClick="onProfileImageClick"
+        android:src="@drawable/teemo_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/nicknameText" />
 
     <ImageView
         android:id="@+id/statsImage"
@@ -43,8 +44,9 @@
         android:layout_height="120dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/stats_rammus"
+        android:contentDescription="@string/over_nine_thousen"
         android:onClick="onStatsImageClick"
+        android:src="@drawable/stats_rammus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -54,8 +56,23 @@
         android:layout_height="100dp"
         android:layout_marginBottom="30dp"
         android:layout_marginStart="32dp"
+        android:contentDescription="@string/over_nine_thousen"
         android:src="@drawable/time_wasted_thresh"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/levelText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/over_nine_thousen"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
 </android.support.constraint.ConstraintLayout>

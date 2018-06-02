@@ -14,7 +14,7 @@ public interface IMyProfileView {
     void showError(String message);
 
 
-    void setNicknameText(String text);
+    void setNicknameText(String text, long lvl, long sumId);
 
     //void setSummonerIcon(File icono);
 

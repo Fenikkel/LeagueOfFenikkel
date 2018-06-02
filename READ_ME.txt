@@ -1,6 +1,6 @@
 17/05/2018
 
--Started the project 
+-Started the project
 -I design the MVP and cleared ideas
 -Created MyProfileActivity
 
@@ -50,3 +50,11 @@ worked 50 min
 -Implemented getIconVersion() to always be in the latest version
 
 worked 2h 30 min
+
+02/06/2018
+
+-Upgrading MyProfileActivity
+-Designing ShowStatsActivity
+-Passing id summoner to ShowStatsActivity
+
+worked 2 h

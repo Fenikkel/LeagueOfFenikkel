@@ -19,6 +19,9 @@ public class MyProfilePresenter {
     private IMyProfileView myProfileView;
     private IMyProfileModel myProfileModel;
 
+    private long idSummoner;
+    private long summonerLevel;
+
     private String nickNamePresenter;
     private int iconIDPresenter;
 
@@ -63,8 +66,10 @@ public class MyProfilePresenter {
         //aci ficarem tot a la vista MyProfil
         nickNamePresenter = response.optString("name");
         iconIDPresenter =response.optInt("profileIconId");
+        idSummoner = response.optLong("id");
+        summonerLevel = response.optLong("summonerLevel");
 
-        myProfileView.setNicknameText(nickNamePresenter);
+        myProfileView.setNicknameText(nickNamePresenter,summonerLevel,idSummoner);
 
         String urlIcon = myProfileModel.getUrlIcon(iconIDPresenter);
 

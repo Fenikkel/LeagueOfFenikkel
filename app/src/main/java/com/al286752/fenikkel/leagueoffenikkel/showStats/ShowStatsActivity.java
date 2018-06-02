@@ -23,6 +23,7 @@ import java.util.List;*/
 public class ShowStatsActivity extends AppCompatActivity {
 
     public static final String NICKNAME = "nickName";//se suposa que se replena al cambiar de activitat, sera el parametre que li passem (esta en MyProfile)
+    public static final String ID_SUMMONER = "idSummoner";
     TextView nickNameStats;
     ProgressBar progressBarProba;
 
@@ -37,11 +38,11 @@ public class ShowStatsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String nick = intent.getStringExtra(NICKNAME); //no se molt be per a que serveix la final string... es tipo un mediador o uns transportador de paquetes?
-
+        String idSummoner = intent.getStringExtra(ID_SUMMONER);
 
         nickNameStats = findViewById(R.id.nickNameStats);
-        nickNameStats.setText(nick); //tindra el que hem escrit en el dialog
-
+        //nickNameStats.setText(nick); //tindra el que hem escrit en el dialog
+        nickNameStats.setText(idSummoner);
         progressBarProba = findViewById(R.id.progressBarProba);
 
     }

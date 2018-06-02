@@ -27,8 +27,9 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     ImageView profileImage;
     TextView nicknameText;
     ImageView noImage; //si no hay nickname o el nickname es invalido
-    TextView noNickname;
+    TextView lvltext;
     MyProfileModel myProfileModel;
+    long idSummoner = -1;
 
    // String nickName = "Fenikkel"; //Aço crec que millor plenar-ho en onNickNameInput()
 
@@ -57,6 +58,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
         nicknameText = findViewById(R.id.nicknameText);
         profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
+        lvltext = findViewById(R.id.levelText);
 
         myProfilePresenter = new MyProfilePresenter(this, myProfileModel);
 
@@ -104,10 +106,17 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     @Override
     public void switchToShowStats(String nickName) {
 
+        if(idSummoner == -1){
+            View parentLayout = findViewById(android.R.id.content);
+            Snackbar.make(parentLayout, "Please insert your summoner name to start", Snackbar.LENGTH_LONG).show();
+            return;
+        }
+
         Intent intent = new Intent(this, ShowStatsActivity.class);
 
         //Anyadim parametres a ShowStatsActivity
         intent.putExtra(ShowStatsActivity.NICKNAME, nickName);
+        intent.putExtra(ShowStatsActivity.ID_SUMMONER, String.valueOf(idSummoner));
 
         startActivity(intent);
     }
@@ -149,8 +158,12 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
     }
 
-    public void setNicknameText(String nicknam) {
+    public void setNicknameText(String nicknam, long lvl, long sumId) {
         this.nicknameText.setText(nicknam);
+        String ltext = ""+lvl; //para passar a String
+        lvltext.setText(ltext);
+
+        idSummoner=sumId;
     }
 
     @Override
