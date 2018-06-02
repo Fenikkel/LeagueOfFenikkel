@@ -58,3 +58,7 @@ worked 2h 30 min
 -Passing id summoner to ShowStatsActivity
 
 worked 2 h
+
+-Preparing all to connect ShowStats to the Server
+
+worked 1h 30 min

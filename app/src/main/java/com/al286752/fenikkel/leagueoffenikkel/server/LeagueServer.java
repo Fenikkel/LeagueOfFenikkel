@@ -22,7 +22,10 @@ public class LeagueServer implements ILeagueServer {
 
     //private static final int MAX_RESULTS = 20;
     private static final String BAD_JSON_IN_SERVER_RESPONSE = "Bad JSON in server response";
-
+    //falta ficar la regio
+    //private static final String BASE_URL = "https://";
+    //private static final String BASE_URL_2 = ".api.riotgames.com";
+    //private  String defaultRegion = "euw1";
     private static final String BASE_URL = "https://euw1.api.riotgames.com";
     private static final String API_KEY = "?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae";
     private static final String SEARCH_SUMMONER = "/lol/summoner/v3/summoners/by-name/"; //aci falta sumarli el nickname + la API_KEY
@@ -41,6 +44,16 @@ public class LeagueServer implements ILeagueServer {
     private static final String PNG = ".png";
 
     private String iconVersion="caca";
+
+
+    //MAESTRIA
+    //https://euw1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/22339646?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
+
+    private static final String SEARCH_MAESTRIES ="/lol/champion-mastery/v3/champion-masteries/by-summoner/";
+    private String summonerId;
+
+
+
 
 
     private Context context;

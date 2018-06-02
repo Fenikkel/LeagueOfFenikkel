@@ -48,6 +48,7 @@ public class MyProfileModel implements IMyProfileModel {
 
     public void findSummoner(String nickname, ResponseReceiver<JSONObject> reciever) { //este sera llamado desde el presenter
         leagueServer.findSummoner(nickname,reciever);
+        //aci crec que hem de fer el process JSON DATA
     }
 
     @Override
