@@ -53,6 +53,8 @@ public class LeagueServer implements ILeagueServer {
     private String summonerId;
 
 
+    //CHAMPIONS
+    private static final String CHAMPIONS = BASE_URL+"/lol/static-data/v3/champions"+API_KEY;
 
 
 
@@ -213,6 +215,48 @@ public class LeagueServer implements ILeagueServer {
 
 
 
+
+    }
+
+    @Override
+    public void getChampions(final ResponseReceiver<JSONArray> responseReceiver) {
+
+        DownloadTask downloadTask =  new DownloadTask(CHAMPIONS, new DownloadCallback<String>() {
+            @Override
+            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
+                try {
+
+                    JSONArray jsonArray = new JSONArray(result);
+
+                    responseReceiver.onResponseReceived(jsonArray); //mos passem un JSON ARRAY pero encara hi ha que processarlo
+
+                    //List<AllGameData> allGameData = processJSON(json);
+                    //receiver.onResponseReceived(allGameData);
+
+
+
+                }catch (JSONException e){
+                    responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public NetworkInfo getActiveNetworkInfo() {
+                return getNetworkInfo();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+                responseReceiver.onErrorReceived(msg);
+            }
+
+
+        });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
+
+        downloadTask.execute();
 
     }
 

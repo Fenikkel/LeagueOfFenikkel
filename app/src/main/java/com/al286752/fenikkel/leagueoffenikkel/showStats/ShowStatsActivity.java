@@ -86,6 +86,17 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         presenter.findMaestries(idSum, new ResponseReceiver<ArrayList<ChampionMaestries>>() {
             @Override
             public void onResponseReceived(ArrayList<ChampionMaestries> response) {
+
+                if(response.size()==0){
+                    listMaestries.setEmptyView(findViewById(R.id.noMaestriesImage));
+
+                    View parentLayout = findViewById(android.R.id.content);
+                    findViewById(R.id.noMaestriesImage).setVisibility(View.VISIBLE);
+                    Snackbar.make(parentLayout, "This summoner don't have any mastery", Snackbar.LENGTH_LONG).show();
+
+                    return; //si es algu que porta molt de temps sense jugar i no te maestria en res
+                }
+
                 //Champion ID
                 long chamId = response.get(0).getChampionId();
                 //String champ = ""+chamId; //si no faig aço peta
@@ -121,7 +132,15 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
                 //aci fem un findChampion i creem una llista de champions per a passarlila a
 
-                fillList(response);
+                ArrayList<String> champsIds = new ArrayList<>();
+
+                for(ChampionMaestries champ : response){
+
+                    champsIds.add(String.valueOf(champ.getChampionId()));
+
+                }
+
+                fillList(champsIds);
 
             }
 
@@ -139,16 +158,18 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
 
 
-    public void fillList(ArrayList<ChampionMaestries> champions){ //desdeOn responce received de findMaestries cridema esta funcio?
+    public void fillList(ArrayList<String> champions){ //desdeOn responce received de findMaestries cridema esta funcio?
 
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
+        /*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
                 "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2" };
+                "Linux", "OS/2" };*/
+
+        String[] value2s = champions.toArray(new String[0]);
 
         /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.list_maestries_layout, R.id.rowText, values);*/
 
-        final MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, values);
+        final MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, value2s);
 
         listMaestries.setAdapter(adapter);
 

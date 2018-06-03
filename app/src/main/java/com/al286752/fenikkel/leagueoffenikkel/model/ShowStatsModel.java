@@ -63,13 +63,29 @@ public class ShowStatsModel implements IShowStatsModel {
 
     }
 
+    @Override
+    public void getChampions(final ResponseReceiver<JSONArray> responseReceiver) {
+        leagueServer.getChampions(new ResponseReceiver<JSONArray>(){
+
+            @Override
+            public void onResponseReceived(JSONArray response) {
+                responseReceiver.onResponseReceived(response);
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+
+            }
+        });
+    }
+
     public ArrayList<ChampionMaestries> processJSONMaestries(JSONArray jsonArray){
 
         ArrayList<ChampionMaestries> championMaestriesArrayList = new ArrayList<>();
         JSONObject cosa;
         ChampionMaestries champion;
 
-        for (int contador = 0 ; contador<2 ; contador++) { //contador<jsonArray.length()
+        for (int contador = 0 ; contador<jsonArray.length() ; contador++) { //contador<jsonArray.length()
 
             try {
 
@@ -77,11 +93,26 @@ public class ShowStatsModel implements IShowStatsModel {
 
                 champion = new ChampionMaestries();
 
-                long championId = cosa.optLong("championId");
-                champion.setChampionId(championId);
+                if(cosa.optLong("championId")==0L){
+                    champion.setChampionId(-1L);
+                }else{
 
-                int champLvl = cosa.optInt("championLevel");
-                champion.setChampionLevel(champLvl);
+                    long championId = cosa.optLong("championId");
+                    champion.setChampionId(championId);
+
+                }
+
+
+                if(cosa.optInt("championLevel")==0){
+                    champion.setChampionLevel(-1);
+                }else {
+                    int champLvl = cosa.optInt("championLevel");
+                    champion.setChampionLevel(champLvl);
+                }
+
+
+
+
 
                 boolean chst = cosa.optBoolean("chestGranted");
                 champion.setChestGranted(chst);
@@ -89,20 +120,35 @@ public class ShowStatsModel implements IShowStatsModel {
                 int champPont = cosa.optInt("championPoints");
                 champion.setChampionPoints(champPont);
 
-                long championPointsUntilNextLevel = cosa.optLong("championPointsUntilNextLevel");
-                champion.setChampionPointsUntilNextLevel(championPointsUntilNextLevel);
+                if(cosa.optLong("championPointsUntilNextLevel")==0L){
+                    champion.setChampionPointsUntilNextLevel(-1L);
+                }else {
+                    long championPointsUntilNextLevel = cosa.optLong("championPointsUntilNextLevel");
+                    champion.setChampionPointsUntilNextLevel(championPointsUntilNextLevel);
+                }
+
+
 
                 int tokens = cosa.optInt("tokensEarned");
                 champion.setTokensEarned(tokens);
 
-                long sinceLast = cosa.optLong("championPointsSinceLastLevel");
+                if(cosa.optLong("championPointsSinceLastLevel")==0L){
+                    champion.setChampionPointsSinceLastLevel(-1L);
+                }
+                else {
+                    long sinceLast = cosa.optLong("championPointsSinceLastLevel");
 
-                champion.setChampionPointsSinceLastLevel(sinceLast);
+                    champion.setChampionPointsSinceLastLevel(sinceLast);
+                }
 
-                long lastPlay = cosa.optLong("lastPlayTime"); //never played que valor sera??
 
-                champion.setLastPlayTime(lastPlay);
+                if(cosa.optLong("lastPlayTime")==0){
+                    champion.setLastPlayTime(-1L);
+                }else {
+                    long lastPlay = cosa.optLong("lastPlayTime"); //never played que valor sera??
 
+                    champion.setLastPlayTime(lastPlay);
+                }
 
 
                 championMaestriesArrayList.add(champion);

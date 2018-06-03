@@ -17,6 +17,8 @@ public interface ILeagueServer {
 
     void  findMaestries(String sumID, ResponseReceiver<JSONArray> reciever);
 
+    void getChampions(ResponseReceiver<JSONArray> responseReceiver);
+
     //void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver);
 
 }

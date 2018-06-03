@@ -76,3 +76,7 @@ worked 1h 15 min
 -Working on a list
 
 worked 1h 30min
+
+-List done and trying to get the champion name using his id
+
+worked 2h
