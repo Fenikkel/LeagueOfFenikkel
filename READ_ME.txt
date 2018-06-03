@@ -72,3 +72,7 @@ worked 2h
 -All maestries data processed
 
 worked 1h 15 min
+
+-Working on a list
+
+worked 1h 30min

@@ -5,8 +5,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
@@ -36,6 +41,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     TextView championPointsSinceLastLevel;
     TextView lastPlayTime;
     ProgressBar progressBarProba;
+    ListView listMaestries;
 
     //private IMyProfileModel model;
     private ShowStatsPresenter presenter;
@@ -62,11 +68,16 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         championPointsSinceLastLevel = findViewById(R.id.pointsSinceLastLevel);
         lastPlayTime = findViewById(R.id.lastPlayTime);
 
+
         //championId.setText(nick); //tindra el que hem escrit en el dialog
         //championId.setText(idSum);
         progressBarProba = findViewById(R.id.progressBarProba);
+        listMaestries = findViewById(R.id.maestriesList);
+
+
 
         findMaestries();
+
 
     }
 
@@ -108,6 +119,10 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                 long pointsSinceLastlvl =response.get(0).getChampionPointsSinceLastLevel();
                 championPointsSinceLastLevel.setText(String.valueOf(pointsSinceLastlvl));
 
+                //aci fem un findChampion i creem una llista de champions per a passarlila a
+
+                fillList(response);
+
             }
 
             @Override
@@ -121,5 +136,55 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
     }
 
+
+
+
+    public void fillList(ArrayList<ChampionMaestries> champions){ //desdeOn responce received de findMaestries cridema esta funcio?
+
+        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
+                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
+                "Linux", "OS/2" };
+
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                R.layout.list_maestries_layout, R.id.rowText, values);*/
+
+        final MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, values);
+
+        listMaestries.setAdapter(adapter);
+
+        listMaestries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //presenter.onAddGameRequested(position);
+                String item = (String) adapter.getItem(position);
+                Toast.makeText(getApplicationContext(),item + " selected",Toast.LENGTH_LONG).show();//this, item + " selected", Toast.LENGTH_LONG
+
+            }
+        });
+
+
+
+/*
+
+        ListAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,champions);
+
+        listMaestries.setAdapter(adapter);
+        listMaestries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //presenter.onAddGameRequested(position);
+            }
+        });
+
+        */
+
+    }
+/*
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        String item = (String) getListAdapter().getItem(position);
+        Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+    }
+*/
 
 }
