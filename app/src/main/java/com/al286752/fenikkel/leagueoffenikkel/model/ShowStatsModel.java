@@ -80,6 +80,31 @@ public class ShowStatsModel implements IShowStatsModel {
                 long championId = cosa.optLong("championId");
                 champion.setChampionId(championId);
 
+                int champLvl = cosa.optInt("championLevel");
+                champion.setChampionLevel(champLvl);
+
+                boolean chst = cosa.optBoolean("chestGranted");
+                champion.setChestGranted(chst);
+
+                int champPont = cosa.optInt("championPoints");
+                champion.setChampionPoints(champPont);
+
+                long championPointsUntilNextLevel = cosa.optLong("championPointsUntilNextLevel");
+                champion.setChampionPointsUntilNextLevel(championPointsUntilNextLevel);
+
+                int tokens = cosa.optInt("tokensEarned");
+                champion.setTokensEarned(tokens);
+
+                long sinceLast = cosa.optLong("championPointsSinceLastLevel");
+
+                champion.setChampionPointsSinceLastLevel(sinceLast);
+
+                long lastPlay = cosa.optLong("lastPlayTime"); //never played que valor sera??
+
+                champion.setLastPlayTime(lastPlay);
+
+
+
                 championMaestriesArrayList.add(champion);
 
             } catch (JSONException e) {

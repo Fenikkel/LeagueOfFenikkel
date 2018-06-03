@@ -24,6 +24,24 @@ public class ChampionMaestries {
     private int tokensEarned;
     private long championPointsUntilNextLevel;
     private boolean chestGranted;
+    private long championPointsSinceLastLevel;
+    private long lastPlayTime;
+
+    public void setChampionPointsSinceLastLevel(long championPointsSinceLastLevel) {
+        this.championPointsSinceLastLevel = championPointsSinceLastLevel;
+    }
+
+    public void setLastPlayTime(long lastPlayTime) {
+        this.lastPlayTime = lastPlayTime;
+    }
+
+    public long getChampionPointsSinceLastLevel() {
+        return championPointsSinceLastLevel;
+    }
+
+    public long getLastPlayTime() {
+        return lastPlayTime;
+    }
 
     public void setChampionId(long championId) {
         this.championId = championId;
