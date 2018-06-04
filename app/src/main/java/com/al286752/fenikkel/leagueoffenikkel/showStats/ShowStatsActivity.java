@@ -15,12 +15,18 @@ import android.widget.Toast;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
+import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
+import com.al286752.fenikkel.leagueoffenikkel.myProfile.MyProfileActivity;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 /*import com.al286752.fenikkel.leagueoffenikkel.server.DownloadCallback;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.server.simpleConection.TaskWithProgress;
@@ -45,6 +51,8 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     TextView lastPlayTime;
     ProgressBar progressBarProba;
     ListView listMaestries;
+    Map<String, JSONObject> allChampions; //autoupdates
+    JSONObject champListByName;
 
     //private IMyProfileModel model;
     private ShowStatsPresenter presenter;
@@ -79,10 +87,68 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         progressBarProba = findViewById(R.id.progressBarProba);
         listMaestries = findViewById(R.id.maestriesList);
 
+        presenter.getChampions(new ResponseReceiver<JSONObject>() {
+            @Override
+            public void onResponseReceived(JSONObject response) {
+                //convert to map
+                //championId.setText(String.valueOf(response));
+                processMap(response);
+            }
 
+            @Override
+            public void onErrorReceived(String message) {
+                championId.setText(String.valueOf(message));
+
+                View parentLayout = findViewById(android.R.id.content);
+                Snackbar.make(parentLayout, "Server error: Too many request, rate limit exceeded", Snackbar.LENGTH_LONG).show();
+
+                //Intent intent = new Intent(this, MyProfileActivity.class);
+
+                //Anyadim parametres a ShowStatsActivity
+                //intent.putExtra(ShowStatsActivity.NICKNAME, nickName);
+                //intent.putExtra(ShowStatsActivity.ID_SUMMONER, String.valueOf(idSummoner));
+
+                //startActivity(intent);
+
+            }
+        });
 
         findMaestries();
 
+
+
+
+
+
+    }
+
+    public void processMap(JSONObject jdata) {
+
+        try {
+            //@SuppressWarnings("unchecked")
+            champListByName= jdata.getJSONObject("data");
+
+            Iterator<String> nameItr = champListByName.keys();
+            Map<String, JSONObject> outMap = new HashMap<String, JSONObject>();
+
+
+
+
+            while (nameItr.hasNext()) {
+
+                String name = nameItr.next();
+                //String name = nameItr.toString();
+                championId.setText(name);
+                outMap.put(champListByName.optJSONObject(name).optString("id"), champListByName.optJSONObject(name));
+
+            }
+
+            allChampions = outMap;
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -105,7 +171,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                 //Champion ID
                 long chamId = response.get(0).getChampionId();
                 //String champ = ""+chamId; //si no faig aço peta
-                championId.setText(String.valueOf(chamId));
+                //championId.setText(String.valueOf(chamId));
 
                 //Champion LVL
                 int championLev = response.get(0).getChampionLevel();
@@ -165,13 +231,48 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
     public void fillList(ArrayList<String> champions){ //desdeOn responce received de findMaestries cridema esta funcio?
 
-        /*String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
+        /*String[] value2s = new String[] { "Android", "iPhone", "WindowsMobile",
                 "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
                 "Linux", "OS/2" };*/
 
-        List<String> twentyFirst = champions.subList(0,2);
+        String[] value2s = champions.toArray(new String[0]);
+        String[] subNames = champions.toArray(new String[0]);
 
-        final String[] value2s = twentyFirst.toArray(new String[0]);
+        for(int contador=0; contador<value2s.length; contador++){
+
+            JSONObject champ =allChampions.get(value2s[contador]);
+
+            value2s[contador]= champ.optString("name");
+            subNames[contador]= champ.optString("title");
+
+
+
+        }
+
+        final MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, value2s, subNames);
+
+        listMaestries.setAdapter(adapter);
+
+        listMaestries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //presenter.onAddGameRequested(position);
+                String item = (String) adapter.getItem(position);
+
+                //mirem quin champ es en champslistbyname y enviem a una altra activity els maestries on les mostrarem totes
+
+
+                Toast.makeText(getApplicationContext(),item + " selected",Toast.LENGTH_LONG).show();//this, item + " selected", Toast.LENGTH_LONG
+
+            }
+        });
+
+        //List<String> twentyFirst = champions.subList(0,2); DESCOMENTAR
+
+        //final String[] value2s = twentyFirst.toArray(new String[0]); DESCOMENTAR
+
+
+
 
         //ESTE STRING[] EL TINC QUE PLENAR PERO OBTENINT TOTS ELS CAMPEONS I BUSCANTLOS PER ID, QUE SINO SUPERE EL RATE LIMIT
 
@@ -196,22 +297,6 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
         /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.list_maestries_layout, R.id.rowText, values);*/
-
-        final MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, value2s);
-
-        listMaestries.setAdapter(adapter);
-
-        listMaestries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //presenter.onAddGameRequested(position);
-                String item = (String) adapter.getItem(position);
-                Toast.makeText(getApplicationContext(),item + " selected",Toast.LENGTH_LONG).show();//this, item + " selected", Toast.LENGTH_LONG
-
-            }
-        });
-
-
 
 /*
 

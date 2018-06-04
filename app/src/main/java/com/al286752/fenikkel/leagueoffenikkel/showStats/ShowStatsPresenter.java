@@ -55,4 +55,8 @@ public class ShowStatsPresenter {
 
 
     }
+
+    public void getChampions(ResponseReceiver<JSONObject> receiver) {
+        model.getChampions(receiver);
+    }
 }

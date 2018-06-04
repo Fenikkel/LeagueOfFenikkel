@@ -8,18 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.model.IShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Created by fenikkel on 3/06/18.
@@ -27,16 +21,18 @@ import java.util.Map;
 
 public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
-    private final String[] values;
+    private final String[] champName;
+    private final String[] subNames;
 
-    private JSONObject mediador;
+    //private JSONObject mediador;
 
     IShowStatsModel model;
 
-    public MySimpleArrayAdapter(Context context, String[] values) {
+    public MySimpleArrayAdapter(Context context, String[] values, String[] subNames) {
         super(context, R.layout.list_maestries_layout, values);
         this.context = context;
-        this.values = values;
+        this.champName = values;
+        this.subNames = subNames;
         this.model = ShowStatsModel.getInstance();
     }
 
@@ -49,19 +45,27 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.list_maestries_layout, parent, false);
         final TextView textView = (TextView) rowView.findViewById(R.id.rowText);
+        final TextView title = (TextView) rowView.findViewById(R.id.title);
+
         ImageView imageView = (ImageView) rowView.findViewById(R.id.rowIcon);
 
+        String s = champName[position]; //champName sera una string de id champion (ho te de quan creem el mySimplearrayadapter)
+        String t = subNames[position];
+        textView.setText(s);
+        title.setText(t);
 
+        if (s.startsWith("Ahri") || s.startsWith("Master")
+                || s.startsWith("Rammus")) {
+            imageView.setImageResource(R.drawable.teemo_profile);
+        } else {
+            imageView.setImageResource(R.drawable.stats_rammus);
+        }
 
-
-        // Change the icon for Windows and iPhone
-
-
-        String s = values[position]; //values sera una string de id champion (ho te de quan creem el mySimplearrayadapter)
+        return rowView;
 
         //String champName = model.getChampionName(s);
 
-        model.getChampionName(s, new ResponseReceiver<JSONObject>() {
+        /*model.getChampionName(s, new ResponseReceiver<JSONObject>() { DESCOMENTAR
             @Override
             public void onResponseReceived(JSONObject response) {
                 textView.setText(response.optString("name"));
@@ -73,7 +77,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
                 textView.setText(message);
 
             }
-        });
+        });*/
 
         //textView.setText(s);
 
@@ -92,14 +96,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         }
 */
         //
-        if (s.startsWith("103") || s.startsWith("iPhone")
-                || s.startsWith("Solaris")) {
-            imageView.setImageResource(R.drawable.teemo_profile);
-        } else {
-            imageView.setImageResource(R.drawable.stats_rammus);
-        }
 
-        return rowView;
     }
 
     public JSONObject getChampions(){
