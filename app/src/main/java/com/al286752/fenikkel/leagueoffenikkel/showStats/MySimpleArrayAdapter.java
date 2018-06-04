@@ -29,7 +29,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] values;
 
-    private JSONArray mediador;
+    private JSONObject mediador;
 
     IShowStatsModel model;
 
@@ -43,21 +43,39 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) { //aci modifica cada fila
 
-        JSONArray champs = getChampions(); //CHAMPIONS TORNA NULL, MIRAR QUE PASSA
+        //JSONObject champs = getChampions(); //CHAMPIONS TORNA NULL, MIRAR QUE PASSA
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.list_maestries_layout, parent, false);
-        TextView textView = (TextView) rowView.findViewById(R.id.rowText);
+        final TextView textView = (TextView) rowView.findViewById(R.id.rowText);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.rowIcon);
 
 
-        textView.setText(String.valueOf(champs));
+
 
         // Change the icon for Windows and iPhone
 
 
         String s = values[position]; //values sera una string de id champion (ho te de quan creem el mySimplearrayadapter)
+
+        //String champName = model.getChampionName(s);
+
+        model.getChampionName(s, new ResponseReceiver<JSONObject>() {
+            @Override
+            public void onResponseReceived(JSONObject response) {
+                textView.setText(response.optString("name"));
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+
+                textView.setText(message);
+
+            }
+        });
+
+        //textView.setText(s);
 
         //Map mapa = (Map<String,String>) champs;
 
@@ -84,15 +102,15 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         return rowView;
     }
 
-    public JSONArray getChampions(){
+    public JSONObject getChampions(){
 
+        final JSONObject[] cosa = new JSONObject[1];
 
-
-        model.getChampions(new ResponseReceiver<JSONArray>() {
+        model.getChampions(new ResponseReceiver<JSONObject>() {
                     @Override
-                    public void onResponseReceived(JSONArray response) {
+                    public void onResponseReceived(JSONObject response) {
 
-                        mediador = response;
+                        cosa[0] = response;
 
                     }
 
@@ -104,7 +122,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
                 }
         );
 
-        return mediador;
+        return cosa[0];
     }
 
 }

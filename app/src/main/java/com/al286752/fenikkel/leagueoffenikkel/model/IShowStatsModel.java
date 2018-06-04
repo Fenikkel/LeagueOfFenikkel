@@ -15,5 +15,8 @@ import java.util.ArrayList;
 public interface IShowStatsModel {
     void findMaestries(String idSummoner, ResponseReceiver<ArrayList<ChampionMaestries>> reciever);
 
-    void getChampions(ResponseReceiver<JSONArray> responseReceiver);
+    void getChampions(ResponseReceiver<JSONObject> responseReceiver);
+
+    void getChampionName(String idChamp,ResponseReceiver<JSONObject> receiver);
+    //String getChampName();
 }

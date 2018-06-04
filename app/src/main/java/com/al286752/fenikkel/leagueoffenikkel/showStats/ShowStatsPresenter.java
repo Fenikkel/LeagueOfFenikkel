@@ -49,4 +49,10 @@ public class ShowStatsPresenter {
         );
     }
 
+    public void getChampionName(String champId, ResponseReceiver<JSONObject> receiver) {
+
+        model.getChampionName(champId, receiver);
+
+
+    }
 }

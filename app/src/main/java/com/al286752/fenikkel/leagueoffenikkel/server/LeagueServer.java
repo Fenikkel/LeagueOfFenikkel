@@ -54,7 +54,10 @@ public class LeagueServer implements ILeagueServer {
 
 
     //CHAMPIONS
+    //https://euw1.api.riotgames.com/lol/static-data/v3/champions?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
     private static final String CHAMPIONS = BASE_URL+"/lol/static-data/v3/champions"+API_KEY;
+    private static final String CHAMPION = BASE_URL + "/lol/static-data/v3/champions/";
+    //https://euw1.api.riotgames.com/lol/static-data/v3/champions/103?locale=en_US&api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
 
 
 
@@ -219,16 +222,60 @@ public class LeagueServer implements ILeagueServer {
     }
 
     @Override
-    public void getChampions(final ResponseReceiver<JSONArray> responseReceiver) {
+    public void getChampions(final ResponseReceiver<JSONObject> responseReceiver) {
 
         DownloadTask downloadTask =  new DownloadTask(CHAMPIONS, new DownloadCallback<String>() {
             @Override
             public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
                 try {
 
-                    JSONArray jsonArray = new JSONArray(result);
+                    JSONObject jsonArray = new JSONObject(result);
 
                     responseReceiver.onResponseReceived(jsonArray); //mos passem un JSON ARRAY pero encara hi ha que processarlo
+
+                    //List<AllGameData> allGameData = processJSON(json);
+                    //receiver.onResponseReceived(allGameData);
+
+
+
+                }catch (JSONException e){
+                    responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public NetworkInfo getActiveNetworkInfo() {
+                return getNetworkInfo();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+                responseReceiver.onErrorReceived(msg);
+            }
+
+
+        });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
+
+        downloadTask.execute();
+
+    }
+
+    @Override
+    public void getChampionName(String  idChamp, final ResponseReceiver<JSONObject> responseReceiver) {
+
+        String url = CHAMPION+idChamp+API_KEY;
+
+        DownloadTask downloadTask =  new DownloadTask(url, new DownloadCallback<String>() {
+            @Override
+            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
+                try {
+
+                    JSONObject json = new JSONObject(result);
+
+                    responseReceiver.onResponseReceived(json); //mos passem un JSON ARRAY pero encara hi ha que processarlo
 
                     //List<AllGameData> allGameData = processJSON(json);
                     //receiver.onResponseReceived(allGameData);

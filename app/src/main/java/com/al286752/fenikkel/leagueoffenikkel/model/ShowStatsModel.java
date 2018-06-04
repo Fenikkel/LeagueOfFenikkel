@@ -38,6 +38,12 @@ public class ShowStatsModel implements IShowStatsModel {
         this.leagueServer = riotServer;
     }
 
+    //public String champName="Lololo";
+
+
+    /*public String getChampName() {
+        return champName;
+    }*/
 
     @Override
     public void findMaestries(String idSummoner, final ResponseReceiver<ArrayList<ChampionMaestries>> reciever) { //crec que este receiver deuria ser ChampionMaestriesd
@@ -64,19 +70,14 @@ public class ShowStatsModel implements IShowStatsModel {
     }
 
     @Override
-    public void getChampions(final ResponseReceiver<JSONArray> responseReceiver) {
-        leagueServer.getChampions(new ResponseReceiver<JSONArray>(){
+    public void getChampions(ResponseReceiver<JSONObject> responseReceiver) {
+        leagueServer.getChampions(responseReceiver);
+    }
 
-            @Override
-            public void onResponseReceived(JSONArray response) {
-                responseReceiver.onResponseReceived(response);
-            }
+    public void getChampionName(String idChamp, ResponseReceiver<JSONObject> receiver) {
+        leagueServer.getChampionName(idChamp, receiver);
 
-            @Override
-            public void onErrorReceived(String message) {
 
-            }
-        });
     }
 
     public ArrayList<ChampionMaestries> processJSONMaestries(JSONArray jsonArray){

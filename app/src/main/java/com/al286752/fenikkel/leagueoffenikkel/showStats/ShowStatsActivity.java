@@ -17,7 +17,10 @@ import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 /*import com.al286752.fenikkel.leagueoffenikkel.server.DownloadCallback;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.server.simpleConection.TaskWithProgress;
@@ -47,6 +50,8 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     private ShowStatsPresenter presenter;
 
     private String idSum;
+
+    private static String champName ="view";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +169,30 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                 "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
                 "Linux", "OS/2" };*/
 
-        String[] value2s = champions.toArray(new String[0]);
+        List<String> twentyFirst = champions.subList(0,2);
+
+        final String[] value2s = twentyFirst.toArray(new String[0]);
+
+        //ESTE STRING[] EL TINC QUE PLENAR PERO OBTENINT TOTS ELS CAMPEONS I BUSCANTLOS PER ID, QUE SINO SUPERE EL RATE LIMIT
+
+        /*for (int contador = 0;contador<value2s.length; contador++){
+
+           presenter.getChampionName(value2s[contador], new ResponseReceiver<JSONObject>() {
+                @Override
+                public void onResponseReceived(JSONObject response) {
+                    champName= response.optString("name");
+                }
+
+                @Override
+                public void onErrorReceived(String message) {
+
+                }
+            });
+
+           value2s[contador]=champName;
+
+
+        }*/
 
         /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.list_maestries_layout, R.id.rowText, values);*/

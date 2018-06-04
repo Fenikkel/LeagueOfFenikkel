@@ -80,3 +80,10 @@ worked 1h 30min
 -List done and trying to get the champion name using his id
 
 worked 2h
+
+
+04/06/2018
+
+-Fighting for put the data in the list, but servers kicks me because I download a lots of data
+
+worked 2h
