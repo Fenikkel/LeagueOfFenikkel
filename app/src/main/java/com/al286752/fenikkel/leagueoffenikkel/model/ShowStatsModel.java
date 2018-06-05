@@ -80,6 +80,25 @@ public class ShowStatsModel implements IShowStatsModel {
 
     }
 
+    @Override
+    public ChampionMaestries getChampionMastery(String summId, String champId) {
+
+        leagueServer.getChampionMastery(summId, champId, new ResponseReceiver<JSONObject>() {
+            @Override
+            public void onResponseReceived(JSONObject response) {
+                //cridem a process chamsMastery
+                //ACIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+                //no se qcom mostrarlo
+            }
+        });
+
+        return null;
+    }
+
     public ArrayList<ChampionMaestries> processJSONMaestries(JSONArray jsonArray){
 
         ArrayList<ChampionMaestries> championMaestriesArrayList = new ArrayList<>();

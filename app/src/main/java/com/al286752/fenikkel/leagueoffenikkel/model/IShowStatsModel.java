@@ -18,5 +18,7 @@ public interface IShowStatsModel {
     void getChampions(ResponseReceiver<JSONObject> responseReceiver);
 
     void getChampionName(String idChamp,ResponseReceiver<JSONObject> receiver);
+
+    ChampionMaestries getChampionMastery(String summId, String champId);
     //String getChampName();
 }

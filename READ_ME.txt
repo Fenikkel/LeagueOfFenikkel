@@ -87,3 +87,13 @@ worked 2h
 -Fighting for put the data in the list, but servers kicks me because I download a lots of data
 
 worked 2h
+
+-List Works
+
+worked 1h
+
+05/06/2018
+
+-Working on ChampMastery
+
+worked 3h

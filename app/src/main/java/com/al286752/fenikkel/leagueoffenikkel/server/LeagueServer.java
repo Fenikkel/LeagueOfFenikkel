@@ -51,6 +51,7 @@ public class LeagueServer implements ILeagueServer {
 
     private static final String SEARCH_MAESTRIES ="/lol/champion-mastery/v3/champion-masteries/by-summoner/";
     private String summonerId;
+    private static final String BY_CHAMPION = "/by-champion/";
 
 
     //CHAMPIONS
@@ -298,6 +299,52 @@ public class LeagueServer implements ILeagueServer {
             public void onError(String msg) {
 
                 responseReceiver.onErrorReceived(msg);
+            }
+
+
+        });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
+
+        downloadTask.execute();
+
+    }
+
+    @Override
+    public void getChampionMastery(String summId, String champId, final ResponseReceiver<JSONObject> receiver) {
+        ///lol/champion-mastery/v3/champion-masteries/by-summoner/{summonerId}/by-champion/{championId}
+
+        String url = BASE_URL+SEARCH_MAESTRIES+summId+BY_CHAMPION+champId;
+
+
+        DownloadTask downloadTask =  new DownloadTask(url, new DownloadCallback<String>() {
+            @Override
+            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
+                try {
+
+                    JSONObject json = new JSONObject(result);
+
+                    receiver.onResponseReceived(json); //mos passem un JSON ARRAY pero encara hi ha que processarlo
+
+                    //List<AllGameData> allGameData = processJSON(json);
+                    //receiver.onResponseReceived(allGameData);
+
+
+
+                }catch (JSONException e){
+                    receiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public NetworkInfo getActiveNetworkInfo() {
+                return getNetworkInfo();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+                receiver.onErrorReceived(msg);
             }
 
 

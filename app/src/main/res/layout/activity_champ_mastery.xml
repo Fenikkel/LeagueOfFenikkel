@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".champMastery.ChampMastery">
+
+    <TextView
+        android:id="@+id/nameChamMastery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="nameChamMastery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/levelMastery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="levelMastery"
+        app:layout_constraintEnd_toEndOf="@+id/imageMastery"
+        app:layout_constraintStart_toStartOf="@+id/imageMastery"
+        app:layout_constraintTop_toBottomOf="@+id/imageMastery" />
+
+    <ImageView
+        android:id="@+id/imageMastery"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="imageMastery"
+        app:layout_constraintEnd_toEndOf="@+id/nameChamMastery"
+        app:layout_constraintStart_toStartOf="@+id/nameChamMastery"
+        app:layout_constraintTop_toBottomOf="@+id/nameChamMastery"
+        app:srcCompat="@drawable/stats_rammus" />
+
+    <TextView
+        android:id="@+id/totalMaestryPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="totalMaestryPoints"
+        app:layout_constraintEnd_toEndOf="@+id/levelMastery"
+        app:layout_constraintStart_toStartOf="@+id/levelMastery"
+        app:layout_constraintTop_toBottomOf="@+id/levelMastery" />
+
+    <TextView
+        android:id="@+id/sinceLastLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="sinceLastLevel"
+        app:layout_constraintEnd_toEndOf="@+id/totalMaestryPoints"
+        app:layout_constraintStart_toStartOf="@+id/totalMaestryPoints"
+        app:layout_constraintTop_toBottomOf="@+id/totalMaestryPoints" />
+
+    <TextView
+        android:id="@+id/untilNextlevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="untilNextlevel"
+        app:layout_constraintEnd_toEndOf="@+id/sinceLastLevel"
+        app:layout_constraintStart_toStartOf="@+id/sinceLastLevel"
+        app:layout_constraintTop_toBottomOf="@+id/sinceLastLevel" />
+
+    <TextView
+        android:id="@+id/chestAvaliable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="chestAvaliable"
+        app:layout_constraintEnd_toEndOf="@+id/untilNextlevel"
+        app:layout_constraintStart_toStartOf="@+id/untilNextlevel"
+        app:layout_constraintTop_toBottomOf="@+id/untilNextlevel" />
+
+    <TextView
+        android:id="@+id/tokensMastery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="tokensMastery"
+        app:layout_constraintEnd_toEndOf="@+id/chestAvaliable"
+        app:layout_constraintStart_toStartOf="@+id/chestAvaliable"
+        app:layout_constraintTop_toBottomOf="@+id/chestAvaliable" />
+
+    <TextView
+        android:id="@+id/lastTimePlayed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="lastTimePlayed"
+        app:layout_constraintEnd_toEndOf="@+id/tokensMastery"
+        app:layout_constraintStart_toStartOf="@+id/tokensMastery"
+        app:layout_constraintTop_toBottomOf="@+id/tokensMastery" />
+</android.support.constraint.ConstraintLayout>
+
+

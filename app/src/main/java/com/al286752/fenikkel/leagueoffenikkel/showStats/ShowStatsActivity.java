@@ -6,17 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.al286752.fenikkel.leagueoffenikkel.champMastery.ChampMastery;
+
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
-import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
-import com.al286752.fenikkel.leagueoffenikkel.myProfile.MyProfileActivity;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
 import org.json.JSONException;
@@ -25,7 +24,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 /*import com.al286752.fenikkel.leagueoffenikkel.server.DownloadCallback;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
@@ -41,6 +39,9 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
     public static final String NICKNAME = "nickName";//se suposa que se replena al cambiar de activitat, sera el parametre que li passem (esta en MyProfile)
     public static final String ID_SUMMONER = "idSummoner";
+
+    ImageView errorImg;
+
     TextView championId;
     TextView championLevel;
     TextView championPoints;
@@ -53,6 +54,12 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     ListView listMaestries;
     Map<String, JSONObject> allChampions; //autoupdates
     JSONObject champListByName;
+
+    ArrayList<ChampionMaestries> champMaestries; //lista ordenanda por puntuacion de cada campeon de el usuario seleccionado
+
+    public void setChampMaestries(ArrayList<ChampionMaestries> champMaestries) {
+        this.champMaestries = champMaestries;
+    }
 
     //private IMyProfileModel model;
     private ShowStatsPresenter presenter;
@@ -81,6 +88,8 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         championPointsSinceLastLevel = findViewById(R.id.pointsSinceLastLevel);
         lastPlayTime = findViewById(R.id.lastPlayTime);
 
+        errorImg=findViewById(R.id.imageErrorShow);
+
 
         //championId.setText(nick); //tindra el que hem escrit en el dialog
         //championId.setText(idSum);
@@ -102,6 +111,10 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                 View parentLayout = findViewById(android.R.id.content);
                 Snackbar.make(parentLayout, "Server error: Too many request, rate limit exceeded", Snackbar.LENGTH_LONG).show();
 
+                //listMaestries.setEmptyView();
+                listMaestries.setVisibility(View.GONE);
+                errorImg.setVisibility(View.VISIBLE);
+
                 //Intent intent = new Intent(this, MyProfileActivity.class);
 
                 //Anyadim parametres a ShowStatsActivity
@@ -114,11 +127,6 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         });
 
         findMaestries();
-
-
-
-
-
 
     }
 
@@ -138,7 +146,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
                 String name = nameItr.next();
                 //String name = nameItr.toString();
-                championId.setText(name);
+                //championId.setText(name);
                 outMap.put(champListByName.optJSONObject(name).optString("id"), champListByName.optJSONObject(name));
 
             }
@@ -168,10 +176,12 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                     return; //si es algu que porta molt de temps sense jugar i no te maestria en res
                 }
 
+                setChampMaestries(response);
+
                 //Champion ID
                 long chamId = response.get(0).getChampionId();
-                //String champ = ""+chamId; //si no faig aço peta
-                //championId.setText(String.valueOf(chamId));
+                String champi = ""+chamId; //si no faig aço peta
+                championId.setText(String.valueOf(champi));
 
                 //Champion LVL
                 int championLev = response.get(0).getChampionLevel();
@@ -231,10 +241,6 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
     public void fillList(ArrayList<String> champions){ //desdeOn responce received de findMaestries cridema esta funcio?
 
-        /*String[] value2s = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-                "Linux", "OS/2" };*/
-
         String[] value2s = champions.toArray(new String[0]);
         String[] subNames = champions.toArray(new String[0]);
 
@@ -257,68 +263,42 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //presenter.onAddGameRequested(position);
-                String item = (String) adapter.getItem(position);
+                String champSelected = (String) adapter.getItem(position);
 
-                //mirem quin champ es en champslistbyname y enviem a una altra activity els maestries on les mostrarem totes
+                //mirem quin champ es en champslistbyname y enviem a una altra activity els maestries on les mostrarem tote
 
+                Toast.makeText(getApplicationContext(),champSelected + " selected",Toast.LENGTH_LONG).show();//this, item + " selected", Toast.LENGTH_LONG
 
-                Toast.makeText(getApplicationContext(),item + " selected",Toast.LENGTH_LONG).show();//this, item + " selected", Toast.LENGTH_LONG
-
+                //CHANGE TO MAESTRY
+                switchToChampMastery(champSelected);
             }
         });
 
-        //List<String> twentyFirst = champions.subList(0,2); DESCOMENTAR
-
-        //final String[] value2s = twentyFirst.toArray(new String[0]); DESCOMENTAR
-
-
-
-
-        //ESTE STRING[] EL TINC QUE PLENAR PERO OBTENINT TOTS ELS CAMPEONS I BUSCANTLOS PER ID, QUE SINO SUPERE EL RATE LIMIT
-
-        /*for (int contador = 0;contador<value2s.length; contador++){
-
-           presenter.getChampionName(value2s[contador], new ResponseReceiver<JSONObject>() {
-                @Override
-                public void onResponseReceived(JSONObject response) {
-                    champName= response.optString("name");
-                }
-
-                @Override
-                public void onErrorReceived(String message) {
-
-                }
-            });
-
-           value2s[contador]=champName;
-
-
-        }*/
-
-        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                R.layout.list_maestries_layout, R.id.rowText, values);*/
-
-/*
-
-        ListAdapter adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,champions);
-
-        listMaestries.setAdapter(adapter);
-        listMaestries.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //presenter.onAddGameRequested(position);
-            }
-        });
-
-        */
 
     }
-/*
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        String item = (String) getListAdapter().getItem(position);
-        Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
+
+    private void switchToChampMastery(String champSelected) {
+
+        //QUITAR ESPACIOS NOMBRES
+
+        String st = champSelected;
+
+        st = st.replaceAll("\\s",""); // aixina llevem els espais i merdes que no existeixen en les ID
+
+        JSONObject allChampData = champListByName.optJSONObject(st);
+
+        String laId = allChampData.optString("id");
+
+
+        Intent intento = new Intent(this, ChampMastery.class);
+
+        intento.putExtra(ChampMastery.CHAMPION, laId);
+        intento.putExtra(ChampMastery.SUMMONER, idSum);
+        //intento.putExtra(ChampMastery.ALL_DATA, champMaestries);
+        //intent.putExtra(ShowStatsActivity.ID_SUMMONER, String.valueOf(idSummoner));
+
+        startActivity(intento);
     }
-*/
+
 
 }
