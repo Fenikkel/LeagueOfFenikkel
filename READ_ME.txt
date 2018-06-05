@@ -97,3 +97,7 @@ worked 1h
 -Working on ChampMastery
 
 worked 3h
+
+-Debugging conections...
+
+worked 45min

@@ -19,7 +19,7 @@ public interface ILeagueServer {
 
     void getChampions(ResponseReceiver<JSONObject> responseReceiver);
 
-    void getChampionName(String idChamp, ResponseReceiver<JSONObject> responseReceiver);
+    //void getChampionName(String idChamp, ResponseReceiver<JSONObject> responseReceiver);
 
     void getChampionMastery(String summId, String champId, ResponseReceiver<JSONObject> receiver);
 

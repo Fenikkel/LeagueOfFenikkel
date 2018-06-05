@@ -57,7 +57,7 @@ public class LeagueServer implements ILeagueServer {
     //CHAMPIONS
     //https://euw1.api.riotgames.com/lol/static-data/v3/champions?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
     private static final String CHAMPIONS = BASE_URL+"/lol/static-data/v3/champions"+API_KEY;
-    private static final String CHAMPION = BASE_URL + "/lol/static-data/v3/champions/";
+    //private static final String CHAMPION = BASE_URL + "/lol/static-data/v3/champions/";
     //https://euw1.api.riotgames.com/lol/static-data/v3/champions/103?locale=en_US&api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
 
 
@@ -263,7 +263,7 @@ public class LeagueServer implements ILeagueServer {
         downloadTask.execute();
 
     }
-
+/*
     @Override
     public void getChampionName(String  idChamp, final ResponseReceiver<JSONObject> responseReceiver) {
 
@@ -307,12 +307,13 @@ public class LeagueServer implements ILeagueServer {
         downloadTask.execute();
 
     }
+    */
 
     @Override
     public void getChampionMastery(String summId, String champId, final ResponseReceiver<JSONObject> receiver) {
         ///lol/champion-mastery/v3/champion-masteries/by-summoner/{summonerId}/by-champion/{championId}
 
-        String url = BASE_URL+SEARCH_MAESTRIES+summId+BY_CHAMPION+champId;
+        String url = BASE_URL+SEARCH_MAESTRIES+summId+BY_CHAMPION+champId+API_KEY;
 
 
         DownloadTask downloadTask =  new DownloadTask(url, new DownloadCallback<String>() {

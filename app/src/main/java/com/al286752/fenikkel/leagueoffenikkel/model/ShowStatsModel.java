@@ -3,6 +3,7 @@ package com.al286752.fenikkel.leagueoffenikkel.model;
 import android.content.Context;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
+import com.al286752.fenikkel.leagueoffenikkel.champMastery.ChampMastery;
 import com.al286752.fenikkel.leagueoffenikkel.server.ILeagueServer;
 import com.al286752.fenikkel.leagueoffenikkel.server.LeagueServer;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 public class ShowStatsModel implements IShowStatsModel {
 
     private ILeagueServer leagueServer;
+
+    private ChampionMaestries champMaestry;
 
     private static ShowStatsModel instance = null;
 
@@ -73,31 +76,23 @@ public class ShowStatsModel implements IShowStatsModel {
     public void getChampions(ResponseReceiver<JSONObject> responseReceiver) {
         leagueServer.getChampions(responseReceiver);
     }
-
+/*
     public void getChampionName(String idChamp, ResponseReceiver<JSONObject> receiver) {
         leagueServer.getChampionName(idChamp, receiver);
 
 
-    }
+    }*/
 
     @Override
-    public ChampionMaestries getChampionMastery(String summId, String champId) {
+    public void getChampionMastery(String summId, String champId, ResponseReceiver<JSONObject> responseReceiver) {
 
-        leagueServer.getChampionMastery(summId, champId, new ResponseReceiver<JSONObject>() {
-            @Override
-            public void onResponseReceived(JSONObject response) {
-                //cridem a process chamsMastery
-                //ACIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-            }
+        leagueServer.getChampionMastery(summId, champId, responseReceiver);
 
-            @Override
-            public void onErrorReceived(String message) {
-                //no se qcom mostrarlo
-            }
-        });
+        //processJSONChampion(response);
 
-        return null;
     }
+
+
 
     public ArrayList<ChampionMaestries> processJSONMaestries(JSONArray jsonArray){
 

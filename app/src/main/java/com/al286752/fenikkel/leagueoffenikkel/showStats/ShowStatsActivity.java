@@ -101,7 +101,13 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
             public void onResponseReceived(JSONObject response) {
                 //convert to map
                 //championId.setText(String.valueOf(response));
-                processMap(response);
+                if(response!=null){
+                    processMap(response);
+                }else {
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
+                }
+
             }
 
             @Override
