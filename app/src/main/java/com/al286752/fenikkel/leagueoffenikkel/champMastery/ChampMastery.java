@@ -1,9 +1,11 @@
 package com.al286752.fenikkel.leagueoffenikkel.champMastery;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.view.View;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
@@ -18,9 +20,16 @@ public class ChampMastery extends AppCompatActivity {
     //public static final ChampionMaestries ALL_DATA = null;
     public static final String CHAMPION = "championId";
     public static final String SUMMONER = "summonerId";
+    public static final String CHAMPION_NAME = "championName";
 
     TextView championName;
     TextView championLevel;
+    TextView totalMaestryPoints;
+    TextView pointsSinceLastLevel;
+    TextView pointsUntilNextLevel;
+    TextView chestAvaliable;
+    TextView tokensMastery;
+    TextView lastTimePlayed;
 
     ChampionMaestries allData;
 
@@ -35,12 +44,16 @@ public class ChampMastery extends AppCompatActivity {
         setContentView(R.layout.activity_champ_mastery);
 
         Intent intent = getIntent();
-        String champId = intent.getStringExtra(CHAMPION);
+        final String champId = intent.getStringExtra(CHAMPION);
         String summId = intent.getStringExtra(SUMMONER);
+        String champName = intent.getStringExtra(CHAMPION_NAME);
 
         allData = new ChampionMaestries();
 
         model= ShowStatsModel.getInstance();
+
+        championName = findViewById(R.id.nameChamMastery);
+        championName.setText(champName);
 
 
         model.getChampionMastery(summId, champId, new ResponseReceiver<JSONObject>() {
@@ -48,16 +61,37 @@ public class ChampMastery extends AppCompatActivity {
             public void onResponseReceived(JSONObject response) {
                 processJSONChampion(response);
 
-                championName = findViewById(R.id.nameChamMastery);
-                championLevel = findViewById(R.id.levelMastery);
 
-                championName.setText(String.valueOf(allData.getLastPlayTime()));
-                championLevel.setText(String.valueOf(allData.getTokensEarned()));
+                championLevel = findViewById(R.id.levelMastery);
+                lastTimePlayed = findViewById(R.id.lastTimePlayed);
+                tokensMastery = findViewById(R.id.tokensMastery);
+                totalMaestryPoints = findViewById(R.id.totalMaestryPoints);
+                pointsSinceLastLevel = findViewById(R.id.sinceLastLevel);
+                pointsUntilNextLevel = findViewById(R.id.untilNextlevel);
+                chestAvaliable = findViewById(R.id.chestAvaliable);
+
+                lastTimePlayed.setText(String.valueOf(allData.getLastPlayTime()));
+                tokensMastery.setText(String.valueOf(allData.getTokensEarned()));
+                championLevel.setText(String.valueOf(allData.getChampionLevel()));
+                totalMaestryPoints.setText(String.valueOf((int) allData.getChampionPoints()));
+                pointsSinceLastLevel.setText(String.valueOf((int) allData.getChampionPointsSinceLastLevel()));
+                pointsUntilNextLevel.setText(String.valueOf((int) allData.getChampionPointsUntilNextLevel()));
+                if(allData.isChestGranted()){
+                    chestAvaliable.setText("Chest: Avaliable");
+                }else {
+                    chestAvaliable.setText("Chest: Unavaliable");
+                }
+
+
+
 
             }
 
             @Override
             public void onErrorReceived(String message) {
+
+                View parentLayout = findViewById(android.R.id.content);
+                Snackbar.make(parentLayout, "Something goes wrong getting the mastery of "+ champId, Snackbar.LENGTH_LONG).show();
 
             }
         });

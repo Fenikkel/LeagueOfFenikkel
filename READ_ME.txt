@@ -101,3 +101,11 @@ worked 3h
 -Debugging conections...
 
 worked 45min
+
+06/06/2018
+
+-Conections debugged and finished the aplication
+1 h
+
+-Making the pdf
+

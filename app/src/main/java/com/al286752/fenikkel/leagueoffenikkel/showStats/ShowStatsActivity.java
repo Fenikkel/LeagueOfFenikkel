@@ -52,7 +52,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     TextView lastPlayTime;
     ProgressBar progressBarProba;
     ListView listMaestries;
-    Map<String, JSONObject> allChampions; //autoupdates
+    Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) crec que la key es el nom del campeo sense espais? o es la id numero?
     JSONObject champListByName;
 
     ArrayList<ChampionMaestries> champMaestries; //lista ordenanda por puntuacion de cada campeon de el usuario seleccionado
@@ -290,14 +290,31 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         String st = champSelected;
 
         st = st.replaceAll("\\s",""); // aixina llevem els espais i merdes que no existeixen en les ID
+        st= st.replaceAll("'","");
+        if(st.equals("Wukong")){
+            st = "MonkeyKing";
+        }else if(st.equals("LeBlanc")){
+            st = "Leblanc";
+        }else if(st.equals("KaiSa")){
+            st = "Kaisa";
+        }
+        else if(st.equals("KhaZix")){
+            st = "Khazix";
+        }
+        else if(st.equals("VelKoz")){
+            st = "Velkoz";
+        }
 
         JSONObject allChampData = champListByName.optJSONObject(st);
 
         String laId = allChampData.optString("id");
 
+        String bitxoName = allChampData.optString("name");
+
 
         Intent intento = new Intent(this, ChampMastery.class);
 
+        intento.putExtra(ChampMastery.CHAMPION_NAME, bitxoName);
         intento.putExtra(ChampMastery.CHAMPION, laId);
         intento.putExtra(ChampMastery.SUMMONER, idSum);
         //intento.putExtra(ChampMastery.ALL_DATA, champMaestries);
