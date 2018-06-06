@@ -1,6 +1,7 @@
 package com.al286752.fenikkel.leagueoffenikkel.champMastery;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,10 @@ import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 public class ChampMastery extends AppCompatActivity {
 
     //public static final ChampionMaestries ALL_DATA = null;
@@ -29,8 +34,8 @@ public class ChampMastery extends AppCompatActivity {
     TextView championName;
     TextView championLevel;
     TextView totalMaestryPoints;
-    TextView pointsSinceLastLevel;
-    TextView pointsUntilNextLevel;
+    //TextView pointsSinceLastLevel;
+    //TextView pointsUntilNextLevel;
     TextView chestAvaliable;
     TextView tokensMastery;
     TextView lastTimePlayed;
@@ -60,6 +65,10 @@ public class ChampMastery extends AppCompatActivity {
 
 
         experienceBar = findViewById(R.id.experienceBar);
+        // Get the Drawable custom_progressbar
+        Drawable draw= getResources().getDrawable(R.drawable.custom_progressbar); //getResources te da la carpeta res
+// set the drawable as progress drawable
+        experienceBar.setProgressDrawable(draw);
         championName = findViewById(R.id.nameChamMastery);
         championName.setText(champName);
         champImage = findViewById(R.id.imageMastery);
@@ -97,28 +106,37 @@ public class ChampMastery extends AppCompatActivity {
                 lastTimePlayed = findViewById(R.id.lastTimePlayed);
                 tokensMastery = findViewById(R.id.tokensMastery);
                 totalMaestryPoints = findViewById(R.id.totalMaestryPoints);
-                pointsSinceLastLevel = findViewById(R.id.sinceLastLevel);
-                pointsUntilNextLevel = findViewById(R.id.untilNextlevel);
+                //pointsSinceLastLevel = findViewById(R.id.sinceLastLevel);
+                //pointsUntilNextLevel = findViewById(R.id.untilNextlevel);
                 chestAvaliable = findViewById(R.id.chestAvaliable);
 
-                championLevel.setText(String.valueOf("Mastery\n\t\t"+allData.getChampionLevel()));
+                championLevel.setText(String.valueOf("Mastery\n\t\t\t"+allData.getChampionLevel()));
 
-                lastTimePlayed.setText(String.valueOf(allData.getLastPlayTime()));
-                tokensMastery.setText(String.valueOf(allData.getTokensEarned()));
 
-                totalMaestryPoints.setText(String.valueOf((int) allData.getChampionPoints()));
-                pointsSinceLastLevel.setText(String.valueOf((int) allData.getChampionPointsSinceLastLevel()));
-                pointsUntilNextLevel.setText(String.valueOf((int) allData.getChampionPointsUntilNextLevel()));
+                long unixSeconds = allData.getLastPlayTime(); // lo que mos passa league of legends esta en miliseconds ja
+                Date date = new Date(unixSeconds); //*1000L); // *1000 is to convert seconds to milliseconds
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");// HH:mm:ss z"); // the format of your date
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT-4")); // give a timezone reference for formating (see comment at the bottom
+                String formattedDate = sdf.format(date);
+                System.out.println(formattedDate);
+
+
+                lastTimePlayed.setText("Last time played: "+formattedDate);
+                tokensMastery.setText("Tokens earned: "+String.valueOf(allData.getTokensEarned()));
+
+                totalMaestryPoints.setText("Total points: "+ String.valueOf((int) allData.getChampionPoints()));
+                //pointsSinceLastLevel.setText(String.valueOf((int) allData.getChampionPointsSinceLastLevel()));
+                //pointsUntilNextLevel.setText(String.valueOf((int) allData.getChampionPointsUntilNextLevel()));
                 if(!allData.isChestGranted()){ //la pregunta es si la chest esta guanyada(concedida) ja
                     chestAvaliable.setText("Chest: Avaliable");
                 }else {
                     chestAvaliable.setText("Chest: Unavaliable");
                 }
-                /*
+
                 int totalPoint = (int) allData.getChampionPointsSinceLastLevel() + (int) allData.getChampionPointsUntilNextLevel();
                 experienceBar.setMax(totalPoint);
                 experienceBar.setProgress((int) allData.getChampionPointsSinceLastLevel());
-                */
+
 
 
 
@@ -143,7 +161,7 @@ public class ChampMastery extends AppCompatActivity {
 
     private void setChampionImage(String urlIcon) {
 
-        String comprobar = urlIcon;
+
 
         new DownloadImageTask(champImage).execute(urlIcon);
 
