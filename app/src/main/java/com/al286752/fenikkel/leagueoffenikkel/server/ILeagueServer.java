@@ -23,6 +23,8 @@ public interface ILeagueServer {
 
     void getChampionMastery(String summId, String champId, ResponseReceiver<JSONObject> receiver);
 
+    void getChampionIcon(String champNameKey, ResponseReceiver<String> responseReceiver);
+
 
     //void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver);
 

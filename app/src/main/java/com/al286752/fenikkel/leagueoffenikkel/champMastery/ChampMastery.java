@@ -6,11 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
+import com.al286752.fenikkel.leagueoffenikkel.myProfile.DownloadImageTask;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
 import org.json.JSONObject;
@@ -21,6 +24,7 @@ public class ChampMastery extends AppCompatActivity {
     public static final String CHAMPION = "championId";
     public static final String SUMMONER = "summonerId";
     public static final String CHAMPION_NAME = "championName";
+    public static final String CHAMP_ID_NAME = "championNameId";
 
     TextView championName;
     TextView championLevel;
@@ -30,6 +34,9 @@ public class ChampMastery extends AppCompatActivity {
     TextView chestAvaliable;
     TextView tokensMastery;
     TextView lastTimePlayed;
+    ProgressBar experienceBar;
+
+    ImageView champImage;
 
     ChampionMaestries allData;
 
@@ -47,13 +54,37 @@ public class ChampMastery extends AppCompatActivity {
         final String champId = intent.getStringExtra(CHAMPION);
         String summId = intent.getStringExtra(SUMMONER);
         String champName = intent.getStringExtra(CHAMPION_NAME);
-
-        allData = new ChampionMaestries();
+        final String chamNamId = intent.getStringExtra(CHAMP_ID_NAME);
 
         model= ShowStatsModel.getInstance();
 
+
+        experienceBar = findViewById(R.id.experienceBar);
         championName = findViewById(R.id.nameChamMastery);
         championName.setText(champName);
+        champImage = findViewById(R.id.imageMastery);
+
+        model.getChampionIcon(chamNamId, new ResponseReceiver<String>() {
+            @Override
+            public void onResponseReceived(String urlIcon) {
+
+                setChampionImage(urlIcon);
+
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+                championName.setText(message);
+            }
+        });
+
+
+
+        allData = new ChampionMaestries();
+
+
+
+
 
 
         model.getChampionMastery(summId, champId, new ResponseReceiver<JSONObject>() {
@@ -70,9 +101,11 @@ public class ChampMastery extends AppCompatActivity {
                 pointsUntilNextLevel = findViewById(R.id.untilNextlevel);
                 chestAvaliable = findViewById(R.id.chestAvaliable);
 
+                championLevel.setText(String.valueOf("Mastery\n\t\t"+allData.getChampionLevel()));
+
                 lastTimePlayed.setText(String.valueOf(allData.getLastPlayTime()));
                 tokensMastery.setText(String.valueOf(allData.getTokensEarned()));
-                championLevel.setText(String.valueOf(allData.getChampionLevel()));
+
                 totalMaestryPoints.setText(String.valueOf((int) allData.getChampionPoints()));
                 pointsSinceLastLevel.setText(String.valueOf((int) allData.getChampionPointsSinceLastLevel()));
                 pointsUntilNextLevel.setText(String.valueOf((int) allData.getChampionPointsUntilNextLevel()));
@@ -81,7 +114,11 @@ public class ChampMastery extends AppCompatActivity {
                 }else {
                     chestAvaliable.setText("Chest: Unavaliable");
                 }
-
+                /*
+                int totalPoint = (int) allData.getChampionPointsSinceLastLevel() + (int) allData.getChampionPointsUntilNextLevel();
+                experienceBar.setMax(totalPoint);
+                experienceBar.setProgress((int) allData.getChampionPointsSinceLastLevel());
+                */
 
 
 
@@ -101,6 +138,14 @@ public class ChampMastery extends AppCompatActivity {
 
 
 
+
+    }
+
+    private void setChampionImage(String urlIcon) {
+
+        String comprobar = urlIcon;
+
+        new DownloadImageTask(champImage).execute(urlIcon);
 
     }
 

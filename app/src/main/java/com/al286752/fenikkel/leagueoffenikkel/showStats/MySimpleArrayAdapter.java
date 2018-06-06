@@ -1,6 +1,7 @@
 package com.al286752.fenikkel.leagueoffenikkel.showStats;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.R;
+import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.model.IShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
+import com.al286752.fenikkel.leagueoffenikkel.myProfile.DownloadImageTask;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
 import org.json.JSONObject;
@@ -23,6 +26,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] champName;
     private final String[] subNames;
+    //private String urlIcon;
 
     //private JSONObject mediador;
 
@@ -47,19 +51,49 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         final TextView textView = (TextView) rowView.findViewById(R.id.rowText);
         final TextView title = (TextView) rowView.findViewById(R.id.title);
 
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.rowIcon);
+        final ImageView imageView = (ImageView) rowView.findViewById(R.id.rowIcon);
 
         String s = champName[position]; //champName sera una string de id champion (ho te de quan creem el mySimplearrayadapter)
         String t = subNames[position];
         textView.setText(s);
         title.setText(t);
 
-        if (s.startsWith("Ahri") || s.startsWith("Master")
+        /*String champNameKey = StaticData.getChampionNameKeys().get(s);
+
+        model.getChampionIcon(champNameKey, new ResponseReceiver<String>() {
+            @Override
+            public void onResponseReceived(String urlIcon) {
+
+
+                new DownloadImageTask(imageView).execute(urlIcon);
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+                title.setText(message);
+            }
+        });
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        Log.i("tag", "This'll run 300 milliseconds later");
+
+
+                    }
+                },
+                300);
+
+         */
+
+        /*if (s.startsWith("Ahri") || s.startsWith("Master")
                 || s.startsWith("Rammus")) {
             imageView.setImageResource(R.drawable.teemo_profile);
         } else {
             imageView.setImageResource(R.drawable.stats_rammus);
-        }
+        }*/
+        imageView.setImageResource(R.drawable.list_icon);
+
 
         return rowView;
 

@@ -92,6 +92,10 @@ public class ShowStatsModel implements IShowStatsModel {
 
     }
 
+    @Override
+    public void getChampionIcon(String champNameKey, ResponseReceiver<String> responseReceiver) {
+        leagueServer.getChampionIcon(champNameKey,responseReceiver);
+    }
 
 
     public ArrayList<ChampionMaestries> processJSONMaestries(JSONArray jsonArray){

@@ -31,6 +31,11 @@ public class LeagueServer implements ILeagueServer {
     private static final String SEARCH_SUMMONER = "/lol/summoner/v3/summoners/by-name/"; //aci falta sumarli el nickname + la API_KEY
 
 
+    //ICONO CHAMP
+    //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/Aatrox.png
+
+    private static final String BASE_URL_ICON_CHAMPION_SQUARE ="/img/champion/";
+
     //icono
 
     private static final String ICON_VERSIONS = "https://ddragon.leagueoflegends.com/api/versions.json";
@@ -38,7 +43,7 @@ public class LeagueServer implements ILeagueServer {
     //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/588.png
 
     private static final String BASE_URL_ICON = "http://ddragon.leagueoflegends.com/cdn/";
-    private static final String VERSION = "8.11.1";
+    //private static final String VERSION = "8.11.1";
     private static final String BASE_URL_ICON2 = "/img/profileicon/";
     //faltaria la id del icon
     private static final String PNG = ".png";
@@ -353,6 +358,14 @@ public class LeagueServer implements ILeagueServer {
 
         downloadTask.execute();
 
+    }
+
+    @Override
+    public void getChampionIcon(String champNameKey, ResponseReceiver<String> responseReceiver) {
+        String url = BASE_URL_ICON + iconVersion + BASE_URL_ICON_CHAMPION_SQUARE + champNameKey + PNG;
+
+        responseReceiver.onResponseReceived(url);
+        //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/Aatrox.png
     }
 
     public void getIconVersion(){

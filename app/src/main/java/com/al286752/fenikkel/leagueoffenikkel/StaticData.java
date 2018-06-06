@@ -16,6 +16,26 @@ public class StaticData {
     private static String summonerName;
     private static String sumonerLVL;
 
+    private static Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) la key es el id del champ
+
+    private static JSONObject champListByName; //la key del champ que es su nombre (menos monkey king y algunos espacios "'" y lowercase
+
+    private static ArrayList<ChampionMaestries> champMaestries; //Masteries of the actual summoner
+
+    private static Map<String, String> championNameKeys; //la key es el nombre del champ (con espacios y "'") y lo que te devuelve es la key del champion que es un nombre sin espacios ni mariconadas
+
+
+
+
+
+    public static Map<String, String> getChampionNameKeys() {
+        return championNameKeys;
+    }
+
+    public static void setChampionNameKeys(Map<String, String> championNameKeys) {
+        StaticData.championNameKeys = championNameKeys;
+    }
+
     public static void setIdSummoner(String idSummoner) {
         StaticData.idSummoner = idSummoner;
     }
@@ -39,12 +59,6 @@ public class StaticData {
     public static String getSumonerLVL() {
         return sumonerLVL;
     }
-
-    private static Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) la key es el id del champ
-
-    private static JSONObject champListByName; //la key del champ que es su nombre (menos monkey king y algunos espacios "'" y lowercase
-
-    private static ArrayList<ChampionMaestries> champMaestries; //Masteries of the actual summoner
 
     public static ArrayList<ChampionMaestries> getChampMaestries() {
         return champMaestries;

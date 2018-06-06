@@ -105,6 +105,7 @@ public class SplashScreen extends AppCompatActivity {
 
             Iterator<String> nameItr = temporal.keys();
             Map<String, JSONObject> outMap = new HashMap<String, JSONObject>();
+            Map<String, String > keysMap = new HashMap<String, String>();
 
 
 
@@ -115,10 +116,12 @@ public class SplashScreen extends AppCompatActivity {
                 //String name = nameItr.toString();
                 //championId.setText(name);
                 outMap.put(temporal.optJSONObject(name).optString("id"), temporal.optJSONObject(name));
+                keysMap.put(temporal.optJSONObject(name).optString("name"), temporal.optJSONObject(name).optString("id"));
 
             }
 
             StaticData.setAllChampions(outMap);
+            StaticData.setChampionNameKeys(keysMap);
 
 
         } catch (JSONException e) {

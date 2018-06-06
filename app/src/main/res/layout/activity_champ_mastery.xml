@@ -10,7 +10,7 @@
         android:id="@+id/nameChamMastery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="nameChamMastery"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         android:id="@+id/imageMastery"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="imageMastery"
         app:layout_constraintEnd_toEndOf="@+id/nameChamMastery"
         app:layout_constraintStart_toStartOf="@+id/nameChamMastery"
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="totalMaestryPoints"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/levelMastery"
         app:layout_constraintStart_toStartOf="@+id/levelMastery"
         app:layout_constraintTop_toBottomOf="@+id/levelMastery" />
@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="sinceLastLevel"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/totalMaestryPoints"
         app:layout_constraintStart_toStartOf="@+id/totalMaestryPoints"
         app:layout_constraintTop_toBottomOf="@+id/totalMaestryPoints" />
@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="untilNextlevel"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/sinceLastLevel"
         app:layout_constraintStart_toStartOf="@+id/sinceLastLevel"
         app:layout_constraintTop_toBottomOf="@+id/sinceLastLevel" />
@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="chestAvaliable"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/untilNextlevel"
         app:layout_constraintStart_toStartOf="@+id/untilNextlevel"
         app:layout_constraintTop_toBottomOf="@+id/untilNextlevel" />
@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="tokensMastery"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/chestAvaliable"
         app:layout_constraintStart_toStartOf="@+id/chestAvaliable"
         app:layout_constraintTop_toBottomOf="@+id/chestAvaliable" />
@@ -100,10 +100,25 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="lastTimePlayed"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/tokensMastery"
         app:layout_constraintStart_toStartOf="@+id/tokensMastery"
         app:layout_constraintTop_toBottomOf="@+id/tokensMastery" />
+
+    <ProgressBar
+        android:id="@+id/experienceBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/levelMastery"
+        app:layout_constraintVertical_bias="0.282" />
 </android.support.constraint.ConstraintLayout>
 
 

@@ -43,7 +43,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
     ImageView errorImg;
 
-    TextView championId;
+   /* TextView championId;
     TextView championLevel;
     TextView championPoints;
     TextView tokensEarned;
@@ -51,10 +51,10 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     TextView chestGranted;
     TextView championPointsSinceLastLevel;
     TextView lastPlayTime;
-    ProgressBar progressBarProba;
+    ProgressBar progressBarProba;*/
     ListView listMaestries;
-    Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) crec que la key es el nom del campeo sense espais? o es la id numero?
-    JSONObject champListByName;
+    //Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) crec que la key es el nom del campeo sense espais? o es la id numero?
+    //JSONObject champListByName;
 
     //ArrayList<ChampionMaestries> champMaestries; //lista ordenanda por puntuacion de cada campeon de el usuario seleccionado
 
@@ -318,6 +318,8 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
         Intent intento = new Intent(this, ChampMastery.class);
 
+
+        intento.putExtra(ChampMastery.CHAMP_ID_NAME, st);
         intento.putExtra(ChampMastery.CHAMPION_NAME, bitxoName);
         intento.putExtra(ChampMastery.CHAMPION, laId);
         intento.putExtra(ChampMastery.SUMMONER, idSum);
