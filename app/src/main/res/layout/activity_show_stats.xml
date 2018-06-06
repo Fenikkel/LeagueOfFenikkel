@@ -6,123 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity">
 
-    <TextView
-        android:id="@+id/championId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="id"
-        android:textSize="60sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/progressBarProba"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/maestryPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="MaestryPoints"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/championId" />
-
-    <TextView
-        android:id="@+id/lvlMaestrie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="LvlMaestrie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maestryPoints" />
-
-    <TextView
-        android:id="@+id/tokens"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="tokens"
-        app:layout_constraintEnd_toEndOf="@+id/lvlMaestrie"
-        app:layout_constraintStart_toStartOf="@+id/lvlMaestrie"
-        app:layout_constraintTop_toBottomOf="@+id/lvlMaestrie" />
-
-    <TextView
-        android:id="@+id/pointsUntilNextLevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="pointsUntil Lvl"
-        app:layout_constraintEnd_toEndOf="@+id/tokens"
-        app:layout_constraintStart_toStartOf="@+id/tokens"
-        app:layout_constraintTop_toBottomOf="@+id/tokens" />
-
-    <TextView
-        android:id="@+id/chest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="chest"
-        app:layout_constraintEnd_toEndOf="@+id/pointsUntilNextLevel"
-        app:layout_constraintStart_toStartOf="@+id/pointsUntilNextLevel"
-        app:layout_constraintTop_toBottomOf="@+id/pointsUntilNextLevel" />
-
-    <TextView
-        android:id="@+id/lastPlayTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="lastPlay"
-        app:layout_constraintEnd_toEndOf="@+id/chest"
-        app:layout_constraintStart_toStartOf="@+id/chest"
-        app:layout_constraintTop_toBottomOf="@+id/chest" />
-
-    <TextView
-        android:id="@+id/pointsSinceLastLevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="pontssincelast"
-        app:layout_constraintEnd_toEndOf="@+id/lastPlayTime"
-        app:layout_constraintStart_toStartOf="@+id/lastPlayTime"
-        app:layout_constraintTop_toBottomOf="@+id/lastPlayTime" />
-
     <ListView
         android:id="@+id/maestriesList"
         android:layout_width="0dp"
-        android:layout_height="187dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pointsSinceLastLevel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/noMaestriesImage"

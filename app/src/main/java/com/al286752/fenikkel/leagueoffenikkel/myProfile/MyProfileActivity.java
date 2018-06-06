@@ -15,9 +15,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.R;
+import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
+import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
+
+import org.json.JSONObject;
 
 import java.io.File;
 
@@ -29,6 +33,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     ImageView noImage; //si no hay nickname o el nickname es invalido
     TextView lvltext;
     MyProfileModel myProfileModel;
+
     long idSummoner = -1;
 
    // String nickName = "Fenikkel"; //Aço crec que millor plenar-ho en onNickNameInput()
@@ -37,8 +42,8 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +64,20 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         nicknameText = findViewById(R.id.nicknameText);
         profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
         lvltext = findViewById(R.id.levelText);
+
+       /* JSONObject temp = StaticData.getAllChampions().get("103");
+
+        String temp2 = temp.optString("name");
+
+        JSONObject temp3 = StaticData.getChampListByName().optJSONObject("MonkeyKing");
+
+        String temp4 = temp3.optString("name");
+
+        nicknameText.setText(temp2);
+        lvltext.setText(temp4);
+        */
+
+
 
         myProfilePresenter = new MyProfilePresenter(this, myProfileModel);
 
@@ -160,6 +179,11 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
     public void setNicknameText(String nicknam, long lvl, long sumId) {
         this.nicknameText.setText(nicknam);
+
+        StaticData.setIdSummoner(String.valueOf(sumId));
+        StaticData.setSumonerLVL(String.valueOf(lvl));
+        StaticData.setSummonerName(nicknam);
+
         String ltext = ""+lvl; //para passar a String
         lvltext.setText(ltext);
 

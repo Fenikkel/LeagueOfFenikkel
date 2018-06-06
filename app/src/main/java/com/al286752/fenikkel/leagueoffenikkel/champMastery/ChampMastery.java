@@ -76,7 +76,7 @@ public class ChampMastery extends AppCompatActivity {
                 totalMaestryPoints.setText(String.valueOf((int) allData.getChampionPoints()));
                 pointsSinceLastLevel.setText(String.valueOf((int) allData.getChampionPointsSinceLastLevel()));
                 pointsUntilNextLevel.setText(String.valueOf((int) allData.getChampionPointsUntilNextLevel()));
-                if(allData.isChestGranted()){
+                if(!allData.isChestGranted()){ //la pregunta es si la chest esta guanyada(concedida) ja
                     chestAvaliable.setText("Chest: Avaliable");
                 }else {
                     chestAvaliable.setText("Chest: Unavaliable");

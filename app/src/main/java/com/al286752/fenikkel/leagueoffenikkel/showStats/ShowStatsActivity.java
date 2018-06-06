@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.champMastery.ChampMastery;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
@@ -55,11 +56,11 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) crec que la key es el nom del campeo sense espais? o es la id numero?
     JSONObject champListByName;
 
-    ArrayList<ChampionMaestries> champMaestries; //lista ordenanda por puntuacion de cada campeon de el usuario seleccionado
+    //ArrayList<ChampionMaestries> champMaestries; //lista ordenanda por puntuacion de cada campeon de el usuario seleccionado
 
-    public void setChampMaestries(ArrayList<ChampionMaestries> champMaestries) {
+    /*public void setChampMaestries(ArrayList<ChampionMaestries> champMaestries) {
         this.champMaestries = champMaestries;
-    }
+    }*/
 
     //private IMyProfileModel model;
     private ShowStatsPresenter presenter;
@@ -79,7 +80,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         String nick = intent.getStringExtra(NICKNAME); //no se molt be per a que serveix la final string... es tipo un mediador o uns transportador de paquetes?
         idSum = intent.getStringExtra(ID_SUMMONER);
 
-        championId = findViewById(R.id.championId);
+        /*championId = findViewById(R.id.championId);
         championLevel= findViewById(R.id.lvlMaestrie);
         championPoints = findViewById(R.id.maestryPoints);
         tokensEarned = findViewById(R.id.tokens);
@@ -87,15 +88,17 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         chestGranted = findViewById(R.id.chest);
         championPointsSinceLastLevel = findViewById(R.id.pointsSinceLastLevel);
         lastPlayTime = findViewById(R.id.lastPlayTime);
-
+        progressBarProba = findViewById(R.id.progressBarProba);
+*/
         errorImg=findViewById(R.id.imageErrorShow);
+
 
 
         //championId.setText(nick); //tindra el que hem escrit en el dialog
         //championId.setText(idSum);
-        progressBarProba = findViewById(R.id.progressBarProba);
-        listMaestries = findViewById(R.id.maestriesList);
 
+        listMaestries = findViewById(R.id.maestriesList);
+/*
         presenter.getChampions(new ResponseReceiver<JSONObject>() {
             @Override
             public void onResponseReceived(JSONObject response) {
@@ -131,11 +134,11 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
             }
         });
-
+*/
         findMaestries();
 
     }
-
+/*
     public void processMap(JSONObject jdata) {
 
         try {
@@ -165,7 +168,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         }
 
     }
-
+*/
     public void findMaestries(){
 
         presenter.findMaestries(idSum, new ResponseReceiver<ArrayList<ChampionMaestries>>() {
@@ -182,8 +185,9 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                     return; //si es algu que porta molt de temps sense jugar i no te maestria en res
                 }
 
-                setChampMaestries(response);
-
+                StaticData.setChampMaestries(response);
+                //setChampMaestries(response);
+/*
                 //Champion ID
                 long chamId = response.get(0).getChampionId();
                 String champi = ""+chamId; //si no faig aço peta
@@ -216,7 +220,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
                 long pointsSinceLastlvl =response.get(0).getChampionPointsSinceLastLevel();
                 championPointsSinceLastLevel.setText(String.valueOf(pointsSinceLastlvl));
-
+*/
                 //aci fem un findChampion i creem una llista de champions per a passarlila a
 
                 ArrayList<String> champsIds = new ArrayList<>();
@@ -252,7 +256,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
         for(int contador=0; contador<value2s.length; contador++){
 
-            JSONObject champ =allChampions.get(value2s[contador]);
+            JSONObject champ = StaticData.getAllChampions().get(value2s[contador]);
 
             value2s[contador]= champ.optString("name");
             subNames[contador]= champ.optString("title");
@@ -305,7 +309,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
             st = "Velkoz";
         }
 
-        JSONObject allChampData = champListByName.optJSONObject(st);
+        JSONObject allChampData = StaticData.getChampListByName().optJSONObject(st);
 
         String laId = allChampData.optString("id");
 
