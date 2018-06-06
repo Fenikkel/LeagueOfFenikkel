@@ -23,8 +23,7 @@ public class LeagueServer implements ILeagueServer {
     //private static final int MAX_RESULTS = 20;
     private static final String BAD_JSON_IN_SERVER_RESPONSE = "Bad JSON in server response";
     //falta ficar la regio
-    //private static final String BASE_URL = "https://";
-    //private static final String BASE_URL_2 = ".api.riotgames.com";
+
     //private  String defaultRegion = "euw1";
     private static final String BASE_URL = "https://euw1.api.riotgames.com";
     private static final String API_KEY = "?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae";
@@ -70,58 +69,15 @@ public class LeagueServer implements ILeagueServer {
     private Context context;
 
 
-    public LeagueServer(Context context){ //de mo ment no recorde pa que es EL FAIG PUBLIC
+    public LeagueServer(Context context){
         this.context = context;
         getIconVersion();
 
     }
 
 
-    /*@Override
-    public void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver){
-
-        String urlIcon = BASE_URL_ICON + VERSION + BASE_URL_ICON2 + profileIconId+PNG;
-
-        //"com.al286752.fenikkel.leagueoffenikkel.server.ILeagueServer"
-        String filename= context.getCacheDir() +"icon.png" ; //tinc que tindre un file i sobrescriurel?
-
-        final File fileToStoreCover = context.getApplicationContext().getFileStreamPath(filename);
-
-        if (fileToStoreCover.exists()){
-            //si existe la borro? Por si da problemas
-        }
-
-
-        DownloadTask downloadTask = new DownloadTask(urlIcon, fileToStoreCover, new DownloadCallback<String>() {
-            @Override
-            public void updateFromDownload(String result) {
-
-                    responseReceiver.onResponseReceived(fileToStoreCover);
-                    //passamos de la String result
-
-            }
-
-            @Override
-            public NetworkInfo getActiveNetworkInfo() {
-                return getNetworkInfo();
-            }
-
-            @Override
-            public void onError(String msg) {
-                responseReceiver.onErrorReceived(msg);
-            }
-        });
-
-        downloadTask.execute();
-
-
-    }*/
-
-
     @Override
     public void findSummoner(String nickName, final ResponseReceiver<JSONObject> responseReceiver) { //este es llamado desde el modelo que sera llamado desde el presenter
-
-        //getIconVersion();
 
         String nickEncoded;
         try {
@@ -141,12 +97,7 @@ public class LeagueServer implements ILeagueServer {
 
                     JSONObject json = new JSONObject(result);
 
-                    responseReceiver.onResponseReceived(json); //mos passem un JSON ARRAY pero encara hi ha que processarlo
-
-                    //List<AllGameData> allGameData = processJSON(json);
-                    //receiver.onResponseReceived(allGameData);
-
-
+                    responseReceiver.onResponseReceived(json);
 
                 }catch (JSONException e){
                     responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
@@ -176,8 +127,6 @@ public class LeagueServer implements ILeagueServer {
     @Override
     public String getUrlIcon(int idIcon) {
 
-        //getIconVersion();
-
         return BASE_URL_ICON + iconVersion + BASE_URL_ICON2 + idIcon +PNG;
     }
 
@@ -192,11 +141,7 @@ public class LeagueServer implements ILeagueServer {
 
                     JSONArray jsonArray = new JSONArray(result);
 
-                    reciever.onResponseReceived(jsonArray); //mos passem un JSON ARRAY pero encara hi ha que processarlo
-
-                    //List<AllGameData> allGameData = processJSON(json);
-                    //receiver.onResponseReceived(allGameData);
-
+                    reciever.onResponseReceived(jsonArray);
 
 
                 }catch (JSONException e){
@@ -232,17 +177,12 @@ public class LeagueServer implements ILeagueServer {
 
         DownloadTask downloadTask =  new DownloadTask(CHAMPIONS, new DownloadCallback<String>() {
             @Override
-            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
+            public void updateFromDownload(String result) {
                 try {
 
                     JSONObject jsonArray = new JSONObject(result);
 
-                    responseReceiver.onResponseReceived(jsonArray); //mos passem un JSON ARRAY pero encara hi ha que processarlo
-
-                    //List<AllGameData> allGameData = processJSON(json);
-                    //receiver.onResponseReceived(allGameData);
-
-
+                    responseReceiver.onResponseReceived(jsonArray);
 
                 }catch (JSONException e){
                     responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
@@ -268,51 +208,6 @@ public class LeagueServer implements ILeagueServer {
         downloadTask.execute();
 
     }
-/*
-    @Override
-    public void getChampionName(String  idChamp, final ResponseReceiver<JSONObject> responseReceiver) {
-
-        String url = CHAMPION+idChamp+API_KEY;
-
-        DownloadTask downloadTask =  new DownloadTask(url, new DownloadCallback<String>() {
-            @Override
-            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
-                try {
-
-                    JSONObject json = new JSONObject(result);
-
-                    responseReceiver.onResponseReceived(json); //mos passem un JSON ARRAY pero encara hi ha que processarlo
-
-                    //List<AllGameData> allGameData = processJSON(json);
-                    //receiver.onResponseReceived(allGameData);
-
-
-
-                }catch (JSONException e){
-                    responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public NetworkInfo getActiveNetworkInfo() {
-                return getNetworkInfo();
-            }
-
-            @Override
-            public void onError(String msg) {
-
-                responseReceiver.onErrorReceived(msg);
-            }
-
-
-        });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
-
-        downloadTask.execute();
-
-    }
-    */
 
     @Override
     public void getChampionMastery(String summId, String champId, final ResponseReceiver<JSONObject> receiver) {
@@ -323,17 +218,12 @@ public class LeagueServer implements ILeagueServer {
 
         DownloadTask downloadTask =  new DownloadTask(url, new DownloadCallback<String>() {
             @Override
-            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
+            public void updateFromDownload(String result) {
                 try {
 
                     JSONObject json = new JSONObject(result);
 
-                    receiver.onResponseReceived(json); //mos passem un JSON ARRAY pero encara hi ha que processarlo
-
-                    //List<AllGameData> allGameData = processJSON(json);
-                    //receiver.onResponseReceived(allGameData);
-
-
+                    receiver.onResponseReceived(json);
 
                 }catch (JSONException e){
                     receiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
@@ -380,17 +270,6 @@ public class LeagueServer implements ILeagueServer {
 
                     String extracto = jsonArray.optString(0);
                     iconVersion = extracto;
-
-
-
-                    //iconVersion = json.optString("0");
-
-                    //responseReceiver.onResponseReceived(json); //mos passem un JSON ARRAY pero encara hi ha que processarlo
-
-                    //List<AllGameData> allGameData = processJSON(json);
-                    //receiver.onResponseReceived(allGameData);
-
-
 
                 }catch (JSONException e){
                     //responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);

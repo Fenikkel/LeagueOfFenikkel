@@ -41,18 +41,8 @@ public class ShowStatsModel implements IShowStatsModel {
         this.leagueServer = riotServer;
     }
 
-    //public String champName="Lololo";
-
-
-    /*public String getChampName() {
-        return champName;
-    }*/
-
     @Override
-    public void findMaestries(String idSummoner, final ResponseReceiver<ArrayList<ChampionMaestries>> reciever) { //crec que este receiver deuria ser ChampionMaestriesd
-        //aci crec que hem de fer el process JSON DATA
-        //aci obtindrem amb el receiver un JSONArray que tindrem que transformar en un array de MaestriaDeCampeo (utilitzant el metode processJSON)
-        //eixa array de maestia la passarem al presenter per a que se la passe a la vista i ho mostre
+    public void findMaestries(String idSummoner, final ResponseReceiver<ArrayList<ChampionMaestries>> reciever) {
 
         leagueServer.findMaestries(idSummoner, new ResponseReceiver<JSONArray>() {
             @Override
@@ -76,19 +66,11 @@ public class ShowStatsModel implements IShowStatsModel {
     public void getChampions(ResponseReceiver<JSONObject> responseReceiver) {
         leagueServer.getChampions(responseReceiver);
     }
-/*
-    public void getChampionName(String idChamp, ResponseReceiver<JSONObject> receiver) {
-        leagueServer.getChampionName(idChamp, receiver);
-
-
-    }*/
 
     @Override
     public void getChampionMastery(String summId, String champId, ResponseReceiver<JSONObject> responseReceiver) {
 
         leagueServer.getChampionMastery(summId, champId, responseReceiver);
-
-        //processJSONChampion(response);
 
     }
 
@@ -121,17 +103,12 @@ public class ShowStatsModel implements IShowStatsModel {
 
                 }
 
-
                 if(cosa.optInt("championLevel")==0){
                     champion.setChampionLevel(-1);
                 }else {
                     int champLvl = cosa.optInt("championLevel");
                     champion.setChampionLevel(champLvl);
                 }
-
-
-
-
 
                 boolean chst = cosa.optBoolean("chestGranted");
                 champion.setChestGranted(chst);
@@ -145,7 +122,6 @@ public class ShowStatsModel implements IShowStatsModel {
                     long championPointsUntilNextLevel = cosa.optLong("championPointsUntilNextLevel");
                     champion.setChampionPointsUntilNextLevel(championPointsUntilNextLevel);
                 }
-
 
 
                 int tokens = cosa.optInt("tokensEarned");

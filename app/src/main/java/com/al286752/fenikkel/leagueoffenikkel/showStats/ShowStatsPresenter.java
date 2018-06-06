@@ -49,12 +49,6 @@ public class ShowStatsPresenter {
         );
     }
 
-    /*public void getChampionName(String champId, ResponseReceiver<JSONObject> receiver) {
-
-        model.getChampionName(champId, receiver);
-
-
-    }*/
 
     public void getChampions(ResponseReceiver<JSONObject> receiver) {
         model.getChampions(receiver);

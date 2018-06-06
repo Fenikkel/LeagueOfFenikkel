@@ -28,14 +28,12 @@ public class AskNickNameDialog extends DialogFragment{
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        Activity context = getActivity(); //constructor per a fer la finestreta?
+        Activity context = getActivity();
 
         View view = context.getLayoutInflater().inflate(R.layout.lookfor_nickname_layout,null);
         nickNameEditor = view.findViewById(R.id.nickNameWritter);
 
-
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
 
         builder.setView(view)
                 .setPositiveButton("Search", new DialogInterface.OnClickListener() {
@@ -49,8 +47,6 @@ public class AskNickNameDialog extends DialogFragment{
                 .setNegativeButton("Cancel",null);
 
         return builder.create();
-
-
 
 
     }

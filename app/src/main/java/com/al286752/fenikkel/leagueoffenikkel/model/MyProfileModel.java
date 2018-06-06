@@ -19,37 +19,15 @@ public class MyProfileModel implements IMyProfileModel {
 
     private ILeagueServer leagueServer ;
 
-    //SINGLETTON
-
-    /*        private static MyGamesModel instance = null;
-
-        public static MyGamesModel getInstance(){
-            return instance;
-        }
-
-        public static MyGamesModel getInstance(Context context){
-            if(instance ==null)
-                instance = new MyGamesModel(new GameDataBase(context),new IGDBServer(context));
-            return instance;
-        }
-*/
-
-
-    public MyProfileModel(Context context){ //private     el lleve perque no estic utilitzant instancies
+    public MyProfileModel(Context context){
 
         leagueServer=new LeagueServer(context);
 
     }
-
-
-    /*public void findIcon(int profileIconId, final ResponseReceiver<File> responseReceiver) { //este sera llamado desde el presenter
-        leagueServer.findIcon(profileIconId,responseReceiver);
-    }*/
-
-    public void findSummoner(String nickname, ResponseReceiver<JSONObject> reciever) { //este sera llamado desde el presenter
-        leagueServer.findSummoner(nickname,reciever); //passa directament el receiver
-        //aci crec que hem de fer el process JSON DATA
+    public void findSummoner(String nickname, ResponseReceiver<JSONObject> reciever) {
+        leagueServer.findSummoner(nickname,reciever);
     }
+
 
     @Override
     public String getUrlIcon(int idIcon) {

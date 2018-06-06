@@ -25,7 +25,7 @@ import java.util.TimeZone;
 
 public class ChampMastery extends AppCompatActivity {
 
-    //public static final ChampionMaestries ALL_DATA = null;
+
     public static final String CHAMPION = "championId";
     public static final String SUMMONER = "summonerId";
     public static final String CHAMPION_NAME = "championName";
@@ -34,8 +34,6 @@ public class ChampMastery extends AppCompatActivity {
     TextView championName;
     TextView championLevel;
     TextView totalMaestryPoints;
-    //TextView pointsSinceLastLevel;
-    //TextView pointsUntilNextLevel;
     TextView chestAvaliable;
     TextView tokensMastery;
     TextView lastTimePlayed;
@@ -46,8 +44,6 @@ public class ChampMastery extends AppCompatActivity {
     ChampionMaestries allData;
 
     ShowStatsModel model;
-
-
 
 
     @Override
@@ -67,7 +63,7 @@ public class ChampMastery extends AppCompatActivity {
         experienceBar = findViewById(R.id.experienceBar);
         // Get the Drawable custom_progressbar
         Drawable draw= getResources().getDrawable(R.drawable.custom_progressbar); //getResources te da la carpeta res
-// set the drawable as progress drawable
+        // set the drawable as progress drawable
         experienceBar.setProgressDrawable(draw);
         championName = findViewById(R.id.nameChamMastery);
         championName.setText(champName);
@@ -92,10 +88,6 @@ public class ChampMastery extends AppCompatActivity {
         allData = new ChampionMaestries();
 
 
-
-
-
-
         model.getChampionMastery(summId, champId, new ResponseReceiver<JSONObject>() {
             @Override
             public void onResponseReceived(JSONObject response) {
@@ -106,11 +98,9 @@ public class ChampMastery extends AppCompatActivity {
                 lastTimePlayed = findViewById(R.id.lastTimePlayed);
                 tokensMastery = findViewById(R.id.tokensMastery);
                 totalMaestryPoints = findViewById(R.id.totalMaestryPoints);
-                //pointsSinceLastLevel = findViewById(R.id.sinceLastLevel);
-                //pointsUntilNextLevel = findViewById(R.id.untilNextlevel);
                 chestAvaliable = findViewById(R.id.chestAvaliable);
 
-                championLevel.setText(String.valueOf("Mastery\n\t\t\t"+allData.getChampionLevel()));
+                championLevel.setText(String.valueOf(allData.getChampionLevel()));
 
 
                 long unixSeconds = allData.getLastPlayTime(); // lo que mos passa league of legends esta en miliseconds ja
@@ -125,8 +115,6 @@ public class ChampMastery extends AppCompatActivity {
                 tokensMastery.setText("Tokens earned: "+String.valueOf(allData.getTokensEarned()));
 
                 totalMaestryPoints.setText("Total points: "+ String.valueOf((int) allData.getChampionPoints()));
-                //pointsSinceLastLevel.setText(String.valueOf((int) allData.getChampionPointsSinceLastLevel()));
-                //pointsUntilNextLevel.setText(String.valueOf((int) allData.getChampionPointsUntilNextLevel()));
                 if(!allData.isChestGranted()){ //la pregunta es si la chest esta guanyada(concedida) ja
                     chestAvaliable.setText("Chest: Avaliable");
                 }else {
@@ -136,10 +124,6 @@ public class ChampMastery extends AppCompatActivity {
                 int totalPoint = (int) allData.getChampionPointsSinceLastLevel() + (int) allData.getChampionPointsUntilNextLevel();
                 experienceBar.setMax(totalPoint);
                 experienceBar.setProgress((int) allData.getChampionPointsSinceLastLevel());
-
-
-
-
             }
 
             @Override
@@ -151,26 +135,13 @@ public class ChampMastery extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
     }
 
     private void setChampionImage(String urlIcon) {
 
-
-
         new DownloadImageTask(champImage).execute(urlIcon);
 
     }
-
-    public void setAllData(ChampionMaestries allData) {
-        this.allData = allData;
-    }
-
 
     private void processJSONChampion(JSONObject champion) {
 
@@ -201,10 +172,6 @@ public class ChampMastery extends AppCompatActivity {
             allData.setChampionLevel(champLvl);
         }
 
-
-
-
-
         boolean chst = cosa.optBoolean("chestGranted");
         allData.setChestGranted(chst);
 
@@ -217,8 +184,6 @@ public class ChampMastery extends AppCompatActivity {
             long championPointsUntilNextLevel = cosa.optLong("championPointsUntilNextLevel");
             allData.setChampionPointsUntilNextLevel(championPointsUntilNextLevel);
         }
-
-
 
         int tokens = cosa.optInt("tokensEarned");
         allData.setTokensEarned(tokens);
@@ -240,10 +205,6 @@ public class ChampMastery extends AppCompatActivity {
 
             allData.setLastPlayTime(lastPlay);
         }
-
-
-
-
 
     }
     

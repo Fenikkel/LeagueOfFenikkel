@@ -36,8 +36,7 @@ public class SplashScreen extends AppCompatActivity {
         showStatsModel.getChampions(new ResponseReceiver<JSONObject>() {
             @Override
             public void onResponseReceived(JSONObject response) {
-                //convert to map
-                //championId.setText(String.valueOf(response));
+
                 if(response!=null){
                     processMap(response);
                 }else {
@@ -49,24 +48,6 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void onErrorReceived(String message) {
-               /* championId.setText(String.valueOf(message));
-
-                View parentLayout = findViewById(android.R.id.content);
-                Snackbar.make(parentLayout, "Server error: Too many request, rate limit exceeded", Snackbar.LENGTH_LONG).show();
-
-                //listMaestries.setEmptyView();
-                listMaestries.setVisibility(View.GONE);
-                errorImg.setVisibility(View.VISIBLE);
-
-                */
-
-                //Intent intent = new Intent(this, MyProfileActivity.class);
-
-                //Anyadim parametres a ShowStatsActivity
-                //intent.putExtra(ShowStatsActivity.NICKNAME, nickName);
-                //intent.putExtra(ShowStatsActivity.ID_SUMMONER, String.valueOf(idSummoner));
-
-                //startActivity(intent);
 
             }
         });
@@ -85,11 +66,6 @@ public class SplashScreen extends AppCompatActivity {
 
     void startApp(){
         Intent intent = new Intent(this, MyProfileActivity.class);
-
-        //Anyadim parametres a ShowStatsActivity
-        //intent.putExtra(ShowStatsActivity.NICKNAME, nickName);
-        //intent.putExtra(ShowStatsActivity.ID_SUMMONER, String.valueOf(idSummoner));
-
         startActivity(intent);
     }
 
@@ -113,8 +89,7 @@ public class SplashScreen extends AppCompatActivity {
             while (nameItr.hasNext()) {
 
                 String name = nameItr.next();
-                //String name = nameItr.toString();
-                //championId.setText(name);
+
                 outMap.put(temporal.optJSONObject(name).optString("id"), temporal.optJSONObject(name));
                 keysMap.put(temporal.optJSONObject(name).optString("name"), temporal.optJSONObject(name).optString("id"));
 

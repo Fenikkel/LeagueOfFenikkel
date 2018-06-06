@@ -26,9 +26,6 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     private final Context context;
     private final String[] champName;
     private final String[] subNames;
-    //private String urlIcon;
-
-    //private JSONObject mediador;
 
     IShowStatsModel model;
 
@@ -43,8 +40,6 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) { //aci modifica cada fila
 
-        //JSONObject champs = getChampions(); //CHAMPIONS TORNA NULL, MIRAR QUE PASSA
-
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.list_maestries_layout, parent, false);
@@ -58,79 +53,10 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
         textView.setText(s);
         title.setText(t);
 
-        /*String champNameKey = StaticData.getChampionNameKeys().get(s);
-
-        model.getChampionIcon(champNameKey, new ResponseReceiver<String>() {
-            @Override
-            public void onResponseReceived(String urlIcon) {
-
-
-                new DownloadImageTask(imageView).execute(urlIcon);
-            }
-
-            @Override
-            public void onErrorReceived(String message) {
-                title.setText(message);
-            }
-        });
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        Log.i("tag", "This'll run 300 milliseconds later");
-
-
-                    }
-                },
-                300);
-
-         */
-
-        /*if (s.startsWith("Ahri") || s.startsWith("Master")
-                || s.startsWith("Rammus")) {
-            imageView.setImageResource(R.drawable.teemo_profile);
-        } else {
-            imageView.setImageResource(R.drawable.stats_rammus);
-        }*/
         imageView.setImageResource(R.drawable.list_icon);
 
 
         return rowView;
-
-        //String champName = model.getChampionName(s);
-
-        /*model.getChampionName(s, new ResponseReceiver<JSONObject>() { DESCOMENTAR
-            @Override
-            public void onResponseReceived(JSONObject response) {
-                textView.setText(response.optString("name"));
-            }
-
-            @Override
-            public void onErrorReceived(String message) {
-
-                textView.setText(message);
-
-            }
-        });*/
-
-        //textView.setText(s);
-
-        //Map mapa = (Map<String,String>) champs;
-
-
-        //textView.setText(mapa.get("103")); //ACI FICAREM EL NOM I NO LA ID DEL CHAMP
-
-
-/*
-        try {
-            JSONObject jsonObject = (JSONObject) champs.get(0);
-            textView.setText(String.valueOf(jsonObject));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-*/
-        //
-
     }
 
     public JSONObject getChampions(){
@@ -148,7 +74,6 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
                     @Override
                     public void onErrorReceived(String message) {
 
-                        //view.showError(message);
                     }
                 }
         );

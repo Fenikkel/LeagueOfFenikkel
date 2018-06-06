@@ -34,8 +34,6 @@ public class MyProfilePresenter {
 
     public void onNickNameRequested(String nickname) {
 
-
-        //nickNamePresenter=nickname;
         myProfileModel.findSummoner(nickname,new ResponseReceiver<JSONObject>() {
                     @Override
                     public void onResponseReceived(JSONObject response) {
@@ -53,17 +51,10 @@ public class MyProfilePresenter {
                 }
         );
 
-
-
-        //myProfileModel.findIcon(); //millor ho faig en processJSONData
-
-
-        //aci tenim el nickname que hem de buscar
-        //myProfileView.switchToShowStats(nickname);
     }
 
     private void processJSONData(JSONObject response) {
-        //aci ficarem tot a la vista MyProfil
+
         nickNamePresenter = response.optString("name");
         iconIDPresenter =response.optInt("profileIconId");
         idSummoner = response.optLong("id");
@@ -75,17 +66,6 @@ public class MyProfilePresenter {
 
         myProfileView.setSummonerIcon(urlIcon);
 
-        /*myProfileModel.findIcon(iconIDPresenter, new ResponseReceiver<File>() {
-            @Override
-            public void onResponseReceived(File response) {
-                myProfileView.setSummonerIcon(response);
-            }
-
-            @Override
-            public void onErrorReceived(String message) {
-                myProfileView.showError(message);
-            }
-        });*/
 
     }
 

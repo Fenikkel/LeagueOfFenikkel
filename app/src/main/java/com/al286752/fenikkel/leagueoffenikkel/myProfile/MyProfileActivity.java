@@ -30,13 +30,11 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     MyProfilePresenter myProfilePresenter;
     ImageView profileImage;
     TextView nicknameText;
-    ImageView noImage; //si no hay nickname o el nickname es invalido
+    ImageView noImage;
     TextView lvltext;
     MyProfileModel myProfileModel;
 
     long idSummoner = -1;
-
-   // String nickName = "Fenikkel"; //Aço crec que millor plenar-ho en onNickNameInput()
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,23 +63,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
         lvltext = findViewById(R.id.levelText);
 
-       /* JSONObject temp = StaticData.getAllChampions().get("103");
-
-        String temp2 = temp.optString("name");
-
-        JSONObject temp3 = StaticData.getChampListByName().optJSONObject("MonkeyKing");
-
-        String temp4 = temp3.optString("name");
-
-        nicknameText.setText(temp2);
-        lvltext.setText(temp4);
-        */
-
-
-
         myProfilePresenter = new MyProfilePresenter(this, myProfileModel);
-
-
 
     }
 
@@ -147,7 +129,6 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         String error ="" + message.charAt(stringLenght-3)+ message.charAt(stringLenght-2) + message.charAt(stringLenght-1);
         View parentLayout = findViewById(android.R.id.content);
 
-        //nicknameText.setText(error);
         String snackString = "YOLO";
         if(error.equals("403")){
             snackString = "Invalid API key";
@@ -173,8 +154,6 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
        Snackbar.make(parentLayout, snackString, Snackbar.LENGTH_LONG).show();
 
         //https://developer.riotgames.com/response-codes.html
-
-
     }
 
     public void setNicknameText(String nicknam, long lvl, long sumId) {
@@ -196,12 +175,4 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         //https://ddragon.leagueoflegends.com/api/versions.json
          new DownloadImageTask(profileImage).execute(urlIcon);
     }
-
-    /*@Override
-    public void setSummonerIcon(File icono) {
-
-        Bitmap sumIcon = BitmapFactory.decodeFile(icono.getPath());
-
-        profileImage.setImageBitmap(sumIcon);
-    }*/
 }
