@@ -15,7 +15,7 @@
         android:layout_marginTop="32dp"
         android:onClick="onProfileImageClick"
         android:text="@string/the_evil"
-
+        android:textColor="@android:color/black"
         android:textSize="36sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -33,24 +33,23 @@
         android:contentDescription="@string/over_nine_thousen"
 
         android:onClick="onProfileImageClick"
-        android:src="@drawable/teemo_profile"
+        android:src="@drawable/default_profile_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nicknameText" />
 
     <ImageView
         android:id="@+id/statsImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="64dp"
         android:contentDescription="@string/over_nine_thousen"
         android:onClick="onStatsImageClick"
         android:src="@drawable/search_masteries"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/profileImage"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="@+id/profileImage"
+        app:layout_constraintTop_toBottomOf="@+id/levelText" />
 
     <TextView
         android:id="@+id/levelText"
@@ -65,5 +64,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+    <ImageView
+        android:id="@+id/getMasteriesButton"
+        android:layout_width="128dp"
+        android:layout_height="22dp"
+        android:contentDescription="@string/over_nine_thousen"
+        android:onClick="onStatsImageClick"
+        app:layout_constraintEnd_toEndOf="@+id/statsImage"
+        app:layout_constraintStart_toStartOf="@+id/statsImage"
+        app:layout_constraintTop_toBottomOf="@+id/statsImage"
+        app:srcCompat="@drawable/button_get_masteries" />
 
 </android.support.constraint.ConstraintLayout>

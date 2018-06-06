@@ -107,5 +107,11 @@ worked 45min
 -Conections debugged and finished the aplication
 1 h
 
--Making the pdf
+-Custom progress bar, editing layouts, etc
+
+worked 5h
+
+-Working on pdf
+
+worked 20min
 

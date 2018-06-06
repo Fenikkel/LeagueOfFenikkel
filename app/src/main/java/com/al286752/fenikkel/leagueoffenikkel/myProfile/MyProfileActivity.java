@@ -184,7 +184,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         StaticData.setSumonerLVL(String.valueOf(lvl));
         StaticData.setSummonerName(nicknam);
 
-        String ltext = ""+lvl; //para passar a String
+        String ltext = "Lvl "+lvl; //para passar a String
         lvltext.setText(ltext);
 
         idSummoner=sumId;
