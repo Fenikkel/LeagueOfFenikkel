@@ -56,14 +56,30 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
 
         //Lo meu
-
+        nicknameText = findViewById(R.id.nicknameText);
         myProfileModel = new MyProfileModel(getApplicationContext());
 
-        nicknameText = findViewById(R.id.nicknameText);
+
         profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
         lvltext = findViewById(R.id.levelText);
 
         myProfilePresenter = new MyProfilePresenter(this, myProfileModel);
+
+
+        if(savedInstanceState!= null){ // important, que sino ho fa a la primera
+            nicknameText.setText(savedInstanceState.getString("SummonerName"));
+            lvltext.setText("Lvl "+savedInstanceState.getString("SummonerLVL"));
+            if(StaticData.getSummonerIcon()!=null){
+                profileImage.setImageBitmap(StaticData.getSummonerIcon());
+            }
+            else{
+                profileImage.setImageResource(R.drawable.evil_teemo);
+            }
+
+        }
+
+
+
 
     }
 
@@ -174,5 +190,15 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         //https://discussion.developer.riotgames.com/questions/3337/how-can-i-load-summoner-icon-images-using-profilei.html
         //https://ddragon.leagueoflegends.com/api/versions.json
          new DownloadImageTask(profileImage).execute(urlIcon);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("SummonerName",StaticData.getSummonerName());
+        outState.putString("SummonerLVL",StaticData.getSumonerLVL());
+
+
     }
 }

@@ -33,7 +33,7 @@
         android:contentDescription="@string/over_nine_thousen"
 
         android:onClick="onProfileImageClick"
-        android:src="@drawable/default_profile_img"
+        android:src="@drawable/captain_teemo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nicknameText" />

@@ -1,5 +1,9 @@
 package com.al286752.fenikkel.leagueoffenikkel;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import org.json.JSONObject;
 import org.w3c.dom.ProcessingInstruction;
 
@@ -13,8 +17,13 @@ import java.util.Map;
 public class StaticData {
 
     private static String idSummoner;
-    private static String summonerName;
-    private static String sumonerLVL;
+    private static String summonerName = "The evil";
+    private static String sumonerLVL = "∞";
+
+    private static Bitmap summonerIcon = BitmapFactory.decodeResource(Resources.getSystem(),
+            R.drawable.evil_teemo);
+
+
 
     private static Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) la key es el id del champ
 
@@ -84,5 +93,13 @@ public class StaticData {
     public static void setAllChampions(Map<String, JSONObject> allChamp) {
 
         allChampions = allChamp;
+    }
+
+    public static Bitmap getSummonerIcon() {
+        return summonerIcon;
+    }
+
+    public static void setSummonerIcon(Bitmap summonerIcon) {
+        StaticData.summonerIcon = summonerIcon;
     }
 }

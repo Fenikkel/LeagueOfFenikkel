@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.al286752.fenikkel.leagueoffenikkel.StaticData;
+
 import java.io.InputStream;
 
 /**
@@ -33,6 +35,9 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
+
+        StaticData.setSummonerIcon(result);
+
         bmImage.setImageBitmap(result);
     }
 }
