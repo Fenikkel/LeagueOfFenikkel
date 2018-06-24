@@ -36,6 +36,14 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
     long idSummoner = -1;
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finishAffinity(); //ActivityCompat.finishAffinity(this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

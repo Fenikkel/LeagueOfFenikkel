@@ -25,6 +25,8 @@ public class SplashScreen extends AppCompatActivity {
 
     JSONObject champListByName;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
