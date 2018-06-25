@@ -19,6 +19,9 @@ public class StaticData {
     private static String idSummoner;
     private static String summonerName = "The evil";
     private static String sumonerLVL = "∞";
+    private static String version;
+    private static String region = "EUW";
+
 
     private static Bitmap summonerIcon = BitmapFactory.decodeResource(Resources.getSystem(),
             R.drawable.evil_teemo);
@@ -45,12 +48,28 @@ public class StaticData {
         StaticData.championNameKeys = championNameKeys;
     }
 
+    public static void setRegion(String region) {
+        StaticData.region = region;
+    }
+
+    public static String getRegion() {
+        return region;
+    }
+
     public static void setIdSummoner(String idSummoner) {
         StaticData.idSummoner = idSummoner;
     }
 
     public static void setSummonerName(String summonerName) {
         StaticData.summonerName = summonerName;
+    }
+
+    public static String getVersion() {
+        return version;
+    }
+
+    public static void setVersion(String version) {
+        StaticData.version = version;
     }
 
     public static void setSumonerLVL(String sumonerLVL) {

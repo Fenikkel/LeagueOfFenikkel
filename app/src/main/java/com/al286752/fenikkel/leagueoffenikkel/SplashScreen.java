@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
+import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.myProfile.MyProfileActivity;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
@@ -15,6 +17,7 @@ import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -22,6 +25,8 @@ import java.util.Map;
 public class SplashScreen extends AppCompatActivity {
 
     ShowStatsModel showStatsModel;
+
+    IMyProfileModel myProfileModel;
 
     JSONObject champListByName;
 
@@ -33,6 +38,8 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         showStatsModel = ShowStatsModel.getInstance(getApplicationContext());
+
+        myProfileModel = MyProfileModel.getInstance(getApplicationContext());
 
 
         showStatsModel.getChampions(new ResponseReceiver<JSONObject>() {
@@ -53,6 +60,23 @@ public class SplashScreen extends AppCompatActivity {
 
             }
         });
+
+        //myProfileModel.deleteCurrentSummoner(); // PER A FER COM SI SIGUERA PER PRIMERA VEGADA
+
+        ArrayList<String> lista = myProfileModel.getCurrentSummoner();
+
+        String text = lista.get(0);
+
+        if(text.equals("N/A")){
+            //do nothing
+        }
+        else{
+            StaticData.setIdSummoner(lista.get(0));
+            StaticData.setVersion(lista.get(1));
+            StaticData.setRegion(lista.get(2));
+        }
+
+
 
 
         new android.os.Handler().postDelayed(

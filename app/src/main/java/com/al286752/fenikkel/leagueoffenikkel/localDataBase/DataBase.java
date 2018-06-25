@@ -1,5 +1,6 @@
 package com.al286752.fenikkel.leagueoffenikkel.localDataBase;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -102,6 +103,39 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
         int rowsDeleted = db.delete(START,null,null); //eliminara totes les files
 
         return rowsDeleted==1;
+
+    }
+
+    public void insertCurrentSummoner(int summonerID, String lastVersion, String region){
+        SQLiteDatabase db = getWritableDatabase();
+
+        //miramos si ya esta insertado
+        Cursor cursor = db.query(START,null,null,null,null,null, null);
+        if(cursor!=null && cursor.getCount()==1){
+            cursor.moveToNext();// cursor.moveToFirst()
+            if(cursor.getInt(0)== summonerID && cursor.getString(1)== lastVersion && cursor.getString(2)== region){
+                return;
+            }else{
+                deleteCurrentSummoner();
+            }
+        }
+
+        else if(cursor.getCount()>1){//no se jo aço...
+            deleteCurrentSummoner();
+        }
+
+        else{
+            ContentValues contentValues = new ContentValues();
+
+            contentValues.put(SUMMONER_ID,summonerID); // han de ser las claves que hemos utilizado en la tabla
+            contentValues.put(LAST_VERSION,lastVersion);
+            contentValues.put(REGION,region);
+
+            db.insertWithOnConflict(START,null,contentValues,SQLiteDatabase.CONFLICT_REPLACE); // tabla, a saber, lo que añadimos, si ya esta(la key) en db, remplazamos
+        }
+
+
+
 
     }
 

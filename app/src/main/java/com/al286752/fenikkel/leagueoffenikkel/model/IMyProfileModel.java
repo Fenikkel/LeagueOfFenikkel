@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
 
 /**
  * Created by fenikkel on 17/05/18.
@@ -15,4 +16,7 @@ public interface IMyProfileModel {
 
     void findSummoner(String nickname, ResponseReceiver<JSONObject> reciever);
     String getUrlIcon(int idIcon);
+    void insertCurrentSummoner(int summonerID, String lastVersion, String region);
+    ArrayList<String> getCurrentSummoner();
+    boolean deleteCurrentSummoner();
 }

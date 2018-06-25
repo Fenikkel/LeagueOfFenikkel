@@ -1,8 +1,13 @@
 package com.al286752.fenikkel.leagueoffenikkel.localDataBase;
 
+import java.util.ArrayList;
+
 /**
  * Created by fenikkel on 23/06/18.
  */
 
-interface IDataBase {
+public interface IDataBase {
+    void insertCurrentSummoner(int summonerID, String lastVersion, String region);
+    ArrayList<String> getCurrentSummoner();
+    boolean deleteCurrentSummoner();
 }

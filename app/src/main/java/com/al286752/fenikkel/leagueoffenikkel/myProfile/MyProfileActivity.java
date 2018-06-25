@@ -3,6 +3,7 @@ package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Region;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,7 +31,8 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     MyProfilePresenter myProfilePresenter;
     ImageView profileImage;
     TextView nicknameText;
-    ImageView noImage;
+    //ImageView noImage;
+    TextView region;
     TextView lvltext;
     MyProfileModel myProfileModel;
 
@@ -48,28 +50,15 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
-
 
         //Lo meu
         nicknameText = findViewById(R.id.nicknameText);
-        myProfileModel = new MyProfileModel(getApplicationContext());
+        myProfileModel = MyProfileModel.getInstance(getApplicationContext());
 
 
         profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
         lvltext = findViewById(R.id.levelText);
+        region = findViewById(R.id.region);
 
         myProfilePresenter = new MyProfilePresenter(this, myProfileModel);
 
@@ -77,40 +66,30 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         if(savedInstanceState!= null){ // important, que sino ho fa a la primera
             nicknameText.setText(savedInstanceState.getString("SummonerName"));
             lvltext.setText("Lvl "+savedInstanceState.getString("SummonerLVL"));
+            region.setText(savedInstanceState.getString("Region"));
             if(StaticData.getSummonerIcon()!=null){
                 profileImage.setImageBitmap(StaticData.getSummonerIcon());
+                //region.setText(StaticData.getRegion());
             }
             else{
                 profileImage.setImageResource(R.drawable.evil_teemo);
             }
 
         }
+        else if(! (StaticData.getIdSummoner()==null)){ //.equals() no val perque si es null no pot fer eixe metode
 
+            //region.setText("HA APLEGAT");
 
+            //buscar el summoner per StaticData.sumoneride
 
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_my_profile, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+            nicknameText.setText(StaticData.getIdSummoner());
+            lvltext.setText(StaticData.getVersion());
+            region.setText(StaticData.getRegion());
         }
 
-        return super.onOptionsItemSelected(item);
+
+
+
     }
 
     public void onProfileImageClick(View view){
@@ -206,6 +185,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         super.onSaveInstanceState(outState);
         outState.putString("SummonerName",StaticData.getSummonerName());
         outState.putString("SummonerLVL",StaticData.getSumonerLVL());
+        outState.putString("Region",StaticData.getRegion());
 
 
     }

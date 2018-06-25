@@ -1,5 +1,6 @@
 package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
+import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.server.ILeagueServer;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by fenikkel on 17/05/18.
  */
 
-public class MyProfilePresenter {
+public class MyProfilePresenter  {
 
     private IMyProfileView myProfileView;
     private IMyProfileModel myProfileModel;
@@ -60,11 +61,15 @@ public class MyProfilePresenter {
         idSummoner = response.optLong("id");
         summonerLevel = response.optLong("summonerLevel");
 
+
+
         myProfileView.setNicknameText(nickNamePresenter,summonerLevel,idSummoner);
 
         String urlIcon = myProfileModel.getUrlIcon(iconIDPresenter);
 
         myProfileView.setSummonerIcon(urlIcon);
+
+        myProfileModel.insertCurrentSummoner((int)idSummoner,StaticData.getVersion(), "califragilistico");//
 
 
     }

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.al286752.fenikkel.leagueoffenikkel.StaticData;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -258,7 +260,9 @@ public class LeagueServer implements ILeagueServer {
         //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/Aatrox.png
     }
 
-    public void getIconVersion(){
+
+
+    public void getIconVersion(){ // si se entra per primera vegada a la aplicacio aço no mos preocupa
 
 
         DownloadTask downloadTask =  new DownloadTask(ICON_VERSIONS, new DownloadCallback<String>() {
@@ -270,6 +274,7 @@ public class LeagueServer implements ILeagueServer {
 
                     String extracto = jsonArray.optString(0);
                     iconVersion = extracto;
+                    StaticData.setVersion(iconVersion);
 
                 }catch (JSONException e){
                     //responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
