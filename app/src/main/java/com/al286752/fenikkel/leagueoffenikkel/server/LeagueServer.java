@@ -30,7 +30,7 @@ public class LeagueServer implements ILeagueServer {
     private static final String BASE_URL = "https://euw1.api.riotgames.com";
     private static final String API_KEY = "?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae";
     private static final String SEARCH_SUMMONER = "/lol/summoner/v3/summoners/by-name/"; //aci falta sumarli el nickname + la API_KEY
-
+    private static final String SEARCH_SUMMONER_BY_ID = "/lol/summoner/v3/summoners/";
 
     //ICONO CHAMP
     //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/Aatrox.png
@@ -124,6 +124,44 @@ public class LeagueServer implements ILeagueServer {
 
         downloadTask.execute(); //aci se fica a fer lo de onpreexecute, doitbackground(on utilitza networkhelper) i onpostexecute
 
+    }
+
+    @Override
+    public void findSummonerByID(String summonerId, final ResponseReceiver<JSONObject> responseReceiver) {
+        String urlPetition =BASE_URL+SEARCH_SUMMONER_BY_ID+summonerId+API_KEY;
+
+
+        DownloadTask downloadTask =  new DownloadTask(urlPetition, new DownloadCallback<String>() {
+            @Override
+            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
+                try {
+
+                    JSONObject json = new JSONObject(result);
+
+                    responseReceiver.onResponseReceived(json);
+
+                }catch (JSONException e){
+                    responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public NetworkInfo getActiveNetworkInfo() {
+                return getNetworkInfo();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+                responseReceiver.onErrorReceived(msg);
+            }
+
+
+        });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
+
+        downloadTask.execute();
     }
 
     @Override

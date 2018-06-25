@@ -12,6 +12,7 @@ import java.io.File;
 public interface ILeagueServer {
 
     void findSummoner(String nickName, ResponseReceiver<JSONObject> responseReceiver);
+    void findSummonerByID(String summonerID, ResponseReceiver<JSONObject> responseReceiver);
 
     String getUrlIcon(int idIcon);
 

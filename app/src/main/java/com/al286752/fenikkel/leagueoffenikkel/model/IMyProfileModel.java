@@ -19,4 +19,5 @@ public interface IMyProfileModel {
     void insertCurrentSummoner(int summonerID, String lastVersion, String region);
     ArrayList<String> getCurrentSummoner();
     boolean deleteCurrentSummoner();
+    void findSummonerByID(String summonerID, ResponseReceiver<JSONObject> responseReceiver);
 }

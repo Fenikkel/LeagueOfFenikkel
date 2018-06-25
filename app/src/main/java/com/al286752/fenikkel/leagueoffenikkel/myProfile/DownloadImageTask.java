@@ -36,7 +36,7 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     protected void onPostExecute(Bitmap result) {
 
-        StaticData.setSummonerIcon(result);
+        StaticData.setSummonerIcon(result); //aço ho crida ChampMastery com MyProfileActivity SOLUCIO: descarregar la image cada vega enves de guardarla
 
         bmImage.setImageBitmap(result);
     }

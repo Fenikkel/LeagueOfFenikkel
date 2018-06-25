@@ -71,5 +71,10 @@ public class MyProfileModel implements IMyProfileModel, IDataBase {
         return dataBase.deleteCurrentSummoner();
     }
 
+    @Override
+    public void findSummonerByID(String summonerID, ResponseReceiver<JSONObject> responseReceiver) {
+        leagueServer.findSummonerByID(summonerID,responseReceiver);
+    }
+
 
 }

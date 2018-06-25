@@ -20,6 +20,7 @@ import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
+import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
 
 import org.json.JSONObject;
@@ -75,16 +76,56 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
                 profileImage.setImageResource(R.drawable.evil_teemo);
             }
 
+            if(StaticData.getIdSummoner()!=null){
+                idSummoner = Long.parseLong(StaticData.getIdSummoner());
+            }else {
+                idSummoner = -1;
+            }
+
+
         }
         else if(! (StaticData.getIdSummoner()==null)){ //.equals() no val perque si es null no pot fer eixe metode
-
+            //osea que si que hay info en la database y no estamos girando
             //region.setText("HA APLEGAT");
 
-            //buscar el summoner per StaticData.sumoneride
 
-            nicknameText.setText(StaticData.getIdSummoner());
-            lvltext.setText(StaticData.getVersion());
+            //SI STATIC DATA == NULL PUES POSEM -1 A IDSUMMONER SINO POSEM STATIC DATA
+
+
+
+
+            myProfileModel.findSummonerByID(StaticData.getIdSummoner(), new ResponseReceiver<JSONObject>() {
+                @Override
+                public void onResponseReceived(JSONObject response) {
+                    //nicknameText.setText(response.optString("name"));
+                    //StaticData.setSummonerName(response.optString("name"));
+                    //lvltext.setText(String.valueOf(response.optLong("summonerLevel")));
+                    //StaticData.setSumonerLVL(String.valueOf(response.optLong("summonerLevel")));
+                    //setSummonerIcon(String.valueOf(response.optInt("profileIconId")));
+                    setNicknameText(response.optString("name"),response.optLong("summonerLevel"), Long.parseLong(StaticData.getIdSummoner()));
+
+
+
+
+                    String urlIcon = myProfileModel.getUrlIcon(response.optInt("profileIconId"));
+
+                    setSummonerIcon(urlIcon);
+
+                    myProfileModel.insertCurrentSummoner(Integer.parseInt(StaticData.getIdSummoner()),StaticData.getVersion(), "tomaMoreno");//
+                }
+
+                @Override
+                public void onErrorReceived(String message) {
+                        showError(message);
+                }
+            });
+
+
             region.setText(StaticData.getRegion());
+        }
+        else{
+            //(StaticData.getIdSummoner()==null)
+            //fiquem teemo per primera vegada
         }
 
 
