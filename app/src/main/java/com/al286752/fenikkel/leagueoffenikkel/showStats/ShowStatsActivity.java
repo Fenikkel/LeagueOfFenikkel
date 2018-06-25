@@ -160,6 +160,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
         st = st.replaceAll("\\s",""); // aixina llevem els espais i merdes que no existeixen en les ID
         st= st.replaceAll("'","");
+        //st= st.replaceAll(".","");
         if(st.equals("Wukong")){
             st = "MonkeyKing";
         }else if(st.equals("LeBlanc")){
@@ -172,6 +173,14 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         }
         else if(st.equals("VelKoz")){
             st = "Velkoz";
+        }else if(st.equals("Dr. Mundo")){ //Dr mundo no va, mira de arreglar-ho be passant les keys lerdo
+            st = "DrMundo";
+        }
+        else if(st.equals("Twisted Fate")){
+            st = "TwistedFate";
+        }
+        else if(st.equals("Cho'Gath")){
+            st = "Chogath";
         }
 
         JSONObject allChampData = StaticData.getChampListByName().optJSONObject(st);

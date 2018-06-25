@@ -1,8 +1,13 @@
 package com.al286752.fenikkel.leagueoffenikkel.localDataBase;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.Currency;
+
 
 /**
  * Created by fenikkel on 23/06/18.
@@ -60,4 +65,44 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
 
         db.execSQL(create);
     }
+
+    public ArrayList<String> getCurrentSummoner(){
+        SQLiteDatabase db = getReadableDatabase();
+
+        //(indica si son necesarios los valores unicos, Tabla que queremos, columnas que queremos, filas que queremos, parametros para seleccion de filas, grouping, grouping, orden, limite de numero de filas)
+        // El primer parametro se usa si hay datos duplicados (supongo que foreing keys)?
+        Cursor cursor = db.query(false, START, null,null, null, null, null, null, null);
+
+        ArrayList<String> lista = new ArrayList<>();
+
+        if(cursor.getCount()==0){
+
+            lista.add("N/A");//no value
+
+            return lista;
+
+        }
+
+        while (cursor.moveToNext()){// el primer move te porta a la primera fila? es com si estiguera fora de la tabla
+
+            lista.add(String.valueOf(cursor.getInt(0))); //ho pase a String pero despres necessitare int a lo millor
+            lista.add(cursor.getString(1)); //LASTVERSION
+            lista.add(cursor.getString(2)); //REGION
+
+        }
+
+        cursor.close();//important
+
+        return lista;
+    }
+
+    public boolean deleteCurrentSummoner(){
+
+        SQLiteDatabase db = getWritableDatabase();
+        int rowsDeleted = db.delete(START,null,null); //eliminara totes les files
+
+        return rowsDeleted==1;
+
+    }
+
 }
