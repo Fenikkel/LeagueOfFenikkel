@@ -48,7 +48,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
     private String idSum;
 
-    private static String champName ="view";
+    //private static String champName ="view";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

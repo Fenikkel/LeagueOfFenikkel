@@ -28,11 +28,11 @@ public class StaticData {
 
 
 
-    private static Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) la key es el id del champ
+    private static Map<String, JSONObject> allChampions; //autoupdates (key, JSONObject campeon) la key es el id del champ (que es diferente al nombre)
 
     private static JSONObject champListByName; //la key del champ que es su nombre (menos monkey king y algunos espacios "'" y lowercase
 
-    private static ArrayList<ChampionMaestries> champMaestries; //Masteries of the actual summoner
+    private static ArrayList<ChampionMaestries> champMaestries; //Masteries of the actual summoner (llista de 0 a n campeons. Tu busques per id el campeo)
 
     private static Map<String, String> championNameKeys; //la key es el nombre del champ (con espacios y "'") y lo que te devuelve es la key del champion que es un nombre sin espacios ni mariconadas
 
