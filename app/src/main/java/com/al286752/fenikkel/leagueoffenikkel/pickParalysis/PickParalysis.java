@@ -56,6 +56,9 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         }
 
 
+        findMaestries();
+
+
     }
 
 
