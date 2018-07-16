@@ -22,13 +22,15 @@ import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.pickParalysis.PickParalysis;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
+import com.al286752.fenikkel.leagueoffenikkel.showStats.IShowStatsActivity;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
+import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsPresenter;
 
 import org.json.JSONObject;
 
 import java.io.File;
 
-public class MyProfileActivity extends AppCompatActivity implements IMyProfileView, AskNickNameDialog.INickNameListener{
+public class MyProfileActivity extends AppCompatActivity implements IShowStatsActivity, IMyProfileView, AskNickNameDialog.INickNameListener{
 
     MyProfilePresenter myProfilePresenter;
     ImageView profileImage;
@@ -38,6 +40,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     TextView lvltext;
     MyProfileModel myProfileModel;
     ShowStatsModel showStatsModel;
+    //private ShowStatsPresenter presenter;
 
 
     long idSummoner = -1;
@@ -66,6 +69,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         region = findViewById(R.id.region);
 
         myProfilePresenter = new MyProfilePresenter(this, myProfileModel);
+        //presenter = new ShowStatsPresenter(this,getApplicationContext());
 
 
         if(savedInstanceState!= null){ // important, que sino ho fa a la primera
@@ -153,6 +157,10 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
 
     }
+
+
+
+
 
     private void processChampions(JSONObject jChampions) {
 

@@ -1,24 +1,33 @@
 package com.al286752.fenikkel.leagueoffenikkel.pickParalysis;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
+import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
+import com.al286752.fenikkel.leagueoffenikkel.showStats.IShowStatsActivity;
+import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsPresenter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class PickParalysis extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class PickParalysis extends AppCompatActivity implements IShowStatsActivity {
 
     TextView freeToPlay;
     ImageView marksmanImage;
     ImageView midImage;
     ImageView apImage;
     ImageView adImage;
+
+    private ShowStatsPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +39,7 @@ public class PickParalysis extends AppCompatActivity {
         midImage = findViewById(R.id.midImage);
         apImage = findViewById(R.id.apImage);
         adImage = findViewById(R.id.adImage);
+        presenter = new ShowStatsPresenter(this,getApplicationContext());
 
         processJSONChampsByID("EASYEST");
 
@@ -45,6 +55,47 @@ public class PickParalysis extends AppCompatActivity {
 
         }
 
+
+    }
+
+
+    public void findMaestries(){
+
+        presenter.findMaestries(StaticData.getIdSummoner(), new ResponseReceiver<ArrayList<ChampionMaestries>>() {
+            @Override
+            public void onResponseReceived(ArrayList<ChampionMaestries> response) {
+
+                if(response.size()==0){
+
+
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "This summoner don't have any mastery", Snackbar.LENGTH_LONG).show();
+
+                    return; //si es algu que porta molt de temps sense jugar i no te maestria en res
+                }
+
+                StaticData.setChampMaestries(response);
+
+
+                ArrayList<String> champsIds = new ArrayList<>(); //aci tenim totes les id delschamps que teni, maestries
+
+                for(ChampionMaestries champ : response){
+
+                    champsIds.add(String.valueOf(champ.getChampionId()));
+
+                }
+
+
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+
+                View parentLayout = findViewById(android.R.id.content);
+                Snackbar.make(parentLayout, "Something goes wrong", Snackbar.LENGTH_LONG).show();
+
+            }
+        });
 
     }
 

@@ -54,6 +54,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     protected void onCreate(Bundle savedInstanceState) {
         presenter = new ShowStatsPresenter(this,getApplicationContext());
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_stats);
 
