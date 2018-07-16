@@ -21,4 +21,7 @@ public interface IShowStatsModel {
 
     void getChampionIcon(String champNameKey, ResponseReceiver<String> responseReceiver);
 
-}
+    void getChampionsByID(ResponseReceiver<JSONObject> responseReceiver);
+    void getVersion(ResponseReceiver<String> responseReceiver);
+
+    }

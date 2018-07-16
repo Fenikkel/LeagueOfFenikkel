@@ -39,11 +39,11 @@ public class LeagueServer implements ILeagueServer {
 
     //icono
 
-    private static final String ICON_VERSIONS = "https://ddragon.leagueoflegends.com/api/versions.json";
+    private static final String ICON_VERSIONS = "https://ddragon.leagueoflegends.com/api/versions.json"; //el parche actual diria jo
 
     //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/588.png
 
-    private static final String BASE_URL_ICON = "http://ddragon.leagueoflegends.com/cdn/";
+    private static final String BASE_URL_ICON = "https://ddragon.leagueoflegends.com/cdn/";
     //private static final String VERSION = "8.11.1";
     private static final String BASE_URL_ICON2 = "/img/profileicon/";
     //faltaria la id del icon
@@ -61,8 +61,16 @@ public class LeagueServer implements ILeagueServer {
 
 
     //CHAMPIONS
+
+    //private static final String CHAMPS = BASE_URL_ICON + StaticData.getCurrentVersion()+ "/data/en_US/champion.json"; // no funciona perque encara no esta current version
+
+
     //https://euw1.api.riotgames.com/lol/static-data/v3/champions?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
-    private static final String CHAMPIONS = BASE_URL+"/lol/static-data/v3/champions"+API_KEY;
+    private static final String CHAMPIONS = BASE_URL+"/lol/static-data/v3/champions"+API_KEY;  //ESTE NO TIENE PARAMETROS
+
+
+    //https://euw1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=tags&tags=info&dataById=true&api_key=RGAPI-4471689c-b44c-4021-bcaa-0812fde93338
+    private static final String CHAMPIONS_BY_ID = BASE_URL+"/lol/static-data/v3/champions"+"?locale=en_US&tags=tags&tags=info&dataById=true&api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae";
     //private static final String CHAMPION = BASE_URL + "/lol/static-data/v3/champions/";
     //https://euw1.api.riotgames.com/lol/static-data/v3/champions/103?locale=en_US&api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
 
@@ -212,6 +220,47 @@ public class LeagueServer implements ILeagueServer {
 
     }
 
+
+    @Override
+    public void getChampionsByID(final ResponseReceiver<JSONObject> responseReceiver) {
+
+        String urlLink = BASE_URL_ICON + StaticData.getCurrentVersion()+ "/data/en_US/champion.json";
+
+        DownloadTask downloadTask =  new DownloadTask(urlLink, new DownloadCallback<String>() {
+            @Override
+            public void updateFromDownload(String result) {
+                try {
+
+                    JSONObject jsonArray = new JSONObject(result);
+
+                    responseReceiver.onResponseReceived(jsonArray);
+
+                }catch (JSONException e){
+                    responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public NetworkInfo getActiveNetworkInfo() {
+                return getNetworkInfo();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+                responseReceiver.onErrorReceived(msg);
+            }
+
+
+        });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
+
+        downloadTask.execute();
+
+    }
+
+
     @Override
     public void getChampions(final ResponseReceiver<JSONObject> responseReceiver) {
 
@@ -298,6 +347,44 @@ public class LeagueServer implements ILeagueServer {
         //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/Aatrox.png
     }
 
+    @Override
+    public void getVersion(final ResponseReceiver<String> responseReceiver) {
+        DownloadTask downloadTask =  new DownloadTask(ICON_VERSIONS, new DownloadCallback<String>() {
+            @Override
+            public void updateFromDownload(String result) { // una vegada s'ha conectat i fet la descarga
+                try {
+
+                    JSONArray jsonArray = new JSONArray(result);
+
+                    String extracto = jsonArray.optString(0);
+                    iconVersion = extracto;
+
+                    StaticData.setCurrentVersion(extracto);
+                    responseReceiver.onResponseReceived(extracto);
+
+                }catch (JSONException e){
+                    //responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public NetworkInfo getActiveNetworkInfo() {
+                return getNetworkInfo();
+            }
+
+            @Override
+            public void onError(String msg) {
+
+                //responseReceiver.onErrorReceived(msg);
+            }
+
+
+        });//aqui a continuacion faltarian las cabeceras (que yo no tengo)
+
+        downloadTask.execute(); //aci se fica a fer lo de onpreexecute, doitbackground(on utilitza networkhelper) i onpostexecute
+    }
 
 
     public void getIconVersion(){ // si se entra per primera vegada a la aplicacio aço no mos preocupa

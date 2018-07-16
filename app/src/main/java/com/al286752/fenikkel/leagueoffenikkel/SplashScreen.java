@@ -42,6 +42,44 @@ public class SplashScreen extends AppCompatActivity {
         myProfileModel = MyProfileModel.getInstance(getApplicationContext());
 
 
+        showStatsModel.getVersion(new ResponseReceiver<String>() {
+            @Override
+            public void onResponseReceived(String response) {
+                StaticData.setCurrentVersion(response);
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+
+            }
+        });//ho guarda en static data (current version)
+
+
+
+        //while(StaticData.getCurrentVersion()==null){Log.i("tag", "vaya mierda");}
+/*
+        showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
+            @Override
+            public void onResponseReceived(JSONObject response) {
+                if(response!=null){
+                    processChampions(response);
+                }else {
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+
+            }
+        });
+
+*/
+
+
+//ESTO ESTA DEPRECATED!!!
+/*
         showStatsModel.getChampions(new ResponseReceiver<JSONObject>() {
             @Override
             public void onResponseReceived(JSONObject response) {
@@ -60,7 +98,7 @@ public class SplashScreen extends AppCompatActivity {
 
             }
         });
-
+*/
         //myProfileModel.deleteCurrentSummoner(); // PER A FER COM SI SIGUERA PER PRIMERA VEGADA
 
         ArrayList<String> lista = myProfileModel.getCurrentSummoner();
@@ -69,11 +107,22 @@ public class SplashScreen extends AppCompatActivity {
 
         if(text.equals("N/A")){
             //do nothing
+            //DESCARGAMOS LOS CAMPEONES PORQUE ES LA PRIMERA VEZ QUE ENRTAMOS
+
+
         }
         else{
             StaticData.setIdSummoner(lista.get(0));
             StaticData.setVersion(lista.get(1));
             StaticData.setRegion(lista.get(2));
+
+            /*if(StaticData.getVersion()== version actual){
+                no descargamos los campeones
+            }
+            else{
+                actualizamos los campeones
+            }*/
+
         }
 
 
@@ -90,11 +139,19 @@ public class SplashScreen extends AppCompatActivity {
                 3000);
     }
 
+
+
     void startApp(){
         Intent intent = new Intent(this, MyProfileActivity.class);
         startActivity(intent);
     }
 
+
+    private void processChampions(JSONObject jChampions) {
+
+        StaticData.setChampListByID(jChampions);
+
+    }
 
     public void processMap(JSONObject jdata) {
 

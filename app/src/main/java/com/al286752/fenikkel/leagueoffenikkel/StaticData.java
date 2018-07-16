@@ -20,6 +20,7 @@ public class StaticData {
     private static String summonerName = "The evil";
     private static String sumonerLVL = "∞";
     private static String version;
+    private static String currentVersion;
     private static String region = "EUW";
 
 
@@ -36,8 +37,9 @@ public class StaticData {
 
     private static Map<String, String> championNameKeys; //la key es el nombre del champ (con espacios y "'") y lo que te devuelve es la key del champion que es un nombre sin espacios ni mariconadas
 
+    private static JSONObject champListByID; //lista campeones por la ID(ordenado creo) con sus tags y info de facil, tanque, mago..
 
-
+    //falta lista de maestrias del summoner actual
 
 
     public static Map<String, String> getChampionNameKeys() {
@@ -120,5 +122,21 @@ public class StaticData {
 
     public static void setSummonerIcon(Bitmap summonerIcon) {
         StaticData.summonerIcon = summonerIcon;
+    }
+
+    public static JSONObject getChampListByID() {
+        return champListByID;
+    }
+
+    public static void setChampListByID(JSONObject champListByID) {
+        StaticData.champListByID = champListByID;
+    }
+
+    public static String getCurrentVersion() {
+        return currentVersion;
+    }
+
+    public static void setCurrentVersion(String curreVersion) {
+        StaticData.currentVersion = curreVersion;
     }
 }

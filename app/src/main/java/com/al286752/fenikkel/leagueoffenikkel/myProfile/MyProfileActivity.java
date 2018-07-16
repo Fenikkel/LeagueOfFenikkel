@@ -20,6 +20,7 @@ import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
+import com.al286752.fenikkel.leagueoffenikkel.pickParalysis.PickParalysis;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
 
@@ -36,6 +37,8 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
     TextView region;
     TextView lvltext;
     MyProfileModel myProfileModel;
+    ShowStatsModel showStatsModel;
+
 
     long idSummoner = -1;
 
@@ -55,6 +58,7 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
         //Lo meu
         nicknameText = findViewById(R.id.nicknameText);
         myProfileModel = MyProfileModel.getInstance(getApplicationContext());
+        showStatsModel = ShowStatsModel.getInstance(getApplicationContext());
 
 
         profileImage = findViewById(R.id.profileImage);  //demoment no fa falta profileImatge.setEmptyView(noImage);
@@ -128,8 +132,31 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
             //fiquem teemo per primera vegada
         }
 
+        showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
+            @Override
+            public void onResponseReceived(JSONObject response) {
+                if(response!=null){
+                    processChampions(response);
+                }else {
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onErrorReceived(String message) {
+
+            }
+        });
 
 
+
+
+    }
+
+    private void processChampions(JSONObject jChampions) {
+
+        StaticData.setChampListByID(jChampions);
 
     }
 
@@ -141,6 +168,26 @@ public class MyProfileActivity extends AppCompatActivity implements IMyProfileVi
 
     public void onStatsImageClick(View view){
         this.switchToShowStats(myProfilePresenter.getNickName());
+    }
+
+    public void onRegionClick(View view){
+        this.switchToShowPickParalysis();
+    }
+
+    private void switchToShowPickParalysis() {
+        if(idSummoner == -1){
+            View parentLayout = findViewById(android.R.id.content);
+            Snackbar.make(parentLayout, "Please insert your summoner name to start", Snackbar.LENGTH_LONG).show();
+            return;
+        }
+
+        Intent intent = new Intent(this, PickParalysis.class);
+
+        //Anyadim parametres a ShowStatsActivity
+        //intent.putExtra(ShowStatsActivity.NICKNAME, nickName);
+        //intent.putExtra(ShowStatsActivity.ID_SUMMONER, String.valueOf(idSummoner));
+
+        startActivity(intent);
     }
 
     @Override

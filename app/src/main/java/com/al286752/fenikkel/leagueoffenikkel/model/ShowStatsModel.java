@@ -66,6 +66,10 @@ public class ShowStatsModel implements IShowStatsModel {
     public void getChampions(ResponseReceiver<JSONObject> responseReceiver) {
         leagueServer.getChampions(responseReceiver);
     }
+    @Override
+    public void getChampionsByID(ResponseReceiver<JSONObject> responseReceiver) {
+        leagueServer.getChampionsByID(responseReceiver);
+    }
 
     @Override
     public void getChampionMastery(String summId, String champId, ResponseReceiver<JSONObject> responseReceiver) {
@@ -77,6 +81,11 @@ public class ShowStatsModel implements IShowStatsModel {
     @Override
     public void getChampionIcon(String champNameKey, ResponseReceiver<String> responseReceiver) {
         leagueServer.getChampionIcon(champNameKey,responseReceiver);
+    }
+
+    @Override
+    public void getVersion(ResponseReceiver<String> responseReceiver) {
+        leagueServer.getVersion(responseReceiver);
     }
 
 
