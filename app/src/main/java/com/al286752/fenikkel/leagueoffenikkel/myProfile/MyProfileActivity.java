@@ -19,6 +19,8 @@ import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
 
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 public class MyProfileActivity extends AppCompatActivity implements IShowStatsActivity, IMyProfileView, AskNickNameDialog.INickNameListener{
 
     MyProfilePresenter myProfilePresenter;
@@ -154,6 +156,16 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
     private void processChampions(JSONObject jChampions) {
 
         StaticData.setChampListDDragon(jChampions);
+
+        JSONObject champs = jChampions.optJSONObject("data");
+        Iterator<?> keys = champs.keys();
+
+        while( keys.hasNext() ) {
+            String key = (String)keys.next();
+            String treeKey = champs.optJSONObject(key).optString("key");
+            JSONObject treeChamp = champs.optJSONObject(key);
+            StaticData.addChampMapByID(treeKey,treeChamp);
+        }
 
     }
 

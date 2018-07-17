@@ -111,13 +111,16 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     }
 
     private void processJSONChampsByID(String requested) {
-        JSONObject champsByID = StaticData.getChampListDDragon();
+
+        freeToPlay.setText(StaticData.getChampMapByID().toString());
+
+        /*JSONObject champsByID = StaticData.getChampListDDragon();
 
         try {
             freeToPlay.setText(champsByID.getString("type"));
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void onMarksmanClick(View view){
@@ -126,6 +129,9 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         apImage.setVisibility(View.VISIBLE);
         adImage.setVisibility(View.VISIBLE);
         linea.add("Marksman");
+
+        freeToPlay.setText(StaticData.getChampMapByID().get("106").toString());
+
 
     }
 
@@ -171,5 +177,6 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         outState.putInt("MarksmanVisibility",marksmanImage.getVisibility());
         outState.putInt("APVisibility",apImage.getVisibility());
         outState.putInt("ADVisibility",adImage.getVisibility());
+
     }
 }

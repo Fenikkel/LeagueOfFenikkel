@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by fenikkel on 6/06/18.
@@ -54,6 +55,7 @@ summonerLevel:	71
 
     private static JSONObject champListDDragon; //lista campeones por la ID(ordenado creo) con sus tags y info de facil, tanque, mago..
 
+    private static TreeMap<String,JSONObject> champMapByID = new TreeMap<>();
 
 /*
 
@@ -225,4 +227,15 @@ data:
         StaticData.masteries.clear();
     }
 
+    public static void setChampMapByID(TreeMap<String, JSONObject> champMapByID) {
+        StaticData.champMapByID = champMapByID;
+    }
+    public static void addChampMapByID(String key, JSONObject champ) {
+        StaticData.champMapByID.put(key, champ);
+    }
+
+    public static TreeMap<String, JSONObject> getChampMapByID() {
+
+        return champMapByID;
+    }
 }
