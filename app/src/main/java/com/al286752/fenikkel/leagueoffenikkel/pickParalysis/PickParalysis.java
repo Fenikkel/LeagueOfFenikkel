@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.al286752.fenikkel.leagueoffenikkel.AttackComparator;
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
@@ -14,11 +15,13 @@ import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.IShowStatsActivity;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsPresenter;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.TreeMap;
 
 public class PickParalysis extends AppCompatActivity implements IShowStatsActivity {
 
@@ -32,6 +35,14 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     String tipo;
 
     private ShowStatsPresenter presenter;
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        StaticData.getAttackFilter().clear();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,13 +125,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         freeToPlay.setText(StaticData.getChampMapByID().toString());
 
-        /*JSONObject champsByID = StaticData.getChampListDDragon();
 
-        try {
-            freeToPlay.setText(champsByID.getString("type"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public void onMarksmanClick(View view){
@@ -144,7 +149,56 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         showMasteryFilter(linea,tipo);
     }
 
+    public void onADClick(View view){
+
+        apImage.setVisibility(View.GONE);
+        adImage.setVisibility(View.GONE);
+        tipo = "AD";
+
+        showMasteryFilter(linea,tipo);
+    }
+
     private void showMasteryFilter(ArrayList<String> linea, String tipo) {
+
+        ArrayList<String> masteryID = StaticData.getMasteriesIds();//de 0 a n tiene por orden los id de los campeones con mas puntuacion de maestria (contador serviria tambien para el que tiene el JSON)
+
+        TreeMap<String, JSONObject> allChamps = StaticData.getChampMapByID(); //la key es la id del champ que queremos
+        for(int contador=0; contador<masteryID.size() ; contador++){
+
+            JSONObject currentChamp = allChamps.get(masteryID.get(contador));
+            JSONArray tags = currentChamp.optJSONArray("tags");
+            JSONObject info = currentChamp.optJSONObject("info");// not necessary
+
+
+            if(tags.optString(0,"").equals(linea.get(0)) || tags.optString(1,"").equals(linea.get(0)) || tags.optString(2,"").equals(linea.get(0)) ){
+                //primer filtro passat
+
+                if(tipo.equals("AD")){
+                    if(StaticData.getAttackFilter().size()>=3){ //major no deuria passar
+                        AttackComparator comparator = new AttackComparator();
+
+                        int resultado = comparator.compare(StaticData.getAttackFilter().peek(),currentChamp); ////Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+
+                        if(resultado<0){
+                            StaticData.getAttackFilter().poll();
+                            StaticData.getAttackFilter().add(currentChamp);
+                        }
+                    }
+                    else {
+                        StaticData.getAttackFilter().add(currentChamp);
+                    }
+                }
+
+            }
+
+
+
+        }
+
+        freeToPlay.setText(StaticData.getAttackFilter().toString());
+
+
+        /*
         JSONObject allChamp = StaticData.getChampListDDragon().optJSONObject("data");
 
         //jObject = new JSONObject(contents.trim());
@@ -159,13 +213,16 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
                 while( tagKeys.hasNext() ) {
                     String keytag = (String) tagKeys.next();
-                    /*if ( allChamp.opt(key) instanceof JSONObject ) {
+                    if ( allChamp.opt(key) instanceof JSONObject ) {
                         ((JSONObject) allChamp.opt(key)).optJSONObject("tags");
 
-                        }*/
+                        }
                 }
             }
         }
+        */
+
+
     }
 
     //FICAR UN METODO DE RESET( per a tornar-ho a fer )
