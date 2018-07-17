@@ -1,34 +1,23 @@
 package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Region;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
-import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.pickParalysis.PickParalysis;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.IShowStatsActivity;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
-import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsPresenter;
 
 import org.json.JSONObject;
-
-import java.io.File;
 
 public class MyProfileActivity extends AppCompatActivity implements IShowStatsActivity, IMyProfileView, AskNickNameDialog.INickNameListener{
 
@@ -164,7 +153,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
     private void processChampions(JSONObject jChampions) {
 
-        StaticData.setChampListByID(jChampions);
+        StaticData.setChampListDDragon(jChampions);
 
     }
 
@@ -266,6 +255,12 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         lvltext.setText(ltext);
 
         idSummoner=sumId;
+
+        //AÇO ES PER A NO REPETIR PETICIONS AL SERVER DE MASTERIES
+
+        StaticData.emptyMasteries();
+        StaticData.emptyMasteriesIds();
+
     }
 
     @Override

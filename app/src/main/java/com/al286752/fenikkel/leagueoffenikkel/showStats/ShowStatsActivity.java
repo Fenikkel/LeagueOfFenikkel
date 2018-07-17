@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
@@ -19,13 +17,9 @@ import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 /*import com.al286752.fenikkel.leagueoffenikkel.server.DownloadCallback;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.server.simpleConection.TaskWithProgress;
@@ -86,7 +80,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                     return; //si es algu que porta molt de temps sense jugar i no te maestria en res
                 }
 
-                StaticData.setChampMaestries(response);
+                StaticData.setMasteries(response);
 
 
                 ArrayList<String> champsIds = new ArrayList<>();

@@ -1,18 +1,15 @@
 package com.al286752.fenikkel.leagueoffenikkel;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.myProfile.MyProfileActivity;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
-import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -149,7 +146,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void processChampions(JSONObject jChampions) {
 
-        StaticData.setChampListByID(jChampions);
+        StaticData.setChampListDDragon(jChampions);
 
     }
 

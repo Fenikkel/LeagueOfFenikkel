@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class PickParalysis extends AppCompatActivity implements IShowStatsActivity {
 
@@ -26,6 +27,9 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     ImageView midImage;
     ImageView apImage;
     ImageView adImage;
+
+    ArrayList<String> linea = new ArrayList<>();
+    String tipo;
 
     private ShowStatsPresenter presenter;
 
@@ -56,7 +60,10 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         }
 
 
-        findMaestries();
+        if(StaticData.getMasteriesIds().isEmpty()){
+            findMaestries();
+        }
+
 
 
     }
@@ -77,7 +84,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                     return; //si es algu que porta molt de temps sense jugar i no te maestria en res
                 }
 
-                StaticData.setChampMaestries(response);
+                StaticData.setMasteries(response);
 
 
                 ArrayList<String> champsIds = new ArrayList<>(); //aci tenim totes les id delschamps que teni, maestries
@@ -87,6 +94,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                     champsIds.add(String.valueOf(champ.getChampionId()));
 
                 }
+                StaticData.setMasteriesIds(champsIds);
 
 
             }
@@ -103,7 +111,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     }
 
     private void processJSONChampsByID(String requested) {
-        JSONObject champsByID = StaticData.getChampListByID();
+        JSONObject champsByID = StaticData.getChampListDDragon();
 
         try {
             freeToPlay.setText(champsByID.getString("type"));
@@ -117,10 +125,44 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         midImage.setVisibility(View.GONE);
         apImage.setVisibility(View.VISIBLE);
         adImage.setVisibility(View.VISIBLE);
-
+        linea.add("Marksman");
 
     }
 
+    public void onAPClick(View view){
+
+        apImage.setVisibility(View.GONE);
+        adImage.setVisibility(View.GONE);
+        tipo = "AP";
+
+        showMasteryFilter(linea,tipo);
+    }
+
+    private void showMasteryFilter(ArrayList<String> linea, String tipo) {
+        JSONObject allChamp = StaticData.getChampListDDragon().optJSONObject("data");
+
+        //jObject = new JSONObject(contents.trim());
+        Iterator<?> keys = allChamp.keys();
+
+        while( keys.hasNext() ) { //AIXINA PERO EN UN ARBRE
+            String key = (String)keys.next();
+            if ( allChamp.opt(key) instanceof JSONObject ) {
+                JSONObject tags = ((JSONObject) allChamp.opt(key)).optJSONObject("tags");
+
+                Iterator<?> tagKeys = tags.keys();
+
+                while( tagKeys.hasNext() ) {
+                    String keytag = (String) tagKeys.next();
+                    /*if ( allChamp.opt(key) instanceof JSONObject ) {
+                        ((JSONObject) allChamp.opt(key)).optJSONObject("tags");
+
+                        }*/
+                }
+            }
+        }
+    }
+
+    //FICAR UN METODO DE RESET( per a tornar-ho a fer )
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -129,9 +171,5 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         outState.putInt("MarksmanVisibility",marksmanImage.getVisibility());
         outState.putInt("APVisibility",apImage.getVisibility());
         outState.putInt("ADVisibility",adImage.getVisibility());
-
-
-
-
     }
 }
