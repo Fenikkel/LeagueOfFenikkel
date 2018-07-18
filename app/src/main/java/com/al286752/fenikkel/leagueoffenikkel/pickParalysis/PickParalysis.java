@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.al286752.fenikkel.leagueoffenikkel.AttackComparator;
+import com.al286752.fenikkel.leagueoffenikkel.ElementComparator;
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
@@ -16,11 +16,10 @@ import com.al286752.fenikkel.leagueoffenikkel.showStats.IShowStatsActivity;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsPresenter;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 public class PickParalysis extends AppCompatActivity implements IShowStatsActivity {
@@ -30,6 +29,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     ImageView midImage;
     ImageView apImage;
     ImageView adImage;
+    ImageView mixImage;
+    ImageView defenseImage;
 
     ArrayList<String> linea = new ArrayList<>();
     String tipo;
@@ -41,7 +42,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     public void onBackPressed() {
         super.onBackPressed();
 
-        StaticData.getAttackFilter().clear();
+        StaticData.getElementFilter().clear();
     }
 
     @Override
@@ -54,6 +55,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         midImage = findViewById(R.id.midImage);
         apImage = findViewById(R.id.apImage);
         adImage = findViewById(R.id.adImage);
+        mixImage = findViewById(R.id.mixImage);
+        defenseImage = findViewById(R.id.defenseImage);
         presenter = new ShowStatsPresenter(this,getApplicationContext());
 
         processJSONChampsByID("EASYEST");
@@ -133,6 +136,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         midImage.setVisibility(View.GONE);
         apImage.setVisibility(View.VISIBLE);
         adImage.setVisibility(View.VISIBLE);
+        mixImage.setVisibility(View.VISIBLE);
+        defenseImage.setVisibility(View.VISIBLE);
         linea.add("Marksman");
 
         freeToPlay.setText(StaticData.getChampMapByID().get("106").toString());
@@ -142,18 +147,44 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
     public void onAPClick(View view){
 
+        mixImage.setVisibility(View.GONE);
         apImage.setVisibility(View.GONE);
         adImage.setVisibility(View.GONE);
+        defenseImage.setVisibility(View.GONE);
         tipo = "AP";
+
+        showMasteryFilter(linea,tipo);
+    }
+
+    public void onDefenseClick(View view){
+
+        mixImage.setVisibility(View.GONE);
+        apImage.setVisibility(View.GONE);
+        adImage.setVisibility(View.GONE);
+        defenseImage.setVisibility(View.GONE);
+        tipo = "defense";
 
         showMasteryFilter(linea,tipo);
     }
 
     public void onADClick(View view){
 
+        mixImage.setVisibility(View.GONE);
         apImage.setVisibility(View.GONE);
         adImage.setVisibility(View.GONE);
+        defenseImage.setVisibility(View.GONE);
         tipo = "AD";
+
+        showMasteryFilter(linea,tipo);
+    }
+
+    public void onMixClick(View view){
+
+        mixImage.setVisibility(View.GONE);
+        apImage.setVisibility(View.GONE);
+        adImage.setVisibility(View.GONE);
+        defenseImage.setVisibility(View.GONE);
+        tipo = "MIX";
 
         showMasteryFilter(linea,tipo);
     }
@@ -163,6 +194,11 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         ArrayList<String> masteryID = StaticData.getMasteriesIds();//de 0 a n tiene por orden los id de los campeones con mas puntuacion de maestria (contador serviria tambien para el que tiene el JSON)
 
         TreeMap<String, JSONObject> allChamps = StaticData.getChampMapByID(); //la key es la id del champ que queremos
+
+        ElementComparator comparator = new ElementComparator(tipo);
+        PriorityQueue<ArrayList> elementFilter = new PriorityQueue<>(3, comparator);
+
+
         for(int contador=0; contador<masteryID.size() ; contador++){
 
             JSONObject currentChamp = allChamps.get(masteryID.get(contador));
@@ -173,29 +209,47 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             if(tags.optString(0,"").equals(linea.get(0)) || tags.optString(1,"").equals(linea.get(0)) || tags.optString(2,"").equals(linea.get(0)) ){
                 //primer filtro passat
 
-                if(tipo.equals("AD")){
-                    if(StaticData.getAttackFilter().size()>=3){ //major no deuria passar
-                        AttackComparator comparator = new AttackComparator();
 
-                        int resultado = comparator.compare(StaticData.getAttackFilter().peek(),currentChamp); ////Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
 
-                        if(resultado<0){
-                            StaticData.getAttackFilter().poll();
-                            StaticData.getAttackFilter().add(currentChamp);
-                        }
-                    }
-                    else {
-                        StaticData.getAttackFilter().add(currentChamp);
+                if(elementFilter.size()>=3){ //major no deuria passar
+
+
+                    ArrayList mutante = new ArrayList();
+                    mutante.add(0,currentChamp);
+                    mutante.add(1,StaticData.getMasteries().get(contador));
+
+                    int resultado = comparator.compare(elementFilter.peek(),mutante); ////Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+
+                    if(resultado<0){
+                        elementFilter.poll();
+                        elementFilter.add(mutante);
                     }
                 }
+                else {
+
+                    ArrayList mutante = new ArrayList();
+                    mutante.add(0,currentChamp);
+                    mutante.add(1,StaticData.getMasteries().get(contador));
+
+                    elementFilter.add(mutante);
+                }
+
+
+
+
+                //cai AP
+
+                //aci mixte
 
             }
+
+            StaticData.setElementFilter(elementFilter);
 
 
 
         }
 
-        freeToPlay.setText(StaticData.getAttackFilter().toString());
+        freeToPlay.setText(StaticData.getElementFilter().toString());
 
 
         /*

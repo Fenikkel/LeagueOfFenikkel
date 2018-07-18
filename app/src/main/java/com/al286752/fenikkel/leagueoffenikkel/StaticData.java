@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.TreeMap;
@@ -101,9 +100,11 @@ data:
 
     private static ArrayList<ChampionMaestries> masteries = new ArrayList<>();; //Masteries of the actual summoner (llista de 0 a n campeons. Tu busques per id el campeo)
 
-    private static Comparator<JSONObject> attackComparator = new AttackComparator();
+    //private static Comparator<ArrayList> attackComparator = new ElementComparator();
 
-    private static PriorityQueue<JSONObject> attackFilter = new PriorityQueue<>(3, attackComparator);
+    //ElementFilter funciona que el menor esta davant
+    private static PriorityQueue<ArrayList> elementFilter = new PriorityQueue<>(3);//, attackComparator
+    //private static PriorityQueue<JSONObject> bestFilter = new PriorityQueue<>(3, attackComparator);
 /* MASTERIES
 
 0:
@@ -245,11 +246,12 @@ data:
         return champMapByID;
     }
 
-    public static PriorityQueue<JSONObject> getAttackFilter() {
-        return attackFilter;
+    public static PriorityQueue<ArrayList> getElementFilter() {
+        return elementFilter;
     }
 
-    public static void setAttackFilter(PriorityQueue<JSONObject> attackFilter) {
-        StaticData.attackFilter = attackFilter;
+    public static void setElementFilter(PriorityQueue<ArrayList> elementFilter) {
+        StaticData.elementFilter = elementFilter;
     }
+
 }
