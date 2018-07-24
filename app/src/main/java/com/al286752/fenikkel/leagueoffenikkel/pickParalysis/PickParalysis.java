@@ -12,6 +12,7 @@ import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.champMastery.ChampMastery;
+import com.al286752.fenikkel.leagueoffenikkel.myProfile.DownloadImageTask;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.IShowStatsActivity;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsPresenter;
@@ -48,9 +49,32 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+       // onCreate(null);
+
+        if(marksmanImage.getVisibility() == View.VISIBLE){
+            super.onBackPressed();
+        }
+        marksmanImage.setVisibility(View.VISIBLE);
+        midImage.setVisibility(View.VISIBLE);
+        apImage.setVisibility(View.GONE);
+        adImage.setVisibility(View.GONE);
+        mixImage.setVisibility(View.GONE);
+        defenseImage.setVisibility(View.GONE);
+        bestRoleImage1.setVisibility(View.GONE);
+        bestRoleImage2.setVisibility(View.GONE);
+        bestRoleImage3.setVisibility(View.GONE);
+        bestRoleText.setVisibility(View.GONE);
+        laneText.setVisibility(View.GONE);
+        freeToPlay.setVisibility(View.GONE);
+
+
+
+
+
 
         StaticData.getElementFilter().clear();
+
     }
 
     @Override
@@ -110,6 +134,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                     View parentLayout = findViewById(android.R.id.content);
                     Snackbar.make(parentLayout, "This summoner don't have any mastery", Snackbar.LENGTH_LONG).show();
 
+                    //onBackPressed(); //demanaria massa vegades champ mastery i fotria la API
                     return; //si es algu que porta molt de temps sense jugar i no te maestria en res
                 }
 
@@ -288,14 +313,14 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         if(tipo.equals("MIX")){
 
-            bestRoleText.setText("Best mixed damage");
+            bestRoleText.setText("Best in mixed damage");
 
-        } else if (tipo.equals("defense")) {
+        } /*else if (tipo.equals("defense")) {
 
-            bestRoleText.setText("Best tankiness");
+            bestRoleText.setText("Best in tankiness"); //esque no se si tankiness esta ben dit
 
-        }else{
-            bestRoleText.setText("Best " + tipo);
+        }*/else{
+            bestRoleText.setText("Best in " + tipo);
         }
 
         int contador =0;
@@ -303,15 +328,25 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             ChampionMaestries masteryData = (ChampionMaestries) StaticData.getElementFilter().peek().get(1); //per al champion level etc
             JSONObject champData = (JSONObject) StaticData.getElementFilter().poll().get(0);
 
+
+            JSONObject imagenes = champData.optJSONObject("image");
+            String iconURL = "http://ddragon.leagueoflegends.com/cdn/"+ StaticData.getVersion()+"/img/champion/" + imagenes.optString("full");
+
             if(contador == 0 ){
+
+                setChampionImage(iconURL,bestRoleImage3);
 
             }
             else if(contador == 1){
 
+                setChampionImage(iconURL,bestRoleImage2);
             }
             else{
 
+                setChampionImage(iconURL,bestRoleImage1);
+
             }
+            contador++;
         }
 
 
@@ -346,6 +381,20 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     }
 
     //FICAR UN METODO DE RESET( per a tornar-ho a fer )
+
+
+    private void setChampionImage(String urlIcon, ImageView image) {
+
+        new DownloadImageTask(image).execute(urlIcon);
+
+    }
+
+    public void onChampClick(View view){
+
+        // aço per a quan apretem a la llista
+
+
+    }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

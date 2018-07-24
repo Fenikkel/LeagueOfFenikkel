@@ -121,28 +121,50 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
 
             region.setText(StaticData.getRegion());
+
+
+            //si aço es tret per db tenim que traure campeons tambe CUIDAOOOOOOOOOOOOOOOO
+            showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
+                @Override
+                public void onResponseReceived(JSONObject response) {
+                    if(response!=null){
+                        processChampions(response);
+                    }else {
+                        View parentLayout = findViewById(android.R.id.content);
+                        Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onErrorReceived(String message) {
+
+                }
+            });
+
+
         }
         else{
             //(StaticData.getIdSummoner()==null)
             //fiquem teemo per primera vegada
+            showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
+                @Override
+                public void onResponseReceived(JSONObject response) {
+                    if(response!=null){
+                        processChampions(response);
+                    }else {
+                        View parentLayout = findViewById(android.R.id.content);
+                        Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onErrorReceived(String message) {
+
+                }
+            });
         }
 
-        showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
-            @Override
-            public void onResponseReceived(JSONObject response) {
-                if(response!=null){
-                    processChampions(response);
-                }else {
-                    View parentLayout = findViewById(android.R.id.content);
-                    Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
-                }
-            }
 
-            @Override
-            public void onErrorReceived(String message) {
-
-            }
-        });
 
 
 
