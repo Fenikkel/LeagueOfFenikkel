@@ -21,66 +21,66 @@
         android:id="@+id/freeToPlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:text="@string/free_to_play"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/bestText"
+        app:layout_constraintStart_toStartOf="@+id/bestText"
+        app:layout_constraintTop_toBottomOf="@+id/bestText" />
 
     <ImageView
         android:id="@+id/marksmanImage"
         android:layout_width="121dp"
         android:layout_height="114dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:onClick="onMarksmanClick"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/midImage"
         app:srcCompat="@drawable/list_icon" />
 
     <ImageView
         android:id="@+id/midImage"
         android:layout_width="117dp"
         android:layout_height="91dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/marksmanImage"
+        app:layout_constraintStart_toEndOf="@+id/marksmanImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.512"
         app:srcCompat="@drawable/default_profile_img" />
 
     <ImageView
         android:id="@+id/adImage"
         android:layout_width="106dp"
         android:layout_height="99dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="24dp"
-        android:visibility="gone"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:onClick="onADClick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/defenseImage"
+        app:layout_constraintStart_toStartOf="@+id/defenseImage"
+        app:layout_constraintTop_toBottomOf="@+id/defenseImage"
         app:srcCompat="@drawable/captain_teemo" />
 
     <ImageView
         android:id="@+id/apImage"
         android:layout_width="107dp"
         android:layout_height="94dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:visibility="gone"
+        android:layout_marginTop="8dp"
         android:onClick="onAPClick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/adImage"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/mixImage"
+        app:layout_constraintStart_toStartOf="@+id/mixImage"
+        app:layout_constraintTop_toBottomOf="@+id/mixImage"
         app:srcCompat="@drawable/evil_teemo" />
 
     <ImageView
@@ -88,10 +88,12 @@
         android:layout_width="131dp"
         android:layout_height="140dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:visibility="gone"
         android:onClick="onMixClick"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/marksmanImage"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/time_wasted_thresh" />
 
@@ -99,13 +101,81 @@
         android:id="@+id/defenseImage"
         android:layout_width="145dp"
         android:layout_height="135dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:visibility="gone"
         android:onClick="onDefenseClick"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/mixImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/stats_rammus" />
+
+    <ImageView
+        android:id="@+id/bestImage1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/bestText"
+        app:layout_constraintStart_toStartOf="@+id/bestText"
+        app:layout_constraintTop_toBottomOf="@+id/bestText"
+        app:srcCompat="@android:drawable/btn_star_big_on" />
+
+    <TextView
+        android:id="@+id/bestText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Best in her role"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/laneText"
+        app:layout_constraintStart_toStartOf="@+id/laneText"
+        app:layout_constraintTop_toBottomOf="@+id/laneText" />
+
+    <ImageView
+        android:id="@+id/bestImage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/bestImage1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bestImage1"
+        app:layout_constraintTop_toTopOf="@+id/bestImage1"
+        app:srcCompat="@android:drawable/presence_online" />
+
+    <ImageView
+        android:id="@+id/bestImage3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/bestImage1"
+        app:layout_constraintEnd_toStartOf="@+id/bestImage1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bestImage1"
+        app:srcCompat="@android:drawable/ic_delete" />
+
+    <TextView
+        android:id="@+id/laneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Lane"
+        android:textSize="30sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
 
     </ScrollView>

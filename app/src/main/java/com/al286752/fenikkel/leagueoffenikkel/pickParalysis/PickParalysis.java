@@ -11,6 +11,7 @@ import com.al286752.fenikkel.leagueoffenikkel.ElementComparator;
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
+import com.al286752.fenikkel.leagueoffenikkel.champMastery.ChampMastery;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.IShowStatsActivity;
 import com.al286752.fenikkel.leagueoffenikkel.showStats.ShowStatsPresenter;
@@ -32,6 +33,13 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     ImageView mixImage;
     ImageView defenseImage;
 
+    TextView laneText;
+    TextView bestRoleText;
+
+    ImageView bestRoleImage1;
+    ImageView bestRoleImage2;
+    ImageView bestRoleImage3;
+
     ArrayList<String> linea = new ArrayList<>();
     String tipo;
 
@@ -50,6 +58,13 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pick_paralysis);
 
+
+        bestRoleImage1 = findViewById(R.id.bestImage1);
+        bestRoleImage2 = findViewById(R.id.bestImage2);
+        bestRoleImage3 = findViewById(R.id.bestImage3);
+
+        bestRoleText = findViewById(R.id.bestText);
+        laneText = findViewById(R.id.laneText);
         freeToPlay = findViewById(R.id.freeToPlay);
         marksmanImage = findViewById(R.id.marksmanImage);
         midImage = findViewById(R.id.midImage);
@@ -124,9 +139,9 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
     }
 
-    private void processJSONChampsByID(String requested) {
+    private void processJSONChampsByID(String requested) { //AÇO PA QUE COLLONS ERAAAAAAAAAAAAAAAAAAAAAAA????
 
-        freeToPlay.setText(StaticData.getChampMapByID().toString());
+        //freeToPlay.setText(StaticData.getChampMapByID().toString());
 
 
     }
@@ -140,7 +155,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         defenseImage.setVisibility(View.VISIBLE);
         linea.add("Marksman");
 
-        freeToPlay.setText(StaticData.getChampMapByID().get("106").toString());
+        //freeToPlay.setText(StaticData.getChampMapByID().get("106").toString());
 
 
     }
@@ -249,7 +264,58 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         }
 
-        freeToPlay.setText(StaticData.getElementFilter().toString());
+        laneText.setVisibility(View.VISIBLE);
+        bestRoleText.setVisibility(View.VISIBLE);
+        bestRoleImage1.setVisibility(View.VISIBLE);
+        bestRoleImage2.setVisibility(View.VISIBLE);
+        bestRoleImage3.setVisibility(View.VISIBLE);
+        freeToPlay.setVisibility(View.VISIBLE);
+
+
+        if(linea.get(0).equals("Mage")){
+
+            laneText.setText("Mid Lane");
+
+        }else if(linea.get(0).equals("Tank")){
+            laneText.setText("Top Lane");
+        }
+        else if(linea.get(0).equals("Fighter")){
+            laneText.setText("Jungle");
+        }else{
+            laneText.setText(linea.get(0));
+        }
+
+
+        if(tipo.equals("MIX")){
+
+            bestRoleText.setText("Best mixed damage");
+
+        } else if (tipo.equals("defense")) {
+
+            bestRoleText.setText("Best tankiness");
+
+        }else{
+            bestRoleText.setText("Best " + tipo);
+        }
+
+        int contador =0;
+        while (!StaticData.getElementFilter().isEmpty()){ //mientras la cola no esta vacia
+            ChampionMaestries masteryData = (ChampionMaestries) StaticData.getElementFilter().peek().get(1); //per al champion level etc
+            JSONObject champData = (JSONObject) StaticData.getElementFilter().poll().get(0);
+
+            if(contador == 0 ){
+
+            }
+            else if(contador == 1){
+
+            }
+            else{
+
+            }
+        }
+
+
+        //freeToPlay.setText(StaticData.getElementFilter().toString());
 
 
         /*
