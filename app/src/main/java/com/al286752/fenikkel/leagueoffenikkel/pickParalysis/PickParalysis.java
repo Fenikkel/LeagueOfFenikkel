@@ -1,8 +1,10 @@
 package com.al286752.fenikkel.leagueoffenikkel.pickParalysis;
 
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +27,7 @@ import java.util.PriorityQueue;
 import java.util.TreeMap;
 
 public class PickParalysis extends AppCompatActivity implements IShowStatsActivity {
+
 
     TextView freeToPlay;
     ImageView marksmanImage;
@@ -70,7 +73,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
 
-
+        StaticData.getAllIndividualMasteries().clear();
 
 
         StaticData.getElementFilter().clear();
@@ -117,8 +120,46 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             findMaestries();
         }
 
+        bestRoleImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToChampMastery(StaticData.getIndividualMasteries(2));
+            }
+        });
+        bestRoleImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToChampMastery(StaticData.getIndividualMasteries(1));
+            }
+        });
+        bestRoleImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switchToChampMastery(StaticData.getIndividualMasteries(0));
+            }
+        });
 
 
+    }
+
+    private void switchToChampMastery(Pair<String,Integer> pareja) {
+
+        String champID = pareja.first;
+        int chmpNumID= pareja.second;
+        String quePesaos = String.valueOf(chmpNumID);
+
+
+
+
+        Intent intento = new Intent(this, ChampMastery.class);
+
+
+        intento.putExtra(ChampMastery.CHAMP_ID_NAME, champID);
+        //intento.putExtra(ChampMastery.CHAMPION_NAME, bitxoName);
+        intento.putExtra(ChampMastery.CHAMPION, quePesaos);
+        //intento.putExtra(ChampMastery.SUMMONER, idSum);
+
+        startActivity(intento);
     }
 
 
@@ -328,6 +369,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             ChampionMaestries masteryData = (ChampionMaestries) StaticData.getElementFilter().peek().get(1); //per al champion level etc
             JSONObject champData = (JSONObject) StaticData.getElementFilter().poll().get(0);
 
+            StaticData.addIndividualMasteries(champData.optString("id"), champData.optInt("key"));
 
             JSONObject imagenes = champData.optJSONObject("image");
             String iconURL = "http://ddragon.leagueoflegends.com/cdn/"+ StaticData.getVersion()+"/img/champion/" + imagenes.optString("full");
@@ -389,13 +431,43 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
     }
 
-    public void onChampClick(View view){
+    /*public void onChampClick(View view){
 
         // aço per a quan apretem a la llista
 
+        switch (view) {
+            case bestRoleImage1:
+                //monthString = "January";
+                break;
+            case 2:  monthString = "February";
+                break;
+            case 3:  monthString = "March";
+                break;
+            case 4:  monthString = "April";
+                break;
+            case 5:  monthString = "May";
+                break;
+            case 6:  monthString = "June";
+                break;
+            case 7:  monthString = "July";
+                break;
+            case 8:  monthString = "August";
+                break;
+            case 9:  monthString = "September";
+                break;
+            case 10: monthString = "October";
+                break;
+            case 11: monthString = "November";
+                break;
+            case 12: monthString = "December";
+                break;
+            default: monthString = "Invalid month";
+                break;
+        }
+
 
     }
-
+*/
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

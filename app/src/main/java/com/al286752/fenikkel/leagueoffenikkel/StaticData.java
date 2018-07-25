@@ -3,6 +3,7 @@ package com.al286752.fenikkel.leagueoffenikkel;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Pair;
 
 import org.json.JSONObject;
 
@@ -56,7 +57,7 @@ summonerLevel:	71
 
     private static JSONObject champListDDragon; //lista campeones por la ID(ordenado creo) con sus tags y info de facil, tanque, mago..
 
-    private static TreeMap<String,JSONObject> champMapByID = new TreeMap<>();
+    private static TreeMap<String,JSONObject> champMapByID = new TreeMap<>(); //la key es el numero ID del campeon
 
 /*
 
@@ -98,13 +99,15 @@ data:
 
     private static ArrayList<String> masteriesIds = new ArrayList<>(); //aci tenim totes les id delschamps que tenim en maestries (en el mateix ordre
 
-    private static ArrayList<ChampionMaestries> masteries = new ArrayList<>();; //Masteries of the actual summoner (llista de 0 a n campeons. Tu busques per id el campeo)
+    private static ArrayList<ChampionMaestries> masteries = new ArrayList<>(); //Masteries of the actual summoner (llista de 0 a n campeons. Tu busques per id(numero) el campeo)
 
     //private static Comparator<ArrayList> attackComparator = new ElementComparator();
 
     //ElementFilter funciona que el menor esta davant
     private static PriorityQueue<ArrayList> elementFilter = new PriorityQueue<>(3);//, attackComparator
     //private static PriorityQueue<JSONObject> bestFilter = new PriorityQueue<>(3, attackComparator);
+
+    private static ArrayList<Pair<String, Integer>> individualMasteries = new ArrayList(); //id champs para que champMastery sepa que mostrar (3 primers bestRole)
 /* MASTERIES
 
 0:
@@ -119,6 +122,18 @@ data:
     tokensEarned:	0
 
 */
+
+    public static ArrayList<Pair<String, Integer>> getAllIndividualMasteries() {
+        return individualMasteries;
+    }
+
+    public static Pair<String, Integer> getIndividualMasteries(int index) {//el dato que nos interesa
+        return individualMasteries.get(index);
+    }
+
+    public static void addIndividualMasteries(String idChamp, int idNumChamp) {
+        StaticData.individualMasteries.add(new Pair<String, Integer>(idChamp,idNumChamp));
+    }
 
 
     public static Map<String, String> getChampionNameKeys() {
@@ -244,6 +259,10 @@ data:
     public static TreeMap<String, JSONObject> getChampMapByID() {
 
         return champMapByID;
+    }
+    public static JSONObject getTheChampMapByID(String key) {
+
+        return (JSONObject) champMapByID.get(key);
     }
 
     public static PriorityQueue<ArrayList> getElementFilter() {

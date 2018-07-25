@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
+import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.myProfile.DownloadImageTask;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
@@ -20,6 +21,7 @@ import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -41,7 +43,7 @@ public class ChampMastery extends AppCompatActivity {
 
     ImageView champImage;
 
-    ChampionMaestries allData;
+    //ChampionMaestries allData;
 
     ShowStatsModel model;
 
@@ -53,20 +55,62 @@ public class ChampMastery extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String champId = intent.getStringExtra(CHAMPION);
-        String summId = intent.getStringExtra(SUMMONER);
-        String champName = intent.getStringExtra(CHAMPION_NAME);
+        //String summId = intent.getStringExtra(SUMMONER);
+        //String champName = intent.getStringExtra(CHAMPION_NAME);
         final String chamNamId = intent.getStringExtra(CHAMP_ID_NAME);
 
         model= ShowStatsModel.getInstance();
 
-
+        championLevel = findViewById(R.id.levelMastery);
+        lastTimePlayed = findViewById(R.id.lastTimePlayed);
+        tokensMastery = findViewById(R.id.tokensMastery);
+        totalMaestryPoints = findViewById(R.id.totalMaestryPoints);
+        chestAvaliable = findViewById(R.id.chestAvaliable);
         experienceBar = findViewById(R.id.experienceBar);
         // Get the Drawable custom_progressbar
         Drawable draw= getResources().getDrawable(R.drawable.custom_progressbar); //getResources te da la carpeta res
         // set the drawable as progress drawable
         experienceBar.setProgressDrawable(draw);
         championName = findViewById(R.id.nameChamMastery);
-        championName.setText(champName);
+
+        ArrayList<ChampionMaestries> copia =  StaticData.getMasteries();
+        long id = Long.valueOf(champId);
+        for(ChampionMaestries actual : copia){
+
+            if(actual.getChampionId() == id){
+                //championName.setText(String.valueOf(actual.getChampionId()));
+
+                championLevel.setText(String.valueOf(actual.getChampionLevel()));
+
+
+                long unixSeconds = actual.getLastPlayTime(); // lo que mos passa league of legends esta en miliseconds ja
+                Date date = new Date(unixSeconds); //*1000L); // *1000 is to convert seconds to milliseconds
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");// HH:mm:ss z"); // the format of your date
+                sdf.setTimeZone(TimeZone.getTimeZone("GMT-4")); // give a timezone reference for formating (see comment at the bottom
+                String formattedDate = sdf.format(date);
+                //System.out.println(formattedDate);
+
+
+                lastTimePlayed.setText("Last time played: "+formattedDate);
+                tokensMastery.setText("Tokens earned: "+String.valueOf(actual.getTokensEarned()));
+
+                totalMaestryPoints.setText("Total points: "+ String.valueOf((int) actual.getChampionPoints()));
+                if(!actual.isChestGranted()){ //la pregunta es si la chest esta guanyada(concedida) ja
+                    chestAvaliable.setText("Chest: Avaliable");
+                }else {
+                    chestAvaliable.setText("Chest: Unavaliable");
+                }
+
+                int totalPoint = (int) actual.getChampionPointsSinceLastLevel() + (int) actual.getChampionPointsUntilNextLevel();
+                experienceBar.setMax(totalPoint);
+                experienceBar.setProgress((int) actual.getChampionPointsSinceLastLevel());
+
+                break;
+            }
+
+        }
+
+        championName.setText(StaticData.getChampListDDragon().optJSONObject("data").optJSONObject(chamNamId).optString("name")); //StaticData.getTheChampMapByID(chamNamId).optString("name")
         champImage = findViewById(R.id.imageMastery);
 
         model.getChampionIcon(chamNamId, new ResponseReceiver<String>() {
@@ -85,9 +129,9 @@ public class ChampMastery extends AppCompatActivity {
 
 
 
-        allData = new ChampionMaestries();
+        //allData = new ChampionMaestries();
 
-
+/*
         model.getChampionMastery(summId, champId, new ResponseReceiver<JSONObject>() {
             @Override
             public void onResponseReceived(JSONObject response) {
@@ -134,8 +178,10 @@ public class ChampMastery extends AppCompatActivity {
 
             }
         });
+        */
 
     }
+
 
     private void setChampionImage(String urlIcon) {
 
@@ -143,7 +189,7 @@ public class ChampMastery extends AppCompatActivity {
 
     }
 
-    private void processJSONChampion(JSONObject champion) {
+    /*private void processJSONChampion(JSONObject champion) {
 
 
 
@@ -206,6 +252,6 @@ public class ChampMastery extends AppCompatActivity {
             allData.setLastPlayTime(lastPlay);
         }
 
-    }
+    }*/
     
 }
