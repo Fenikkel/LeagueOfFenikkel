@@ -18,12 +18,12 @@
     tools:context=".pickParalysis.PickParalysis">
 
     <TextView
-        android:id="@+id/freeToPlay"
+        android:id="@+id/mostPlayedText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/free_to_play"
+        android:text="@string/most_played"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="@+id/bestImage1"
         app:layout_constraintStart_toStartOf="@+id/bestImage1"
@@ -37,17 +37,18 @@
         android:layout_marginTop="8dp"
         android:onClick="onMarksmanClick"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/midImage"
+        app:layout_constraintTop_toTopOf="@+id/supportImage"
         app:srcCompat="@drawable/list_icon" />
 
     <ImageView
-        android:id="@+id/midImage"
+        android:id="@+id/supportImage"
         android:layout_width="117dp"
         android:layout_height="91dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="onSupportClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/marksmanImage"
@@ -143,9 +144,10 @@
         android:layout_marginTop="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/bestImage1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/bestImage1"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/bestImage1"
         app:layout_constraintTop_toTopOf="@+id/bestImage1"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/presence_online" />
 
     <ImageView
@@ -157,8 +159,8 @@
         android:layout_marginTop="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/bestImage1"
-        app:layout_constraintEnd_toStartOf="@+id/bestImage1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bestImage1"
+        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/bestImage1"
         app:srcCompat="@android:drawable/ic_delete" />
 
@@ -175,6 +177,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/mostPlayedImage1"
+        android:layout_width="81dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/mostPlayedText"
+        app:layout_constraintStart_toStartOf="@+id/mostPlayedText"
+        app:layout_constraintTop_toBottomOf="@+id/mostPlayedText"
+        app:srcCompat="@drawable/captain_teemo" />
+
+    <ImageView
+        android:id="@+id/mostPlayedImage2"
+        android:layout_width="81dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/mostPlayedImage1"
+        app:layout_constraintEnd_toStartOf="@+id/mostPlayedImage1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mostPlayedImage1"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/captain_teemo" />
+
+    <ImageView
+        android:id="@+id/mostPlayedImage3"
+        android:layout_width="81dp"
+        android:layout_height="71dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/mostPlayedImage1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/mostPlayedImage1"
+        app:layout_constraintTop_toTopOf="@+id/mostPlayedImage1"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/captain_teemo" />
 </android.support.constraint.ConstraintLayout>
 
     </ScrollView>

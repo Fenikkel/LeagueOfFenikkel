@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Stack;
 import java.util.TreeMap;
 
 /**
@@ -106,6 +107,7 @@ data:
     //ElementFilter funciona que el menor esta davant
     private static PriorityQueue<ArrayList> elementFilter = new PriorityQueue<>(3);//, attackComparator
     //private static PriorityQueue<JSONObject> bestFilter = new PriorityQueue<>(3, attackComparator);
+    private static Stack<JSONObject> mostPlayedFilter;
 
     private static ArrayList<Pair<String, Integer>> individualMasteries = new ArrayList(); //id champs para que champMastery sepa que mostrar (3 primers bestRole)
 /* MASTERIES
@@ -271,6 +273,14 @@ data:
 
     public static void setElementFilter(PriorityQueue<ArrayList> elementFilter) {
         StaticData.elementFilter = elementFilter;
+    }
+
+    public static Stack<JSONObject> getMostPlayedFilter() {
+        return mostPlayedFilter;
+    }
+
+    public static void setMostPlayedFilter(Stack<JSONObject> mostPlayedFilter) {
+        StaticData.mostPlayedFilter = mostPlayedFilter;
     }
 
 }
