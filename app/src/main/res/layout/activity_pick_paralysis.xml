@@ -1,224 +1,422 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/darkMidnight"
+    android:clipToPadding="false"
+    android:fillViewport="true">
+
     <!-- Here you put the rest of your current view-->
 
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".pickParalysis.PickParalysis">
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
-    <TextView
-        android:id="@+id/mostPlayedText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/most_played"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/bestImage1"
-        app:layout_constraintStart_toStartOf="@+id/bestImage1"
-        app:layout_constraintTop_toBottomOf="@+id/bestImage1" />
+        tools:context=".pickParalysis.PickParalysis">
 
-    <ImageView
-        android:id="@+id/marksmanImage"
-        android:layout_width="121dp"
-        android:layout_height="114dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onMarksmanClick"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/supportImage"
-        app:srcCompat="@drawable/list_icon" />
+        <TextView
+            android:id="@+id/mostPlayedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/most_played"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/bestImage1"
+            app:layout_constraintStart_toStartOf="@+id/bestImage1"
+            app:layout_constraintTop_toBottomOf="@+id/bestImage1" />
 
-    <ImageView
-        android:id="@+id/supportImage"
-        android:layout_width="117dp"
-        android:layout_height="91dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onSupportClick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/marksmanImage"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512"
-        app:srcCompat="@drawable/default_profile_img" />
+        <ImageView
+            android:id="@+id/marksmanImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="onMarksmanClick"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/midImage"
+            app:layout_constraintTop_toBottomOf="@+id/midImage"
+            app:srcCompat="@drawable/marksman_icon" />
 
-    <ImageView
-        android:id="@+id/adImage"
-        android:layout_width="106dp"
-        android:layout_height="99dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onADClick"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/defenseImage"
-        app:layout_constraintStart_toStartOf="@+id/defenseImage"
-        app:layout_constraintTop_toBottomOf="@+id/defenseImage"
-        app:srcCompat="@drawable/captain_teemo" />
+        <ImageView
+            android:id="@+id/supportImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="onSupportClick"
+            android:visibility="visible"
+            app:layout_constraintStart_toEndOf="@+id/midImage"
+            app:layout_constraintTop_toBottomOf="@+id/midImage"
+            app:srcCompat="@drawable/support_icon" />
 
-    <ImageView
-        android:id="@+id/apImage"
-        android:layout_width="107dp"
-        android:layout_height="94dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onAPClick"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/mixImage"
-        app:layout_constraintStart_toStartOf="@+id/mixImage"
-        app:layout_constraintTop_toBottomOf="@+id/mixImage"
-        app:srcCompat="@drawable/evil_teemo" />
+        <ImageView
+            android:id="@+id/adImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:onClick="onADClick"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/helmetBro"
+            app:layout_constraintEnd_toStartOf="@+id/helmetBro"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/role_icon_attack" />
 
-    <ImageView
-        android:id="@+id/mixImage"
-        android:layout_width="131dp"
-        android:layout_height="140dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onMixClick"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/marksmanImage"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/time_wasted_thresh" />
+        <ImageView
+            android:id="@+id/apImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:onClick="onAPClick"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/helmetBro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/helmetBro"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/role_icon_mage" />
 
-    <ImageView
-        android:id="@+id/defenseImage"
-        android:layout_width="145dp"
-        android:layout_height="135dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:onClick="onDefenseClick"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/mixImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/stats_rammus" />
+        <ImageView
+            android:id="@+id/mixImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="onMixClick"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/helmetBro"
+            app:layout_constraintTop_toBottomOf="@+id/helmetBro"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/time_wasted_thresh" />
 
-    <ImageView
-        android:id="@+id/bestImage1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/bestText"
-        app:layout_constraintStart_toStartOf="@+id/bestText"
-        app:layout_constraintTop_toBottomOf="@+id/bestText"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        <ImageView
+            android:id="@+id/defenseImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:onClick="onDefenseClick"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/helmetBro"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/helmetBro"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/role_icon_tank" />
 
-    <TextView
-        android:id="@+id/bestText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Best in her role"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/laneText"
-        app:layout_constraintStart_toStartOf="@+id/laneText"
-        app:layout_constraintTop_toBottomOf="@+id/laneText" />
+        <ImageView
+            android:id="@+id/bestImage1"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/bestText"
+            app:layout_constraintStart_toStartOf="@+id/bestText"
+            app:layout_constraintTop_toBottomOf="@+id/bestText"
+            app:srcCompat="@drawable/fill_icon" />
 
-    <ImageView
-        android:id="@+id/bestImage2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/bestImage1"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/bestImage1"
-        app:layout_constraintTop_toTopOf="@+id/bestImage1"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/presence_online" />
+        <TextView
+            android:id="@+id/bestText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/best_in_role"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/laneText"
+            app:layout_constraintStart_toStartOf="@+id/laneText"
+            app:layout_constraintTop_toBottomOf="@+id/laneText" />
 
-    <ImageView
-        android:id="@+id/bestImage3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/bestImage1"
-        app:layout_constraintEnd_toEndOf="@+id/bestImage1"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/bestImage1"
-        app:srcCompat="@android:drawable/ic_delete" />
+        <ImageView
+            android:id="@+id/bestImage2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/bestImage1"
+            app:layout_constraintEnd_toStartOf="@+id/bestImage1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/bestImage1"
+            app:srcCompat="@drawable/fill_icon" />
 
-    <TextView
-        android:id="@+id/laneText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Lane"
-        android:textSize="30sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/bestImage3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/bestImage1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/bestImage1"
+            app:layout_constraintTop_toTopOf="@+id/bestImage1"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/fill_icon" />
 
-    <ImageView
-        android:id="@+id/mostPlayedImage1"
-        android:layout_width="81dp"
-        android:layout_height="71dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="@+id/mostPlayedText"
-        app:layout_constraintStart_toStartOf="@+id/mostPlayedText"
-        app:layout_constraintTop_toBottomOf="@+id/mostPlayedText"
-        app:srcCompat="@drawable/captain_teemo" />
+        <TextView
+            android:id="@+id/laneText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Lane"
+            android:textSize="30sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/mostPlayedImage2"
-        android:layout_width="81dp"
-        android:layout_height="71dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/mostPlayedImage1"
-        app:layout_constraintEnd_toStartOf="@+id/mostPlayedImage1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mostPlayedImage1"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/captain_teemo" />
+        <ImageView
+            android:id="@+id/mostPlayedImage1"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/mostPlayedText"
+            app:layout_constraintStart_toStartOf="@+id/mostPlayedText"
+            app:layout_constraintTop_toBottomOf="@+id/mostPlayedText"
+            app:srcCompat="@drawable/fill_icon" />
 
-    <ImageView
-        android:id="@+id/mostPlayedImage3"
-        android:layout_width="81dp"
-        android:layout_height="71dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/mostPlayedImage1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mostPlayedImage1"
-        app:layout_constraintTop_toTopOf="@+id/mostPlayedImage1"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/captain_teemo" />
-</android.support.constraint.ConstraintLayout>
+        <ImageView
+            android:id="@+id/mostPlayedImage2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/mostPlayedImage1"
+            app:layout_constraintEnd_toStartOf="@+id/mostPlayedImage1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/mostPlayedImage1"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/fill_icon" />
 
-    </ScrollView>
+        <ImageView
+            android:id="@+id/mostPlayedImage3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/mostPlayedImage1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/mostPlayedImage1"
+            app:layout_constraintTop_toTopOf="@+id/mostPlayedImage1"
+            app:layout_constraintVertical_bias="1.0"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/midImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:onClick="onMidClick"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/laneText"
+            app:srcCompat="@drawable/mid_icon" />
+
+        <ImageView
+            android:id="@+id/jungleImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:onClick="onJungleClick"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/midImage"
+            app:layout_constraintStart_toEndOf="@+id/midImage"
+            app:srcCompat="@drawable/jungler_icon" />
+
+        <ImageView
+            android:id="@+id/topImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="onTopClick"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/midImage"
+            app:layout_constraintEnd_toStartOf="@+id/midImage"
+            app:srcCompat="@drawable/top_icon" />
+
+        <TextView
+            android:id="@+id/lessPlayedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/less_played"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/mostPlayedImage1"
+            app:layout_constraintStart_toStartOf="@+id/mostPlayedImage1"
+            app:layout_constraintTop_toBottomOf="@+id/mostPlayedImage1" />
+
+        <ImageView
+            android:id="@+id/lessPlayed1"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/lessPlayedText"
+            app:layout_constraintStart_toStartOf="@+id/lessPlayedText"
+            app:layout_constraintTop_toBottomOf="@+id/lessPlayedText"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/lessPlayed2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/lessPlayed1"
+            app:layout_constraintEnd_toStartOf="@+id/lessPlayed1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/lessPlayed1"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/lessPlayed3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/lessPlayed1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/lessPlayed1"
+            app:layout_constraintTop_toTopOf="@+id/lessPlayed1"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/helmetBro"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/helmet_bro" />
+
+        <TextView
+            android:id="@+id/onDefenseIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="serif"
+            android:text="@string/defense"
+            android:textAlignment="center"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/defenseImage"
+            app:layout_constraintStart_toStartOf="@+id/defenseImage"
+            app:layout_constraintTop_toTopOf="@+id/defenseImage" />
+
+        <TextView
+            android:id="@+id/onMixIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="serif"
+            android:text="@string/mix"
+            android:textAlignment="center"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/mixImage"
+            app:layout_constraintStart_toStartOf="@+id/mixImage"
+            app:layout_constraintTop_toTopOf="@+id/mixImage" />
+
+        <TextView
+            android:id="@+id/onMagicIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="serif"
+            android:text="@string/magic"
+            android:textAlignment="center"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/apImage"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="@+id/apImage"
+            app:layout_constraintTop_toTopOf="@+id/apImage" />
+
+        <TextView
+            android:id="@+id/onAttackIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="serif"
+            android:text="@string/attack"
+            android:textAlignment="center"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/adImage"
+            app:layout_constraintStart_toStartOf="@+id/adImage"
+            app:layout_constraintTop_toTopOf="@+id/adImage" />
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

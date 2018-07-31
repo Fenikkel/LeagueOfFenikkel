@@ -7,5 +7,13 @@
     <string name="experience">ex:</string>
     <string name="mastery">Mastery</string>
     <string name="free_to_play">Free to play</string>
-    <string name="most_played">Most played</string>
+    <string name="most_played">Your most played</string>
+    <string name="best_in_role">Best in his role</string>
+    <string name="less_played">Your less played</string>
+    <string name="attack">AD</string>
+    <string name="magic">AP</string>
+    <string name="defense">TANK</string>
+    <string name="mix">MIX</string>
+
+
 </resources>

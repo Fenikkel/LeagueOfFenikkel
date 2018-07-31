@@ -30,16 +30,29 @@ import java.util.TreeMap;
 public class PickParalysis extends AppCompatActivity implements IShowStatsActivity {
 
 
-    TextView mostPlayed;
+
     ImageView marksmanImage;
     ImageView supportImage;
+    ImageView topImage;
+    ImageView midImage;
+    ImageView jungleImage;
+
+
     ImageView apImage;
     ImageView adImage;
     ImageView mixImage;
     ImageView defenseImage;
+    ImageView helmetBro;
 
     TextView laneText;
     TextView bestRoleText;
+    TextView mostPlayedText;
+
+    TextView apText;
+    TextView adText;
+    TextView tankText;
+    TextView mixText;
+
 
     ImageView bestRoleImage1;
     ImageView bestRoleImage2;
@@ -62,21 +75,37 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         if(marksmanImage.getVisibility() == View.VISIBLE){
             super.onBackPressed();
         }
+
         marksmanImage.setVisibility(View.VISIBLE);
         supportImage.setVisibility(View.VISIBLE);
+        topImage.setVisibility(View.VISIBLE);
+        midImage.setVisibility(View.VISIBLE);
+        jungleImage.setVisibility(View.VISIBLE);
+
         apImage.setVisibility(View.GONE);
         adImage.setVisibility(View.GONE);
         mixImage.setVisibility(View.GONE);
         defenseImage.setVisibility(View.GONE);
+
+        helmetBro.setVisibility(View.GONE);
+        adText.setVisibility(View.GONE);
+        apText.setVisibility(View.GONE);
+        tankText.setVisibility(View.GONE);
+        mixText.setVisibility(View.GONE);
+
+
         bestRoleImage1.setVisibility(View.GONE);
         bestRoleImage2.setVisibility(View.GONE);
         bestRoleImage3.setVisibility(View.GONE);
         mostPlayedImage1.setVisibility(View.GONE);
         mostPlayedImage2.setVisibility(View.GONE);
         mostPlayedImage3.setVisibility(View.GONE);
+
         bestRoleText.setVisibility(View.GONE);
         laneText.setVisibility(View.GONE);
-        mostPlayed.setVisibility(View.GONE);
+        mostPlayedText.setVisibility(View.GONE);
+
+
 
 
 
@@ -105,13 +134,29 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         bestRoleText = findViewById(R.id.bestText);
         laneText = findViewById(R.id.laneText);
-        mostPlayed = findViewById(R.id.mostPlayedText);
+        mostPlayedText = findViewById(R.id.mostPlayedText);
+
+        adText = findViewById(R.id.onAttackIcon); //text que esta per damunt del icono
+        apText = findViewById(R.id.onMagicIcon);
+        mixText = findViewById(R.id.onMixIcon);
+        tankText = findViewById(R.id.onDefenseIcon);
+
+
+
+
         marksmanImage = findViewById(R.id.marksmanImage);
         supportImage = findViewById(R.id.supportImage);
+        topImage = findViewById(R.id.topImage);
+        midImage = findViewById(R.id.midImage);
+        jungleImage = findViewById(R.id.jungleImage);
+
         apImage = findViewById(R.id.apImage);
         adImage = findViewById(R.id.adImage);
         mixImage = findViewById(R.id.mixImage);
         defenseImage = findViewById(R.id.defenseImage);
+        helmetBro = findViewById(R.id.helmetBro);
+
+
         presenter = new ShowStatsPresenter(this,getApplicationContext());
 
         processJSONChampsByID("EASYEST");
@@ -272,34 +317,119 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
     private void processJSONChampsByID(String requested) { //AÇO PA QUE COLLONS ERAAAAAAAAAAAAAAAAAAAAAAA????
 
-        //mostPlayed.setText(StaticData.getChampMapByID().toString());
+        //mostPlayedText.setText(StaticData.getChampMapByID().toString());
 
 
+    }
+
+    public void onTopClick(View view){
+        marksmanImage.setVisibility(View.GONE);
+        supportImage.setVisibility(View.GONE);
+        topImage.setVisibility(View.GONE);
+        jungleImage.setVisibility(View.GONE);
+        midImage.setVisibility(View.GONE);
+
+        apImage.setVisibility(View.VISIBLE);
+        adImage.setVisibility(View.VISIBLE);
+        mixImage.setVisibility(View.VISIBLE);
+        defenseImage.setVisibility(View.VISIBLE);
+
+        helmetBro.setVisibility(View.VISIBLE);
+        adText.setVisibility(View.VISIBLE);
+        apText.setVisibility(View.VISIBLE);
+        tankText.setVisibility(View.VISIBLE);
+        mixText.setVisibility(View.VISIBLE);
+
+        linea.add("Tank");
+        linea.add("Fighter");
+    }
+
+    public void onMidClick(View view){
+        marksmanImage.setVisibility(View.GONE);
+        supportImage.setVisibility(View.GONE);
+        topImage.setVisibility(View.GONE);
+        jungleImage.setVisibility(View.GONE);
+        midImage.setVisibility(View.GONE);
+
+        apImage.setVisibility(View.VISIBLE);
+        adImage.setVisibility(View.VISIBLE);
+        mixImage.setVisibility(View.VISIBLE);
+        defenseImage.setVisibility(View.VISIBLE);
+
+        helmetBro.setVisibility(View.VISIBLE);
+        adText.setVisibility(View.VISIBLE);
+        apText.setVisibility(View.VISIBLE);
+        tankText.setVisibility(View.VISIBLE);
+        mixText.setVisibility(View.VISIBLE);
+        linea.add("Mage");
+        linea.add("Assasin");
+    }
+    public void onJungleClick(View view){
+        marksmanImage.setVisibility(View.GONE);
+        supportImage.setVisibility(View.GONE);
+        topImage.setVisibility(View.GONE);
+        jungleImage.setVisibility(View.GONE);
+        midImage.setVisibility(View.GONE);
+
+        apImage.setVisibility(View.VISIBLE);
+        adImage.setVisibility(View.VISIBLE);
+        mixImage.setVisibility(View.VISIBLE);
+        defenseImage.setVisibility(View.VISIBLE);
+
+        helmetBro.setVisibility(View.VISIBLE);
+        adText.setVisibility(View.VISIBLE);
+        apText.setVisibility(View.VISIBLE);
+        tankText.setVisibility(View.VISIBLE);
+        mixText.setVisibility(View.VISIBLE);
+        linea.add("Fighter");
+        //linea.add("Assasin");
     }
 
     public void onMarksmanClick(View view){
         marksmanImage.setVisibility(View.GONE);
         supportImage.setVisibility(View.GONE);
+        topImage.setVisibility(View.GONE);
+        jungleImage.setVisibility(View.GONE);
+        midImage.setVisibility(View.GONE);
+
         apImage.setVisibility(View.VISIBLE);
         adImage.setVisibility(View.VISIBLE);
         mixImage.setVisibility(View.VISIBLE);
         defenseImage.setVisibility(View.VISIBLE);
+
+        helmetBro.setVisibility(View.VISIBLE);
+        adText.setVisibility(View.VISIBLE);
+        apText.setVisibility(View.VISIBLE);
+        tankText.setVisibility(View.VISIBLE);
+        mixText.setVisibility(View.VISIBLE);
+
+
         linea.add("Marksman");
 
-        //mostPlayed.setText(StaticData.getChampMapByID().get("106").toString());
+        //mostPlayedText.setText(StaticData.getChampMapByID().get("106").toString());
 
 
     }
     public void onSupportClick(View view){
         marksmanImage.setVisibility(View.GONE);
         supportImage.setVisibility(View.GONE);
+        topImage.setVisibility(View.GONE);
+        jungleImage.setVisibility(View.GONE);
+        midImage.setVisibility(View.GONE);
+
         apImage.setVisibility(View.VISIBLE);
         adImage.setVisibility(View.VISIBLE);
         mixImage.setVisibility(View.VISIBLE);
         defenseImage.setVisibility(View.VISIBLE);
+
+        helmetBro.setVisibility(View.VISIBLE);
+        adText.setVisibility(View.VISIBLE);
+        apText.setVisibility(View.VISIBLE);
+        tankText.setVisibility(View.VISIBLE);
+        mixText.setVisibility(View.VISIBLE);
         linea.add("Support");
 
-        //mostPlayed.setText(StaticData.getChampMapByID().get("106").toString());
+        //mostPlayedText.setText(StaticData.getChampMapByID().get("106").toString());
 
 
     }
@@ -310,6 +440,12 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         apImage.setVisibility(View.GONE);
         adImage.setVisibility(View.GONE);
         defenseImage.setVisibility(View.GONE);
+
+        helmetBro.setVisibility(View.GONE);
+        adText.setVisibility(View.GONE);
+        apText.setVisibility(View.GONE);
+        tankText.setVisibility(View.GONE);
+        mixText.setVisibility(View.GONE);
         tipo = "AP";
 
         showMasteryFilter(linea,tipo);
@@ -321,6 +457,12 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         apImage.setVisibility(View.GONE);
         adImage.setVisibility(View.GONE);
         defenseImage.setVisibility(View.GONE);
+
+        helmetBro.setVisibility(View.GONE);
+        adText.setVisibility(View.GONE);
+        apText.setVisibility(View.GONE);
+        tankText.setVisibility(View.GONE);
+        mixText.setVisibility(View.GONE);
         tipo = "defense";
 
         showMasteryFilter(linea,tipo);
@@ -332,6 +474,12 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         apImage.setVisibility(View.GONE);
         adImage.setVisibility(View.GONE);
         defenseImage.setVisibility(View.GONE);
+
+        helmetBro.setVisibility(View.GONE);
+        adText.setVisibility(View.GONE);
+        apText.setVisibility(View.GONE);
+        tankText.setVisibility(View.GONE);
+        mixText.setVisibility(View.GONE);
         tipo = "AD";
 
         showMasteryFilter(linea,tipo);
@@ -343,6 +491,12 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         apImage.setVisibility(View.GONE);
         adImage.setVisibility(View.GONE);
         defenseImage.setVisibility(View.GONE);
+
+        helmetBro.setVisibility(View.GONE);
+        adText.setVisibility(View.GONE);
+        apText.setVisibility(View.GONE);
+        tankText.setVisibility(View.GONE);
+        mixText.setVisibility(View.GONE);
         tipo = "MIX";
 
         showMasteryFilter(linea,tipo);
@@ -368,7 +522,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             JSONObject info = currentChamp.optJSONObject("info");// not necessary
 
 
-            if(tags.optString(0,"").equals(linea.get(0)) || tags.optString(1,"").equals(linea.get(0)) || tags.optString(2,"").equals(linea.get(0)) ){
+            if(linea.contains(tags.optString(0,"")) || linea.contains(tags.optString(1,"")) || linea.contains(tags.optString(2,"")) ){
                 //primer filtro passat
 
 
@@ -426,7 +580,9 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
             JSONArray tags = currentChamp.optJSONArray("tags");
 
-            if(tags.optString(0,"").equals(linea.get(0)) || tags.optString(1,"").equals(linea.get(0)) || tags.optString(2,"").equals(linea.get(0)) ){
+            //linea.contains(tags.optString(0,"")) || linea.contains(tags.optString(1,"")) || linea.contains(tags.optString(2,""))
+
+            if(linea.contains(tags.optString(0,"")) || linea.contains(tags.optString(1,"")) || linea.contains(tags.optString(2,""))){ //(tags.optString(0,"").equals(linea.get(0)) || tags.optString(1,"").equals(linea.get(0)) || tags.optString(2,"").equals(linea.get(0)) )
 
                 int attack = currentChamp.optJSONObject("info").optInt("attack");
                 int magic = currentChamp.optJSONObject("info").optInt("magic");
@@ -483,7 +639,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mostPlayedImage1.setVisibility(View.VISIBLE);
         mostPlayedImage2.setVisibility(View.VISIBLE);
         mostPlayedImage3.setVisibility(View.VISIBLE);
-        mostPlayed.setVisibility(View.VISIBLE);
+        mostPlayedText.setVisibility(View.VISIBLE);
 
 
         if(linea.get(0).equals("Mage")){
@@ -596,7 +752,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                 StaticData.addIndividualMasteries(null, -1);
 
             }
-            else if(contador == 1){
+            else if(contador == 4){
 
                 mostPlayedImage2.setImageResource(R.drawable.captain_teemo);
                 StaticData.addIndividualMasteries(null, -1);
@@ -618,7 +774,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
 
-        //mostPlayed.setText(StaticData.getElementFilter().toString());
+        //mostPlayedText.setText(StaticData.getElementFilter().toString());
 
 
         /*

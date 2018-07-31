@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="blueBlackBackground">#273f7c</color>
+    <color name="antiflashWhite">#f2f3f4</color>
+    <color name="moreBlueBlackBackground">#000033</color>
+    <color name="oxfordBlueBackground">#000D4D</color>
+    <color name="royalBlue">#001166</color>
+    <color name="darkMidnight">#003366</color>
 </resources>
