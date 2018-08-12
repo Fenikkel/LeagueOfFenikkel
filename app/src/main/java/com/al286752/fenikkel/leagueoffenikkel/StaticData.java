@@ -108,6 +108,7 @@ data:
     private static PriorityQueue<ArrayList> elementFilter = new PriorityQueue<>(3);//, attackComparator
     //private static PriorityQueue<JSONObject> bestFilter = new PriorityQueue<>(3, attackComparator);
     private static Stack<JSONObject> mostPlayedFilter;
+    private static Stack<JSONObject> lessPlayedFilter;
 
     private static ArrayList<Pair<String, Integer>> individualMasteries = new ArrayList(); //id champs para que champMastery sepa que mostrar (3 primers bestRole)
 /* MASTERIES
@@ -283,4 +284,11 @@ data:
         StaticData.mostPlayedFilter = mostPlayedFilter;
     }
 
+    public static Stack<JSONObject> getLessPlayedFilter() {
+        return lessPlayedFilter;
+    }
+
+    public static void setLessPlayedFilter(Stack<JSONObject> lessPlayedFilter) {
+        StaticData.lessPlayedFilter = lessPlayedFilter;
+    }
 }
