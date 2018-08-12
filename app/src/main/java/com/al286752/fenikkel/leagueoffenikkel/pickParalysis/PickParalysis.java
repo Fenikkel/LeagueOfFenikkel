@@ -441,7 +441,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         tankText.setVisibility(View.VISIBLE);
         mixText.setVisibility(View.VISIBLE);
         linea.add("Mage");
-        linea.add("Assasin");
+        linea.add("Assassin");
     }
     public void onJungleClick(View view){
         marksmanImage.setVisibility(View.GONE);
