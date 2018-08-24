@@ -107,6 +107,8 @@ data:
 
     //ElementFilter funciona que el menor esta davant
     private static PriorityQueue<ArrayList> elementFilter = new PriorityQueue<>(3);//, attackComparator
+
+    private static PriorityQueue<ArrayList> easiestFilter = new PriorityQueue<>(3);//, attackComparator
     //private static PriorityQueue<JSONObject> bestFilter = new PriorityQueue<>(3, attackComparator);
     private static Stack<JSONObject> mostPlayedFilter;
     private static Stack<JSONObject> lessPlayedFilter;
@@ -129,6 +131,14 @@ data:
 
     public static ArrayList<Pair<String, Integer>> getAllIndividualMasteries() {
         return individualMasteries;
+    }
+
+    public static PriorityQueue<ArrayList> getEasiestFilter() {
+        return easiestFilter;
+    }
+
+    public static void setEasiestFilter(PriorityQueue<ArrayList> easiestFilter) {
+        StaticData.easiestFilter = easiestFilter;
     }
 
     public static Pair<String, Integer> getIndividualMasteries(int index) {//el dato que nos interesa

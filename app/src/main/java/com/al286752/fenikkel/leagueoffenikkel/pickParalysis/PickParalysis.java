@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.al286752.fenikkel.leagueoffenikkel.ElementComparator;
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
+import com.al286752.fenikkel.leagueoffenikkel.SkillComparator;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.champMastery.ChampMastery;
 import com.al286752.fenikkel.leagueoffenikkel.myProfile.DownloadImageTask;
@@ -55,6 +56,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     TextView bestRoleText;
     TextView mostPlayedText;
     TextView lessPlayedText;
+    TextView easiestText;
+    TextView skilledText;
 
 
     TextView apText;
@@ -66,6 +69,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     ImageView bestRoleImage1;
     ImageView bestRoleImage2;
     ImageView bestRoleImage3;
+
     ImageView mostPlayedImage1;
     ImageView mostPlayedImage2;
     ImageView mostPlayedImage3;
@@ -73,6 +77,14 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     ImageView lessPlayedImage1;
     ImageView lessPlayedImage2;
     ImageView lessPlayedImage3;
+
+    ImageView easiestImage1;
+    ImageView easiestImage2;
+    ImageView easiestImage3;
+
+    ImageView skilledImage1;
+    ImageView skilledImage2;
+    ImageView skilledImage3;
 
     ArrayList<String> linea = new ArrayList<>();
     String tipo;
@@ -113,6 +125,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         bestRoleImage1.setVisibility(View.GONE);
         bestRoleImage2.setVisibility(View.GONE);
         bestRoleImage3.setVisibility(View.GONE);
+
         mostPlayedImage1.setVisibility(View.GONE);
         mostPlayedImage2.setVisibility(View.GONE);
         mostPlayedImage3.setVisibility(View.GONE);
@@ -121,10 +134,22 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         lessPlayedImage2.setVisibility(View.GONE);
         lessPlayedImage3.setVisibility(View.GONE);
 
+        skilledImage1.setVisibility(View.GONE);
+        skilledImage2.setVisibility(View.GONE);
+        skilledImage3.setVisibility(View.GONE);
+
+        easiestImage1.setVisibility(View.GONE);
+        easiestImage2.setVisibility(View.GONE);
+        easiestImage3.setVisibility(View.GONE);
+
+
         bestRoleText.setVisibility(View.GONE);
         laneText.setVisibility(View.GONE);
         mostPlayedText.setVisibility(View.GONE);
         lessPlayedText.setVisibility(View.GONE);
+        skilledText.setVisibility(View.GONE);
+        easiestText.setVisibility(View.GONE);
+
 
 
 
@@ -152,6 +177,10 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             StaticData.getLessPlayedFilter().clear();
         }
 
+
+        //FALTA EASIEST AND SKILLED
+
+
         linea.clear();
 
     }
@@ -163,6 +192,16 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
         bgElement = (ScrollView) findViewById(R.id.container);
+
+        easiestImage1 = findViewById(R.id.easiestImage1);
+        easiestImage2 = findViewById(R.id.easiestImage2);
+        easiestImage3 = findViewById(R.id.easiestImage3);
+
+        skilledImage1 = findViewById(R.id.skilledImage1);
+        skilledImage2 = findViewById(R.id.skilledImage2);
+        skilledImage3 = findViewById(R.id.skilledImage3);
+
+
 
         bestRoleImage1 = findViewById(R.id.bestImage1);
         bestRoleImage2 = findViewById(R.id.bestImage2);
@@ -180,6 +219,9 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         laneText = findViewById(R.id.laneText);
         mostPlayedText = findViewById(R.id.mostPlayedText);
         lessPlayedText = findViewById(R.id.lessPlayedText);
+        skilledText = findViewById(R.id.skilledText);
+        easiestText = findViewById(R.id.easiestText);
+
 
         adText = findViewById(R.id.onAttackIcon); //text que esta per damunt del icono
         apText = findViewById(R.id.onMagicIcon);
@@ -324,6 +366,41 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                     Snackbar.make(parentLayout, "No matches or not enought data", Snackbar.LENGTH_SHORT).show();
                 }else{
                     switchToChampMastery(StaticData.getIndividualMasteries(6));
+                }
+            }
+        });
+
+
+        easiestImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StaticData.getIndividualMasteries(11).first==null){
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "No matches or not enought data", Snackbar.LENGTH_SHORT).show();
+                }else{
+                    switchToChampMastery(StaticData.getIndividualMasteries(11));
+                }
+            }
+        });
+        easiestImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StaticData.getIndividualMasteries(10).first==null){
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "No matches or not enought data", Snackbar.LENGTH_SHORT).show();
+                }else{
+                    switchToChampMastery(StaticData.getIndividualMasteries(10));
+                }
+            }
+        });
+        easiestImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StaticData.getIndividualMasteries(9).first==null){
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "No matches or not enought data", Snackbar.LENGTH_SHORT).show();
+                }else{
+                    switchToChampMastery(StaticData.getIndividualMasteries(9));
                 }
             }
         });
@@ -633,13 +710,6 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                     elementFilter.add(mutante);
                 }
 
-
-
-
-                //cai AP
-
-                //aci mixte
-
             }
 
             StaticData.setElementFilter(elementFilter);
@@ -648,6 +718,103 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         }
 
+
+        //filtro easiest
+
+
+        //creem comparador de facilAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        SkillComparator comparatorSkill = new SkillComparator(tipo, "easiest");
+        PriorityQueue<ArrayList> easiestFilter = new PriorityQueue<>(3, comparatorSkill);
+
+
+
+        for(int contador=0; contador<masteryID.size() ; contador++){
+
+            JSONObject currentChamp = allChamps.get(masteryID.get(contador));
+            JSONArray tags = currentChamp.optJSONArray("tags");
+            JSONObject info = currentChamp.optJSONObject("info");// not necessary
+
+
+            if(linea.contains(tags.optString(0,"")) || linea.contains(tags.optString(1,"")) || linea.contains(tags.optString(2,"")) ){
+                //primer filtro passat
+
+
+
+                if(easiestFilter.size()>=3){ //major no deuria passar
+
+
+                    ArrayList mutante = new ArrayList();
+                    mutante.add(0,currentChamp);
+                    mutante.add(1,StaticData.getMasteries().get(contador));
+
+                    int resultado = comparatorSkill.compare(easiestFilter.peek(),mutante); ////Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+
+                    if(resultado<0){
+                        easiestFilter.poll();
+                        easiestFilter.add(mutante);
+                    }
+                }
+
+
+                else {//EL PROBLEMA D'ACI ES QUE NO ORDENE SI NO SUPERE LES 3 INSERCIONS
+
+                    int attack =info.optInt("attack");
+                    int magic = info.optInt("magic");
+                    int defense = info.optInt("defense");
+                    String tipoArreglado;
+                    if(tipo.equals("AD")){
+                        tipoArreglado="attack";
+                    }else if(tipo.equals("AP")){
+                        tipoArreglado="magic";
+                    }
+                    else{
+                        tipoArreglado="defense";
+                    }
+
+                    if(tipo.equals("MIX")){
+
+                        if(attack< 10 && magic< 10 && (magic+attack)>12){
+                            ArrayList mutante = new ArrayList();
+                            mutante.add(0,currentChamp);
+                            mutante.add(1,StaticData.getMasteries().get(contador));
+
+                            easiestFilter.add(mutante);
+                        }
+                    }
+
+
+
+                    else if((info.optInt(tipoArreglado)>=attack) && (info.optInt(tipoArreglado)>=magic) && (info.optInt(tipoArreglado)>=defense)){
+                        ArrayList mutante = new ArrayList();
+                        mutante.add(0,currentChamp);
+                        mutante.add(1,StaticData.getMasteries().get(contador));
+
+                        easiestFilter.add(mutante);
+
+
+                    }
+
+                    else if(tipoArreglado.equals("defense")&& linea.get(0).equals("Marksman")){
+                        if(defense>=5){
+                            ArrayList mutante = new ArrayList();
+                            mutante.add(0,currentChamp);
+                            mutante.add(1,StaticData.getMasteries().get(contador));
+
+                            easiestFilter.add(mutante);
+
+                        }
+                    }
+
+
+                }
+
+            }
+
+            StaticData.setEasiestFilter(easiestFilter);
+
+
+
+        }
 
         //filtro masteries
 
@@ -715,6 +882,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         //ArrayList<ChampionMaestries> allMasteries = StaticData.getMasteries();
         int cunt =allMasteries.size()-1;
 
+
         //LESS PLAYED
         while (lessPlayedFilter.size()<3 && cunt>=0 ){//|| mostPlayedFilter==null
             ChampionMaestries currentMasteryChamp = allMasteries.get(cunt);
@@ -778,6 +946,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         bestRoleText.setVisibility(View.VISIBLE);
         lessPlayedText.setVisibility(View.VISIBLE);
         mostPlayedText.setVisibility(View.VISIBLE);
+        easiestText.setVisibility(View.VISIBLE);
+        skilledText.setVisibility(View.VISIBLE);
 
         bestRoleImage1.setVisibility(View.VISIBLE);
         bestRoleImage2.setVisibility(View.VISIBLE);
@@ -791,6 +961,14 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         lessPlayedImage1.setVisibility(View.VISIBLE);
         lessPlayedImage2.setVisibility(View.VISIBLE);
         lessPlayedImage3.setVisibility(View.VISIBLE);
+
+        easiestImage1.setVisibility(View.VISIBLE);
+        easiestImage2.setVisibility(View.VISIBLE);
+        easiestImage3.setVisibility(View.VISIBLE);
+
+        skilledImage1.setVisibility(View.VISIBLE);
+        skilledImage2.setVisibility(View.VISIBLE);
+        skilledImage3.setVisibility(View.VISIBLE);
 
 
 
@@ -965,6 +1143,58 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
             }
             contador++;
+
+        }
+
+        //EASIEST
+
+        int cantadore =0; //LOL deuria ser contador
+        while (!StaticData.getEasiestFilter().isEmpty()){ //mientras la cola no esta vacia
+            ChampionMaestries masteryData = (ChampionMaestries) StaticData.getEasiestFilter().peek().get(1); //per al champion level etc
+            JSONObject champData = (JSONObject) StaticData.getEasiestFilter().poll().get(0);
+
+            StaticData.addIndividualMasteries(champData.optString("id"), champData.optInt("key"));
+
+            JSONObject imagenes = champData.optJSONObject("image");
+            String iconURL = "http://ddragon.leagueoflegends.com/cdn/"+ StaticData.getVersion()+"/img/champion/" + imagenes.optString("full");
+
+            if(cantadore == 0 ){
+
+                setChampionImage(iconURL,easiestImage3);
+
+            }
+            else if(cantadore == 1){
+
+                setChampionImage(iconURL,easiestImage2);
+            }
+            else{
+
+                setChampionImage(iconURL,easiestImage1);
+
+            }
+            cantadore++;
+        }
+
+        while (cantadore<=2){
+
+            if(cantadore == 0 ){
+
+                easiestImage3.setImageResource(R.drawable.fill_icon);
+                StaticData.addIndividualMasteries(null, -1);
+
+            }
+            else if(cantadore == 1){
+
+                easiestImage2.setImageResource(R.drawable.fill_icon);
+                StaticData.addIndividualMasteries(null, -1);
+            }
+            else{
+
+                easiestImage1.setImageResource(R.drawable.fill_icon);
+                StaticData.addIndividualMasteries(null, -1);
+
+            }
+            cantadore++;
 
         }
 
