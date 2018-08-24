@@ -185,8 +185,10 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         while( keys.hasNext() ) {
             String key = (String)keys.next();
             String treeKey = champs.optJSONObject(key).optString("key");
+            String name =champs.optJSONObject(key).optString("name");
             JSONObject treeChamp = champs.optJSONObject(key);
             StaticData.addChampMapByID(treeKey,treeChamp);
+            StaticData.addChampionNameKeys(name, treeKey);
         }
 
     }
@@ -198,11 +200,16 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
     }
 
     public void onStatsImageClick(View view){
-        this.switchToShowStats(myProfilePresenter.getNickName());
+
+        this.switchToShowPickParalysis();
+
     }
 
     public void onRegionClick(View view){
-        this.switchToShowPickParalysis();
+        //this.switchToShowStats(StaticData.getSummonerName());//myProfilePresenter.getNickName()
+    }
+    public void onMasteryListClick(View view){
+        this.switchToShowStats(StaticData.getSummonerName());//myProfilePresenter.getNickName()
     }
 
     private void switchToShowPickParalysis() {
@@ -239,7 +246,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
         //Anyadim parametres a ShowStatsActivity
         intent.putExtra(ShowStatsActivity.NICKNAME, nickName);
-        intent.putExtra(ShowStatsActivity.ID_SUMMONER, String.valueOf(idSummoner));
+        intent.putExtra(ShowStatsActivity.ID_SUMMONER, StaticData.getIdSummoner());//String.valueOf(idSummoner)
 
         startActivity(intent);
     }
@@ -314,4 +321,6 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
 
     }
+
+
 }

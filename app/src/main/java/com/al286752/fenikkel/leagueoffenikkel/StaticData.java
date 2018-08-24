@@ -8,6 +8,7 @@ import android.util.Pair;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Stack;
@@ -51,7 +52,7 @@ summonerLevel:	71
 
 
 
-    private static Map<String, String> championNameKeys; //la key es el nombre del champ (con espacios y "'") y lo que te devuelve es la key del champion que es un nombre sin espacios ni mariconadas
+    private static Map<String, String> championNameKeys = new HashMap<>(); //la key es el nombre del champ (con espacios y "'") y lo que te devuelve es la key del champion que es un nombre sin espacios ni mariconadas
 
 
     //STATIC CHAMPIONS
@@ -141,6 +142,13 @@ data:
 
     public static Map<String, String> getChampionNameKeys() {
         return championNameKeys;
+    }
+
+    public static String getTheChampionNameKeys(String key) {
+        return championNameKeys.get(key);
+    }
+    public static void addChampionNameKeys(String champ, String id) {///eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+        StaticData.championNameKeys.put(champ, id);
     }
 
     public static void setChampionNameKeys(Map<String, String> championNameKeys) {

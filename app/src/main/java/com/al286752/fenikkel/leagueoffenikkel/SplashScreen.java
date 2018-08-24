@@ -143,7 +143,7 @@ public class SplashScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+/*
     private void processChampions(JSONObject jChampions) {
 
         StaticData.setChampListDDragon(jChampions);
@@ -184,5 +184,6 @@ public class SplashScreen extends AppCompatActivity {
         }
 
     }
+    */
 
 }

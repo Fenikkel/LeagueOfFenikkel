@@ -59,14 +59,18 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         errorImg=findViewById(R.id.imageErrorShow);
 
         listMaestries = findViewById(R.id.maestriesList);
+        if(StaticData.getMasteries().isEmpty()){
+            findMaestries();
+        }else{
+            fillList(StaticData.getMasteriesIds());
+        }
 
-        findMaestries();
 
     }
 
     public void findMaestries(){
 
-        presenter.findMaestries(idSum, new ResponseReceiver<ArrayList<ChampionMaestries>>() {
+        presenter.findMaestries(StaticData.getIdSummoner(), new ResponseReceiver<ArrayList<ChampionMaestries>>() {
             @Override
             public void onResponseReceived(ArrayList<ChampionMaestries> response) {
 
@@ -90,6 +94,8 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                     champsIds.add(String.valueOf(champ.getChampionId()));
 
                 }
+
+                StaticData.setMasteriesIds(champsIds);
 
                 fillList(champsIds);
 
@@ -116,7 +122,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
         for(int contador=0; contador<value2s.length; contador++){
 
-            JSONObject champ = StaticData.getAllChampions().get(value2s[contador]);
+            JSONObject champ = StaticData.getTheChampMapByID(value2s[contador]);
 
             value2s[contador]= champ.optString("name");
             subNames[contador]= champ.optString("title");
@@ -140,7 +146,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
                 Toast.makeText(getApplicationContext(),champSelected + " selected",Toast.LENGTH_LONG).show();//this, item + " selected", Toast.LENGTH_LONG
 
                 //CHANGE TO MAESTRY
-                switchToChampMastery(champSelected);
+                switchToChampMastery(StaticData.getTheChampionNameKeys(champSelected));
             }
         });
 
@@ -152,7 +158,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         //QUITAR ESPACIOS NOMBRES
 
         String st = champSelected;
-
+/*
         st = st.replaceAll("\\s",""); // aixina llevem els espais i merdes que no existeixen en les ID
         st= st.replaceAll("'","");
         //st= st.replaceAll(".","");
@@ -177,10 +183,15 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         else if(st.equals("Cho'Gath")){
             st = "Chogath";
         }
+*/
 
-        JSONObject allChampData = StaticData.getChampListByName().optJSONObject(st);
+        //JSONObject general = StaticData.getChampListDDragon().optJSONObject("data") ;
 
-        String laId = allChampData.optString("id");
+        JSONObject allChampData = StaticData.getTheChampMapByID(st);
+
+        String laId = allChampData.optString("key");
+
+        String laIdNombre = allChampData.optString("id");
 
         String bitxoName = allChampData.optString("name");
 
@@ -188,10 +199,10 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         Intent intento = new Intent(this, ChampMastery.class);
 
 
-        intento.putExtra(ChampMastery.CHAMP_ID_NAME, st);
+        intento.putExtra(ChampMastery.CHAMP_ID_NAME, laIdNombre);
         intento.putExtra(ChampMastery.CHAMPION_NAME, bitxoName);
         intento.putExtra(ChampMastery.CHAMPION, laId);
-        intento.putExtra(ChampMastery.SUMMONER, idSum);
+        intento.putExtra(ChampMastery.SUMMONER, StaticData.getIdSummoner());
 
         startActivity(intento);
     }
