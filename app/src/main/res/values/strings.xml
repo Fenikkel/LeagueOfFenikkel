@@ -14,6 +14,8 @@
     <string name="magic">AP</string>
     <string name="defense">TANK</string>
     <string name="mix">MIX</string>
+    <string name="easiest">Easiest to play</string>
+    <string name="skilled">Skilled</string>
 
 
 </resources>

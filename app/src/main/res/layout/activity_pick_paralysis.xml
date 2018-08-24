@@ -31,7 +31,7 @@
             android:textColor="@color/antiflashWhite"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@+id/bestImage1"
             app:layout_constraintStart_toStartOf="@+id/bestImage1"
             app:layout_constraintTop_toBottomOf="@+id/bestImage1" />
@@ -213,7 +213,7 @@
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginTop="8dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@+id/mostPlayedText"
             app:layout_constraintStart_toStartOf="@+id/mostPlayedText"
             app:layout_constraintTop_toBottomOf="@+id/mostPlayedText"
@@ -302,17 +302,48 @@
             android:textColor="@color/antiflashWhite"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@+id/mostPlayedImage1"
             app:layout_constraintStart_toStartOf="@+id/mostPlayedImage1"
             app:layout_constraintTop_toBottomOf="@+id/mostPlayedImage1" />
+
+        <TextView
+            android:id="@+id/easiestText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/easiest"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/lessPlayed1"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="@+id/lessPlayed1"
+            app:layout_constraintTop_toBottomOf="@+id/lessPlayed1" />
+
+        <TextView
+            android:id="@+id/skilledText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/skilled"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/easiestImage1"
+            app:layout_constraintStart_toStartOf="@+id/easiestImage1"
+            app:layout_constraintTop_toBottomOf="@+id/easiestImage1" />
 
         <ImageView
             android:id="@+id/lessPlayed1"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginTop="8dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@+id/lessPlayedText"
             app:layout_constraintStart_toStartOf="@+id/lessPlayedText"
             app:layout_constraintTop_toBottomOf="@+id/lessPlayedText"
@@ -324,7 +355,7 @@
             android:layout_height="75dp"
             android:layout_marginEnd="32dp"
             android:layout_marginStart="8dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/lessPlayed1"
             app:layout_constraintEnd_toStartOf="@+id/lessPlayed1"
             app:layout_constraintHorizontal_bias="1.0"
@@ -333,12 +364,90 @@
             app:srcCompat="@drawable/fill_icon" />
 
         <ImageView
+            android:id="@+id/easiestImage1"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/easiestText"
+            app:layout_constraintStart_toStartOf="@+id/easiestText"
+            app:layout_constraintTop_toBottomOf="@+id/easiestText"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/easiestImage2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/easiestImage1"
+            app:layout_constraintEnd_toStartOf="@+id/easiestImage1"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/easiestImage1"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/skilledImage3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/skilledImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/skilledImage"
+            app:layout_constraintTop_toTopOf="@+id/skilledImage"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/skilledImage2"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/skilledImage"
+            app:layout_constraintEnd_toStartOf="@+id/skilledImage"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/skilledImage"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/skilledImage"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/skilledText"
+            app:layout_constraintStart_toStartOf="@+id/skilledText"
+            app:layout_constraintTop_toBottomOf="@+id/skilledText"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/easiestImage3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/easiestImage1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/easiestImage1"
+            app:layout_constraintTop_toTopOf="@+id/easiestImage1"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
             android:id="@+id/lessPlayed3"
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="32dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/lessPlayed1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
