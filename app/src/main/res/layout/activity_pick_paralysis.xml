@@ -22,20 +22,6 @@
 
         tools:context=".pickParalysis.PickParalysis">
 
-        <TextView
-            android:id="@+id/mostPlayedText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/most_played"
-            android:textColor="@color/antiflashWhite"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/bestImage1"
-            app:layout_constraintStart_toStartOf="@+id/bestImage1"
-            app:layout_constraintTop_toBottomOf="@+id/bestImage1" />
-
         <ImageView
             android:id="@+id/marksmanImage"
             android:layout_width="100dp"
@@ -100,6 +86,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/laneText"
             app:srcCompat="@drawable/mid_icon" />
+
+        <ImageView
+            android:id="@+id/helmetBro"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/helmet_bro" />
 
         <ImageView
             android:id="@+id/adImage"
@@ -174,6 +176,97 @@
             app:srcCompat="@drawable/role_icon_tank" />
 
         <TextView
+            android:id="@+id/onMixIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="serif"
+            android:text="@string/mix"
+            android:textAlignment="center"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/mixImage"
+            app:layout_constraintStart_toStartOf="@+id/mixImage"
+            app:layout_constraintTop_toTopOf="@+id/mixImage" />
+
+        <TextView
+            android:id="@+id/onAttackIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="serif"
+            android:text="@string/attack"
+            android:textAlignment="center"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/adImage"
+            app:layout_constraintStart_toStartOf="@+id/adImage"
+            app:layout_constraintTop_toTopOf="@+id/adImage" />
+
+        <TextView
+            android:id="@+id/onMagicIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="serif"
+            android:text="@string/magic"
+            android:textAlignment="center"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/apImage"
+            app:layout_constraintHorizontal_bias="0.508"
+            app:layout_constraintStart_toStartOf="@+id/apImage"
+            app:layout_constraintTop_toTopOf="@+id/apImage" />
+
+        <TextView
+            android:id="@+id/onDefenseIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="80dp"
+            android:fontFamily="serif"
+            android:text="@string/defense"
+            android:textAlignment="center"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/defenseImage"
+            app:layout_constraintStart_toStartOf="@+id/defenseImage"
+            app:layout_constraintTop_toTopOf="@+id/defenseImage" />
+
+        <TextView
+            android:id="@+id/laneText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="serif"
+            android:text="Lane"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/bestText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -232,22 +325,18 @@
             app:srcCompat="@drawable/fill_icon" />
 
         <TextView
-            android:id="@+id/laneText"
+            android:id="@+id/mostPlayedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:fontFamily="serif"
-            android:text="Lane"
+            android:text="@string/most_played"
             android:textColor="@color/antiflashWhite"
-            android:textSize="30sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/bestImage1"
+            app:layout_constraintStart_toStartOf="@+id/bestImage1"
+            app:layout_constraintTop_toBottomOf="@+id/bestImage1" />
 
         <ImageView
             android:id="@+id/mostPlayedImage1"
@@ -307,37 +396,6 @@
             app:layout_constraintStart_toStartOf="@+id/mostPlayedImage1"
             app:layout_constraintTop_toBottomOf="@+id/mostPlayedImage1" />
 
-        <TextView
-            android:id="@+id/easiestText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/easiest"
-            android:textColor="@color/antiflashWhite"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/lessPlayed1"
-            app:layout_constraintHorizontal_bias="0.488"
-            app:layout_constraintStart_toStartOf="@+id/lessPlayed1"
-            app:layout_constraintTop_toBottomOf="@+id/lessPlayed1" />
-
-        <TextView
-            android:id="@+id/skilledText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/skilled"
-            android:textColor="@color/antiflashWhite"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/easiestImage1"
-            app:layout_constraintStart_toStartOf="@+id/easiestImage1"
-            app:layout_constraintTop_toBottomOf="@+id/easiestImage1" />
-
         <ImageView
             android:id="@+id/lessPlayed1"
             android:layout_width="75dp"
@@ -364,6 +422,36 @@
             app:srcCompat="@drawable/fill_icon" />
 
         <ImageView
+            android:id="@+id/lessPlayed3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/lessPlayed1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/lessPlayed1"
+            app:layout_constraintTop_toTopOf="@+id/lessPlayed1"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <TextView
+            android:id="@+id/easiestText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/easiest"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/lessPlayed1"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="@+id/lessPlayed1"
+            app:layout_constraintTop_toBottomOf="@+id/lessPlayed1" />
+
+        <ImageView
             android:id="@+id/easiestImage1"
             android:layout_width="75dp"
             android:layout_height="75dp"
@@ -387,6 +475,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/easiestImage1"
             app:srcCompat="@drawable/fill_icon" />
+
+        <ImageView
+            android:id="@+id/easiestImage3"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="32dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/easiestImage1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/easiestImage1"
+            app:layout_constraintTop_toTopOf="@+id/easiestImage1"
+            app:srcCompat="@drawable/fill_icon" />
+
+        <TextView
+            android:id="@+id/skilledText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/skilled"
+            android:textColor="@color/antiflashWhite"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/easiestImage1"
+            app:layout_constraintStart_toStartOf="@+id/easiestImage1"
+            app:layout_constraintTop_toBottomOf="@+id/easiestImage1" />
 
         <ImageView
             android:id="@+id/skilledImage3"
@@ -428,123 +545,6 @@
             app:srcCompat="@drawable/fill_icon" />
 
         <ImageView
-            android:id="@+id/easiestImage3"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="32dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/easiestImage1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/easiestImage1"
-            app:layout_constraintTop_toTopOf="@+id/easiestImage1"
-            app:srcCompat="@drawable/fill_icon" />
-
-        <ImageView
-            android:id="@+id/lessPlayed3"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="32dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/lessPlayed1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/lessPlayed1"
-            app:layout_constraintTop_toTopOf="@+id/lessPlayed1"
-            app:srcCompat="@drawable/fill_icon" />
-
-        <ImageView
-            android:id="@+id/helmetBro"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/helmet_bro" />
-
-        <TextView
-            android:id="@+id/onDefenseIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="80dp"
-            android:fontFamily="serif"
-            android:text="@string/defense"
-            android:textAlignment="center"
-            android:textColor="@color/antiflashWhite"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/defenseImage"
-            app:layout_constraintStart_toStartOf="@+id/defenseImage"
-            app:layout_constraintTop_toTopOf="@+id/defenseImage" />
-
-        <TextView
-            android:id="@+id/onMixIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="80dp"
-            android:fontFamily="serif"
-            android:text="@string/mix"
-            android:textAlignment="center"
-            android:textColor="@color/antiflashWhite"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/mixImage"
-            app:layout_constraintStart_toStartOf="@+id/mixImage"
-            app:layout_constraintTop_toTopOf="@+id/mixImage" />
-
-        <TextView
-            android:id="@+id/onMagicIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="80dp"
-            android:fontFamily="serif"
-            android:text="@string/magic"
-            android:textAlignment="center"
-            android:textColor="@color/antiflashWhite"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/apImage"
-            app:layout_constraintHorizontal_bias="0.508"
-            app:layout_constraintStart_toStartOf="@+id/apImage"
-            app:layout_constraintTop_toTopOf="@+id/apImage" />
-
-        <TextView
-            android:id="@+id/onAttackIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="80dp"
-            android:fontFamily="serif"
-            android:text="@string/attack"
-            android:textAlignment="center"
-            android:textColor="@color/antiflashWhite"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/adImage"
-            app:layout_constraintStart_toStartOf="@+id/adImage"
-            app:layout_constraintTop_toTopOf="@+id/adImage" />
-
-        <ImageView
             android:id="@+id/bestRoleShield1"
             android:layout_width="37dp"
             android:layout_height="33dp"
@@ -576,6 +576,138 @@
             app:layout_constraintStart_toStartOf="@+id/bestImage3"
             app:layout_constraintTop_toTopOf="@+id/bestImage3"
             app:srcCompat="@drawable/m5" />
+
+        <ImageView
+            android:id="@+id/mPlayedShield1"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/mostPlayedImage1"
+            app:layout_constraintTop_toTopOf="@+id/mostPlayedImage1"
+            app:srcCompat="@drawable/m2" />
+
+        <ImageView
+            android:id="@+id/mPlayedShield3"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/mostPlayedImage3"
+            app:layout_constraintTop_toTopOf="@+id/mostPlayedImage3"
+            app:srcCompat="@drawable/m2" />
+
+        <ImageView
+            android:id="@+id/mPlayedShield2"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/mostPlayedImage2"
+            app:layout_constraintTop_toTopOf="@+id/mostPlayedImage2"
+            app:srcCompat="@drawable/m2" />
+
+        <ImageView
+            android:id="@+id/lPlayedShield1"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/lessPlayed1"
+            app:layout_constraintTop_toTopOf="@+id/lessPlayed1"
+            app:srcCompat="@drawable/m3" />
+
+        <ImageView
+            android:id="@+id/lPlayedShield2"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/lessPlayed2"
+            app:layout_constraintTop_toTopOf="@+id/lessPlayed2"
+            app:srcCompat="@drawable/m3" />
+
+        <ImageView
+            android:id="@+id/lPlayedShield3"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/lessPlayed3"
+            app:layout_constraintTop_toTopOf="@+id/lessPlayed3"
+            app:srcCompat="@drawable/m3" />
+
+        <ImageView
+            android:id="@+id/easyShield1"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/easiestImage1"
+            app:layout_constraintTop_toTopOf="@+id/easiestImage1"
+            app:srcCompat="@drawable/m3" />
+
+        <ImageView
+            android:id="@+id/easyShield3"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/easiestImage3"
+            app:layout_constraintTop_toTopOf="@+id/easiestImage3"
+            app:srcCompat="@drawable/m3" />
+
+        <ImageView
+            android:id="@+id/easyShield2"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/easiestImage2"
+            app:layout_constraintTop_toTopOf="@+id/easiestImage2"
+            app:srcCompat="@drawable/m3" />
+
+        <ImageView
+            android:id="@+id/skilledShield2"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/skilledImage2"
+            app:layout_constraintTop_toTopOf="@+id/skilledImage2"
+            app:srcCompat="@drawable/m3" />
+
+        <ImageView
+            android:id="@+id/skilledShield3"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/skilledImage3"
+            app:layout_constraintTop_toTopOf="@+id/skilledImage3"
+            app:srcCompat="@drawable/m3" />
+
+        <ImageView
+            android:id="@+id/skilledShield1"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/skilledImage1"
+            app:layout_constraintTop_toTopOf="@+id/skilledImage1"
+            app:srcCompat="@drawable/m3" />
 
     </android.support.constraint.ConstraintLayout>
 

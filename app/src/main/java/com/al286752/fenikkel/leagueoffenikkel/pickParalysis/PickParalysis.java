@@ -78,17 +78,35 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     ImageView mostPlayedImage2;
     ImageView mostPlayedImage3;
 
+    ImageView mostPlayedShield1;
+    ImageView mostPlayedShield2;
+    ImageView mostPlayedShield3;
+
+
+
     ImageView lessPlayedImage1;
     ImageView lessPlayedImage2;
     ImageView lessPlayedImage3;
+
+    ImageView lessPlayedShield1;
+    ImageView lessPlayedShield2;
+    ImageView lessPlayedShield3;
 
     ImageView easiestImage1;
     ImageView easiestImage2;
     ImageView easiestImage3;
 
+    ImageView easiestShield1;
+    ImageView easiestShield2;
+    ImageView easiestShield3;
+
     ImageView skilledImage1;
     ImageView skilledImage2;
     ImageView skilledImage3;
+
+    ImageView skilledShield1;
+    ImageView skilledShield2;
+    ImageView skilledShield3;
 
     ArrayList<String> linea = new ArrayList<>();
     String tipo;
@@ -138,17 +156,33 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mostPlayedImage2.setVisibility(View.GONE);
         mostPlayedImage3.setVisibility(View.GONE);
 
+        mostPlayedShield1.setVisibility(View.GONE);
+        mostPlayedShield2.setVisibility(View.GONE);
+        mostPlayedShield3.setVisibility(View.GONE);
+
         lessPlayedImage1.setVisibility(View.GONE);
         lessPlayedImage2.setVisibility(View.GONE);
         lessPlayedImage3.setVisibility(View.GONE);
+
+        lessPlayedShield1.setVisibility(View.GONE);
+        lessPlayedShield2.setVisibility(View.GONE);
+        lessPlayedShield3.setVisibility(View.GONE);
 
         skilledImage1.setVisibility(View.GONE);
         skilledImage2.setVisibility(View.GONE);
         skilledImage3.setVisibility(View.GONE);
 
+        skilledShield1.setVisibility(View.GONE);
+        skilledShield2.setVisibility(View.GONE);
+        skilledShield3.setVisibility(View.GONE);
+
         easiestImage1.setVisibility(View.GONE);
         easiestImage2.setVisibility(View.GONE);
         easiestImage3.setVisibility(View.GONE);
+
+        easiestShield1.setVisibility(View.GONE);
+        easiestShield2.setVisibility(View.GONE);
+        easiestShield3.setVisibility(View.GONE);
 
 
         bestRoleText.setVisibility(View.GONE);
@@ -215,9 +249,17 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         easiestImage2 = findViewById(R.id.easiestImage2);
         easiestImage3 = findViewById(R.id.easiestImage3);
 
+        easiestShield1 = findViewById(R.id.easyShield1);
+        easiestShield2 = findViewById(R.id.easyShield2);
+        easiestShield3 = findViewById(R.id.easyShield3);
+
         skilledImage1 = findViewById(R.id.skilledImage1);
         skilledImage2 = findViewById(R.id.skilledImage2);
         skilledImage3 = findViewById(R.id.skilledImage3);
+
+        skilledShield1 = findViewById(R.id.skilledShield1);
+        skilledShield2 = findViewById(R.id.skilledShield2);
+        skilledShield3 = findViewById(R.id.skilledShield3);
 
 
 
@@ -233,9 +275,17 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mostPlayedImage2 = findViewById(R.id.mostPlayedImage2);
         mostPlayedImage3 = findViewById(R.id.mostPlayedImage3);
 
+        mostPlayedShield1 = findViewById(R.id.mPlayedShield1);
+        mostPlayedShield2 = findViewById(R.id.mPlayedShield2);
+        mostPlayedShield3 = findViewById(R.id.mPlayedShield3);
+
         lessPlayedImage1 = findViewById(R.id.lessPlayed1);
         lessPlayedImage2 = findViewById(R.id.lessPlayed2);
         lessPlayedImage3 = findViewById(R.id.lessPlayed3);
+
+        lessPlayedShield1 = findViewById(R.id.lPlayedShield1);
+        lessPlayedShield2 = findViewById(R.id.lPlayedShield2);
+        lessPlayedShield3 = findViewById(R.id.lPlayedShield3);
 
         bestRoleText = findViewById(R.id.bestText);
         laneText = findViewById(R.id.laneText);
@@ -970,7 +1020,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         //filtro masteries
 
 
-        Stack<JSONObject> mostPlayedFilter = new Stack<>();
+        Stack<ArrayList> mostPlayedFilter = new Stack<>();
         ArrayList<ChampionMaestries> allMasteries = StaticData.getMasteries();
         int contadore =0;
 
@@ -989,32 +1039,35 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                 int magic = currentChamp.optJSONObject("info").optInt("magic");
                 int defense = currentChamp.optJSONObject("info").optInt("defense");
 
+                ArrayList mutante = new ArrayList();
+                mutante.add(0,currentChamp);
+                mutante.add(1,currentMasteryChamp);
 
                 if(tipo.equals("MIX")){
                     if(attack< 10 && magic< 10 && (magic+attack)>12){ //VARIAR els menors
-                        mostPlayedFilter.push(currentChamp);
+                        mostPlayedFilter.push(mutante);
                     }
                 }
                 else if(tipo.equals("AD")){
                     if(attack>magic && attack>defense){
-                        mostPlayedFilter.push(currentChamp);
+                        mostPlayedFilter.push(mutante);
                     }
 
                 }else if (tipo.equals("AP")){
                     if(attack<magic && magic>defense){
-                        mostPlayedFilter.push(currentChamp);
+                        mostPlayedFilter.push(mutante);
                     }
 
                 }else{//defense
 
                     if(linea.get(0).equals("Marksman")){// si son marksman ||linea.get(1).equals("Marksman")
                         if(defense>=5){
-                            mostPlayedFilter.push(currentChamp);
+                            mostPlayedFilter.push(mutante);
                         }
                     }
                     else{
                         if(defense>magic && attack<defense){
-                            mostPlayedFilter.push(currentChamp);
+                            mostPlayedFilter.push(mutante);
                         }
                     }
 
@@ -1029,7 +1082,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         StaticData.setMostPlayedFilter(mostPlayedFilter);
 
 
-        Stack<JSONObject> lessPlayedFilter = new Stack<>();
+        Stack<ArrayList> lessPlayedFilter = new Stack<>();
         //ArrayList<ChampionMaestries> allMasteries = StaticData.getMasteries();
         int cunt =allMasteries.size()-1;
 
@@ -1050,32 +1103,36 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                 int magic = currentChamp.optJSONObject("info").optInt("magic");
                 int defense = currentChamp.optJSONObject("info").optInt("defense");
 
+                ArrayList mutante = new ArrayList();
+                mutante.add(0,currentChamp);
+                mutante.add(1,currentMasteryChamp);
+
 
                 if(tipo.equals("MIX")){
                     if(attack< 10 && magic< 10 && (magic+attack)>12){ //VARIAR els menors
-                        lessPlayedFilter.push(currentChamp);
+                        lessPlayedFilter.push(mutante);
                     }
                 }
                 else if(tipo.equals("AD")){
                     if(attack>magic && attack>defense){
-                        lessPlayedFilter.push(currentChamp);
+                        lessPlayedFilter.push(mutante);
                     }
 
                 }else if (tipo.equals("AP")){
                     if(attack<magic && magic>defense){
-                        lessPlayedFilter.push(currentChamp);
+                        lessPlayedFilter.push(mutante);
                     }
 
                 }else{//defense
 
                     if(linea.get(0).equals("Marksman")){// si son marksman ||linea.get(1).equals("Marksman")
                         if(defense>=5){
-                            lessPlayedFilter.push(currentChamp);
+                            lessPlayedFilter.push(mutante);
                         }
                     }
                     else{
                         if(defense>magic && attack<defense){
-                            lessPlayedFilter.push(currentChamp);
+                            lessPlayedFilter.push(mutante);
                         }
                     }
 
@@ -1285,24 +1342,106 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         }
 
         while(!mostPlayedFilter.empty()){
-            JSONObject current = mostPlayedFilter.pop();//.optJSONObject("data");
-            StaticData.addIndividualMasteries(current.optString("id"), current.optInt("key")); //5 = el millor de mes jugat , index 4 el segon millor, index 3 el 3r millor
 
-            JSONObject imagenes = current.optJSONObject("image");
+            ArrayList current = mostPlayedFilter.pop();//.optJSONObject("data");
+            JSONObject currentCham = (JSONObject) current.get(0);
+            ChampionMaestries masteryData = (ChampionMaestries) current.get(1);
+            StaticData.addIndividualMasteries(currentCham.optString("id"), currentCham.optInt("key")); //5 = el millor de mes jugat , index 4 el segon millor, index 3 el 3r millor
+
+            JSONObject imagenes = currentCham.optJSONObject("image");
             String iconURL = "http://ddragon.leagueoflegends.com/cdn/"+ StaticData.getVersion()+"/img/champion/" + imagenes.optString("full");
+
+            int masteryLVL = masteryData.getChampionLevel();
 
             if(contador == 3 ){
 
                 setChampionImage(iconURL,mostPlayedImage3);
 
+                mostPlayedShield3.setVisibility(View.VISIBLE);
+                switch (masteryLVL){
+                    case 2:
+                        mostPlayedShield3.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        mostPlayedShield3.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        mostPlayedShield3.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        mostPlayedShield3.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        mostPlayedShield3.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        mostPlayedShield3.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        mostPlayedShield3.setVisibility(View.GONE);
+                        break;
+
+                }
+
             }
             else if(contador == 4){
 
                 setChampionImage(iconURL,mostPlayedImage2);
+
+                mostPlayedShield2.setVisibility(View.VISIBLE);
+                switch (masteryLVL){
+                    case 2:
+                        mostPlayedShield2.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        mostPlayedShield2.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        mostPlayedShield2.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        mostPlayedShield2.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        mostPlayedShield2.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        mostPlayedShield2.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        mostPlayedShield2.setVisibility(View.GONE);
+                        break;
+
+                }
             }
             else{
 
                 setChampionImage(iconURL,mostPlayedImage1);
+                mostPlayedShield1.setVisibility(View.VISIBLE);
+                switch (masteryLVL){
+                    case 2:
+                        mostPlayedShield1.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        mostPlayedShield1.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        mostPlayedShield1.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        mostPlayedShield1.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        mostPlayedShield1.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        mostPlayedShield1.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        mostPlayedShield1.setVisibility(View.GONE);
+                        break;
+
+                }
 
             }
             contador++;
@@ -1312,16 +1451,19 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
             if(contador == 3 ){
 
+                mostPlayedShield3.setVisibility(View.GONE);
                 mostPlayedImage3.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
 
             }
             else if(contador == 4){
+                mostPlayedShield2.setVisibility(View.GONE);
 
                 mostPlayedImage2.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
             }
             else{
+                mostPlayedShield1.setVisibility(View.GONE);
 
                 mostPlayedImage1.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
@@ -1334,24 +1476,114 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
         while(!lessPlayedFilter.empty()){
-            JSONObject current = lessPlayedFilter.pop();//.optJSONObject("data");
-            StaticData.addIndividualMasteries(current.optString("id"), current.optInt("key")); //5 = el millor de mes jugat , index 4 el segon millor, index 3 el 3r millor
 
-            JSONObject imagenes = current.optJSONObject("image");
+
+
+
+
+
+
+            ArrayList current = lessPlayedFilter.pop();//.optJSONObject("data");
+            JSONObject currentCham = (JSONObject) current.get(0);
+            ChampionMaestries masteryData = (ChampionMaestries) current.get(1);
+
+            StaticData.addIndividualMasteries(currentCham.optString("id"), currentCham.optInt("key")); //5 = el millor de mes jugat , index 4 el segon millor, index 3 el 3r millor
+
+            JSONObject imagenes = currentCham.optJSONObject("image");
             String iconURL = "http://ddragon.leagueoflegends.com/cdn/"+ StaticData.getVersion()+"/img/champion/" + imagenes.optString("full");
+
+            int masteryLVL = masteryData.getChampionLevel();
 
             if(contador == 6 ){
 
                 setChampionImage(iconURL,lessPlayedImage3);
 
+                lessPlayedShield3.setVisibility(View.VISIBLE);
+                switch (masteryLVL){
+                    case 2:
+                        lessPlayedShield3.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        lessPlayedShield3.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        lessPlayedShield3.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        lessPlayedShield3.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        lessPlayedShield3.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        lessPlayedShield3.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        lessPlayedShield3.setVisibility(View.GONE);
+                        break;
+
+                }
+
             }
             else if(contador == 7){
 
                 setChampionImage(iconURL,lessPlayedImage2);
+
+                lessPlayedShield2.setVisibility(View.VISIBLE);
+                switch (masteryLVL){
+                    case 2:
+                        lessPlayedShield2.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        lessPlayedShield2.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        lessPlayedShield2.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        lessPlayedShield2.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        lessPlayedShield2.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        lessPlayedShield2.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        lessPlayedShield2.setVisibility(View.GONE);
+                        break;
+
+                }
             }
             else{
 
                 setChampionImage(iconURL,lessPlayedImage1);
+
+                lessPlayedShield1.setVisibility(View.VISIBLE);
+                switch (masteryLVL){
+                    case 2:
+                        lessPlayedShield1.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        lessPlayedShield1.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        lessPlayedShield1.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        lessPlayedShield1.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        lessPlayedShield1.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        lessPlayedShield1.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        lessPlayedShield1.setVisibility(View.GONE);
+                        break;
+
+                }
 
             }
             contador++;
@@ -1361,16 +1593,22 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
             if(contador == 6 ){
 
+                lessPlayedShield3.setVisibility(View.GONE);
+
                 lessPlayedImage3.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
 
             }
             else if(contador == 7){
 
+                lessPlayedShield2.setVisibility(View.GONE);
+
                 lessPlayedImage2.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
             }
             else{
+
+                lessPlayedShield1.setVisibility(View.GONE);
 
                 lessPlayedImage1.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
