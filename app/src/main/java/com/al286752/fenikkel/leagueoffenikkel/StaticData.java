@@ -109,6 +109,8 @@ data:
     private static PriorityQueue<ArrayList> elementFilter = new PriorityQueue<>(3);//, attackComparator
 
     private static PriorityQueue<ArrayList> easiestFilter = new PriorityQueue<>(3);//, attackComparator
+
+    private static PriorityQueue<ArrayList> skilledFilter = new PriorityQueue<>(3);//, attackComparator
     //private static PriorityQueue<JSONObject> bestFilter = new PriorityQueue<>(3, attackComparator);
     private static Stack<JSONObject> mostPlayedFilter;
     private static Stack<JSONObject> lessPlayedFilter;
@@ -135,6 +137,14 @@ data:
 
     public static PriorityQueue<ArrayList> getEasiestFilter() {
         return easiestFilter;
+    }
+
+    public static PriorityQueue<ArrayList> getSkilledFilter() {
+        return skilledFilter;
+    }
+
+    public static void setSkilledFilter(PriorityQueue<ArrayList> skilledFilter) {
+        StaticData.skilledFilter = skilledFilter;
     }
 
     public static void setEasiestFilter(PriorityQueue<ArrayList> easiestFilter) {

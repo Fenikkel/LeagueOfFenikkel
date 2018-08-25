@@ -723,7 +723,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
         //creem comparador de facilAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        SkillComparator comparatorSkill = new SkillComparator(tipo, "easiest");
+        SkillComparator comparatorSkill = new SkillComparator(tipo, "EASIEST");
         PriorityQueue<ArrayList> easiestFilter = new PriorityQueue<>(3, comparatorSkill);
 
 
@@ -811,6 +811,101 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             }
 
             StaticData.setEasiestFilter(easiestFilter);
+
+
+
+        }
+
+        //filtro SKILLED
+
+        SkillComparator skilledComparator = new SkillComparator(tipo, "SKILLED");
+        PriorityQueue<ArrayList> skilledFilter = new PriorityQueue<>(3, skilledComparator);
+
+
+
+        for(int contador=0; contador<masteryID.size() ; contador++){
+
+            JSONObject currentChamp = allChamps.get(masteryID.get(contador));
+            JSONArray tags = currentChamp.optJSONArray("tags");
+            JSONObject info = currentChamp.optJSONObject("info");// not necessary
+
+
+            if(linea.contains(tags.optString(0,"")) || linea.contains(tags.optString(1,"")) || linea.contains(tags.optString(2,"")) ){
+                //primer filtro passat
+
+
+
+                if(skilledFilter.size()>=3){ //major no deuria passar
+
+
+                    ArrayList mutante = new ArrayList();
+                    mutante.add(0,currentChamp);
+                    mutante.add(1,StaticData.getMasteries().get(contador));
+
+                    int resultado = skilledComparator.compare(skilledFilter.peek(),mutante); ////Returns a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+
+                    if(resultado<0){
+                        skilledFilter.poll();
+                        skilledFilter.add(mutante);
+                    }
+                }
+
+
+                else {//EL PROBLEMA D'ACI ES QUE NO ORDENE SI NO SUPERE LES 3 INSERCIONS
+
+                    int attack =info.optInt("attack");
+                    int magic = info.optInt("magic");
+                    int defense = info.optInt("defense");
+                    String tipoArreglado;
+                    if(tipo.equals("AD")){
+                        tipoArreglado="attack";
+                    }else if(tipo.equals("AP")){
+                        tipoArreglado="magic";
+                    }
+                    else{
+                        tipoArreglado="defense";
+                    }
+
+                    if(tipo.equals("MIX")){
+
+                        if(attack< 10 && magic< 10 && (magic+attack)>12){
+                            ArrayList mutante = new ArrayList();
+                            mutante.add(0,currentChamp);
+                            mutante.add(1,StaticData.getMasteries().get(contador));
+
+                            skilledFilter.add(mutante);
+                        }
+                    }
+
+
+
+                    else if((info.optInt(tipoArreglado)>=attack) && (info.optInt(tipoArreglado)>=magic) && (info.optInt(tipoArreglado)>=defense)){
+                        ArrayList mutante = new ArrayList();
+                        mutante.add(0,currentChamp);
+                        mutante.add(1,StaticData.getMasteries().get(contador));
+
+                        skilledFilter.add(mutante);
+
+
+                    }
+
+                    else if(tipoArreglado.equals("defense")&& linea.get(0).equals("Marksman")){
+                        if(defense>=5){
+                            ArrayList mutante = new ArrayList();
+                            mutante.add(0,currentChamp);
+                            mutante.add(1,StaticData.getMasteries().get(contador));
+
+                            skilledFilter.add(mutante);
+
+                        }
+                    }
+
+
+                }
+
+            }
+
+            StaticData.setSkilledFilter(skilledFilter);
 
 
 
@@ -1191,6 +1286,59 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             else{
 
                 easiestImage1.setImageResource(R.drawable.fill_icon);
+                StaticData.addIndividualMasteries(null, -1);
+
+            }
+            cantadore++;
+
+        }
+
+
+        //SKilled
+
+        cantadore =0; //LOL deuria ser contador
+        while (!StaticData.getSkilledFilter().isEmpty()){ //mientras la cola no esta vacia
+            ChampionMaestries masteryData = (ChampionMaestries) StaticData.getSkilledFilter().peek().get(1); //per al champion level etc
+            JSONObject champData = (JSONObject) StaticData.getSkilledFilter().poll().get(0);
+
+            StaticData.addIndividualMasteries(champData.optString("id"), champData.optInt("key"));
+
+            JSONObject imagenes = champData.optJSONObject("image");
+            String iconURL = "http://ddragon.leagueoflegends.com/cdn/"+ StaticData.getVersion()+"/img/champion/" + imagenes.optString("full");
+
+            if(cantadore == 0 ){
+
+                setChampionImage(iconURL,skilledImage3);
+
+            }
+            else if(cantadore == 1){
+
+                setChampionImage(iconURL,skilledImage2);
+            }
+            else{
+
+                setChampionImage(iconURL,skilledImage1);
+
+            }
+            cantadore++;
+        }
+
+        while (cantadore<=2){
+
+            if(cantadore == 0 ){
+
+                skilledImage3.setImageResource(R.drawable.fill_icon);
+                StaticData.addIndividualMasteries(null, -1);
+
+            }
+            else if(cantadore == 1){
+
+                skilledImage2.setImageResource(R.drawable.fill_icon);
+                StaticData.addIndividualMasteries(null, -1);
+            }
+            else{
+
+                skilledImage1.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
 
             }
