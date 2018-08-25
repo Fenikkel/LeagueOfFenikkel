@@ -405,6 +405,40 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             }
         });
 
+        skilledImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StaticData.getIndividualMasteries(14).first==null){
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "No matches or not enought data", Snackbar.LENGTH_SHORT).show();
+                }else{
+                    switchToChampMastery(StaticData.getIndividualMasteries(14));
+                }
+            }
+        });
+        skilledImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StaticData.getIndividualMasteries(13).first==null){
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "No matches or not enought data", Snackbar.LENGTH_SHORT).show();
+                }else{
+                    switchToChampMastery(StaticData.getIndividualMasteries(13));
+                }
+            }
+        });
+        skilledImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StaticData.getIndividualMasteries(12).first==null){
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "No matches or not enought data", Snackbar.LENGTH_SHORT).show();
+                }else{
+                    switchToChampMastery(StaticData.getIndividualMasteries(12));
+                }
+            }
+        });
+
 
     }
 
