@@ -70,6 +70,10 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     ImageView bestRoleImage2;
     ImageView bestRoleImage3;
 
+    ImageView bestRoleShield1;
+    ImageView bestRoleShield2;
+    ImageView bestRoleShield3;
+
     ImageView mostPlayedImage1;
     ImageView mostPlayedImage2;
     ImageView mostPlayedImage3;
@@ -126,6 +130,10 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         bestRoleImage2.setVisibility(View.GONE);
         bestRoleImage3.setVisibility(View.GONE);
 
+        bestRoleShield1.setVisibility(View.GONE);
+        bestRoleShield2.setVisibility(View.GONE);
+        bestRoleShield3.setVisibility(View.GONE);
+
         mostPlayedImage1.setVisibility(View.GONE);
         mostPlayedImage2.setVisibility(View.GONE);
         mostPlayedImage3.setVisibility(View.GONE);
@@ -178,7 +186,17 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         }
 
 
-        //FALTA EASIEST AND SKILLED
+        if(StaticData.getSkilledFilter()==null){
+
+        }else{
+            StaticData.getSkilledFilter().clear();
+        }
+
+        if(StaticData.getEasiestFilter()==null){
+
+        }else{
+            StaticData.getEasiestFilter().clear();
+        }
 
 
         linea.clear();
@@ -206,6 +224,10 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         bestRoleImage1 = findViewById(R.id.bestImage1);
         bestRoleImage2 = findViewById(R.id.bestImage2);
         bestRoleImage3 = findViewById(R.id.bestImage3);
+
+        bestRoleShield1 = findViewById(R.id.bestRoleShield1);
+        bestRoleShield2 = findViewById(R.id.bestRoleShield2);
+        bestRoleShield3 = findViewById(R.id.bestRoleShield3);
 
         mostPlayedImage1 = findViewById(R.id.mostPlayedImage1);
         mostPlayedImage2 = findViewById(R.id.mostPlayedImage2);
@@ -1139,18 +1161,98 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             JSONObject imagenes = champData.optJSONObject("image");
             String iconURL = "http://ddragon.leagueoflegends.com/cdn/"+ StaticData.getVersion()+"/img/champion/" + imagenes.optString("full");
 
+            int masteryLVL = masteryData.getChampionLevel();
+
             if(contador == 0 ){
 
                 setChampionImage(iconURL,bestRoleImage3);
+                bestRoleShield3.setVisibility(View.VISIBLE);
+                switch (masteryLVL){
+                    case 2:
+                        bestRoleShield3.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        bestRoleShield3.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        bestRoleShield3.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        bestRoleShield3.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        bestRoleShield3.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        bestRoleShield3.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        bestRoleShield3.setVisibility(View.GONE);
+                        break;
+
+                }
+
+
 
             }
             else if(contador == 1){
 
                 setChampionImage(iconURL,bestRoleImage2);
+                bestRoleShield2.setVisibility(View.VISIBLE);
+
+                switch (masteryLVL){
+                    case 2:
+                        bestRoleShield2.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        bestRoleShield2.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        bestRoleShield2.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        bestRoleShield2.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        bestRoleShield2.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        bestRoleShield2.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        bestRoleShield2.setVisibility(View.GONE);
+                        break;
+
+                }
             }
             else{
 
                 setChampionImage(iconURL,bestRoleImage1);
+                bestRoleShield1.setVisibility(View.VISIBLE);
+                switch (masteryLVL){
+                    case 2:
+                        bestRoleShield1.setImageResource(R.drawable.m2);
+                        break;
+                    case 3:
+                        bestRoleShield1.setImageResource(R.drawable.m3);
+                        break;
+                    case 4:
+                        bestRoleShield1.setImageResource(R.drawable.m4);
+                        break;
+                    case 5:
+                        bestRoleShield1.setImageResource(R.drawable.m5);
+                        break;
+                    case 6:
+                        bestRoleShield1.setImageResource(R.drawable.m6);
+                        break;
+                    case 7:
+                        bestRoleShield1.setImageResource(R.drawable.m7);
+                        break;
+                    default:
+                        bestRoleShield1.setVisibility(View.GONE);
+                        break;
+
+                }
 
             }
             contador++;
@@ -1160,16 +1262,19 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
             if(contador == 0 ){
 
+                bestRoleShield3.setVisibility(View.GONE);
                 bestRoleImage3.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
 
             }
             else if(contador == 1){
 
+                bestRoleShield2.setVisibility(View.GONE);
                 bestRoleImage2.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
             }
             else{
+                bestRoleShield1.setVisibility(View.GONE);
 
                 bestRoleImage1.setImageResource(R.drawable.fill_icon);
                 StaticData.addIndividualMasteries(null, -1);
