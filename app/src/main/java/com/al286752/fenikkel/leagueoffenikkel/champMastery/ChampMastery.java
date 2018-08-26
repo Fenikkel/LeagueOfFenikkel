@@ -1,6 +1,7 @@
 package com.al286752.fenikkel.leagueoffenikkel.champMastery;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -52,6 +53,9 @@ public class ChampMastery extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_champ_mastery);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+
 
         Intent intent = getIntent();
         final String champId = intent.getStringExtra(CHAMPION);
