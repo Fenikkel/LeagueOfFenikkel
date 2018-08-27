@@ -1,6 +1,7 @@
 package com.al286752.fenikkel.leagueoffenikkel.pickParalysis;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -579,6 +582,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
     }
 
+
+
     private void switchToChampMastery(Pair<String,Integer> pareja) {
 
         String champID = pareja.first;
@@ -831,6 +836,13 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
     private void showMasteryFilter(ArrayList<String> linea, String tipo) {
+
+
+        ProgressDialog dialog=new ProgressDialog(this);
+        dialog.setMessage("Loading...");
+        dialog.setCancelable(false);
+        dialog.setInverseBackgroundForced(false);
+        dialog.show();
 
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         bgElement.setBackgroundColor(0xFF000000);
@@ -1958,7 +1970,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         }
 
-
+        dialog.hide();
     }
 
     //FICAR UN METODO DE RESET( per a tornar-ho a fer )

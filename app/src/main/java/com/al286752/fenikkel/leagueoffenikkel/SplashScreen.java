@@ -1,9 +1,13 @@
 package com.al286752.fenikkel.leagueoffenikkel;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
@@ -123,7 +127,7 @@ public class SplashScreen extends AppCompatActivity {
         }
 
 
-
+        runAnimation();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -133,10 +137,17 @@ public class SplashScreen extends AppCompatActivity {
                         startApp();
                     }
                 },
-                3000);
+                2000);
     }
 
-
+    private void runAnimation()
+    {
+        @SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.fenikkel_animation);
+        a.reset();
+        TextView tv = (TextView) findViewById(R.id.fenikkel);
+        tv.clearAnimation();
+        tv.startAnimation(a);
+    }
 
     void startApp(){
         Intent intent = new Intent(this, MyProfileActivity.class);

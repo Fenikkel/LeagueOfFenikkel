@@ -1,5 +1,6 @@
 package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -49,6 +50,13 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
+
+        ProgressDialog dialog=new ProgressDialog(this);
+        dialog.setMessage("Loading...");
+        dialog.setCancelable(false);
+        dialog.setInverseBackgroundForced(false);
+        dialog.show();
+
         //Lo meu
         nicknameText = findViewById(R.id.nicknameText);
         myProfileModel = MyProfileModel.getInstance(getApplicationContext());
@@ -90,9 +98,6 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
             //SI STATIC DATA == NULL PUES POSEM -1 A IDSUMMONER SINO POSEM STATIC DATA
 
-
-
-
             myProfileModel.findSummonerByID(StaticData.getIdSummoner(), new ResponseReceiver<JSONObject>() {
                 @Override
                 public void onResponseReceived(JSONObject response) {
@@ -102,8 +107,6 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
                     //StaticData.setSumonerLVL(String.valueOf(response.optLong("summonerLevel")));
                     //setSummonerIcon(String.valueOf(response.optInt("profileIconId")));
                     setNicknameText(response.optString("name"),response.optLong("summonerLevel"), Long.parseLong(StaticData.getIdSummoner()));
-
-
 
 
                     String urlIcon = myProfileModel.getUrlIcon(response.optInt("profileIconId"));
@@ -166,6 +169,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
 
 
+        dialog.hide();
 
 
 
