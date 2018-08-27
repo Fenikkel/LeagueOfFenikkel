@@ -140,7 +140,8 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
                 @Override
                 public void onErrorReceived(String message) {
-
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
                 }
             });
 
@@ -162,7 +163,8 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
                 @Override
                 public void onErrorReceived(String message) {
-
+                    View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
                 }
             });
         }
