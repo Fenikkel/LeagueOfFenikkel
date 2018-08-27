@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.R;
@@ -23,6 +24,8 @@ import org.json.JSONObject;
 import java.util.Iterator;
 
 public class MyProfileActivity extends AppCompatActivity implements IShowStatsActivity, IMyProfileView, AskNickNameDialog.INickNameListener{
+
+    //ScrollView bgElement;
 
     MyProfilePresenter myProfilePresenter;
     ImageView profileImage;
@@ -50,12 +53,35 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
 
+        /*
+        bgElement = (ScrollView) findViewById(R.id.profileScrollView);
 
-        ProgressDialog dialog=new ProgressDialog(this);
+        double random = Math.random() * 4 + 1; //This will give you value from 1 to 50 using Math.random()
+
+        switch ((int)random){
+            case 1:
+                bgElement.setBackgroundResource(R.drawable.bg1);
+                break;
+
+            case 2:
+                bgElement.setBackgroundResource(R.drawable.bg2);
+                break;
+
+            case 3:
+                bgElement.setBackgroundResource(R.drawable.bg3);
+                break;
+
+            case 4:
+                bgElement.setBackgroundResource(R.drawable.bg4);
+                break;
+
+        }*/
+
+       /* ProgressDialog dialog=new ProgressDialog(this);
         dialog.setMessage("Loading...");
         dialog.setCancelable(false);
         dialog.setInverseBackgroundForced(false);
-        dialog.show();
+        dialog.show();*/
 
         //Lo meu
         nicknameText = findViewById(R.id.nicknameText);
@@ -171,7 +197,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
 
 
-        dialog.hide();
+        //dialog.hide();
 
 
 

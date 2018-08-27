@@ -838,11 +838,11 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
     private void showMasteryFilter(ArrayList<String> linea, String tipo) {
 
 
-        ProgressDialog dialog=new ProgressDialog(this);
+        /*ProgressDialog dialog=new ProgressDialog(this);
         dialog.setMessage("Loading...");
         dialog.setCancelable(false);
         dialog.setInverseBackgroundForced(false);
-        dialog.show();
+        dialog.show();*/
 
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_LOCKED);
         bgElement.setBackgroundColor(0xFF000000);
@@ -1970,7 +1970,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         }
 
-        dialog.hide();
+        //dialog.hide();
     }
 
     //FICAR UN METODO DE RESET( per a tornar-ho a fer )
