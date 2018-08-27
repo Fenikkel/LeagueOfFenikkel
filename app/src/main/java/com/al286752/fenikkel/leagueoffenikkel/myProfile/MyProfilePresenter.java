@@ -69,7 +69,7 @@ public class MyProfilePresenter  {
 
         myProfileView.setSummonerIcon(urlIcon);
 
-        myProfileModel.insertCurrentSummoner((int)idSummoner,StaticData.getVersion(), "califragilistico");//
+        myProfileModel.insertCurrentSummoner((int)idSummoner,StaticData.getVersion(), StaticData.getRegion());//
 
 
     }

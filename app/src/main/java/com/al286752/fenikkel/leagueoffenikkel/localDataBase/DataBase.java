@@ -86,9 +86,16 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
 
         while (cursor.moveToNext()){// el primer move te porta a la primera fila? es com si estiguera fora de la tabla
 
-            lista.add(String.valueOf(cursor.getInt(0))); //ho pase a String pero despres necessitare int a lo millor
-            lista.add(cursor.getString(1)); //LASTVERSION
-            lista.add(cursor.getString(2)); //REGION
+            String idSummoner = String.valueOf(cursor.getInt(0));
+            String lastVersion = cursor.getString(1);
+            String region = cursor.getString(2);
+
+
+            lista.add(idSummoner); //ho pase a String pero despres necessitare int a lo millor
+            lista.add(lastVersion); //LASTVERSION
+            lista.add(region); //REGION
+
+            //deleteCurrentSummoner();
 
         }
 
@@ -117,6 +124,7 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
                 return;
             }else{
                 deleteCurrentSummoner();
+                insertCurrentSummoner(summonerID,lastVersion,region);
             }
         }
 
@@ -124,7 +132,7 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
             deleteCurrentSummoner();
         }
 
-        else{
+        else{//si cursor es null o 0
             ContentValues contentValues = new ContentValues();
 
             contentValues.put(SUMMONER_ID,summonerID); // han de ser las claves que hemos utilizado en la tabla

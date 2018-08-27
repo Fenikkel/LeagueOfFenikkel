@@ -113,7 +113,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
                     setSummonerIcon(urlIcon);
 
-                    myProfileModel.insertCurrentSummoner(Integer.parseInt(StaticData.getIdSummoner()),StaticData.getVersion(), "tomaMoreno");//
+                    myProfileModel.insertCurrentSummoner(Integer.parseInt(StaticData.getIdSummoner()),StaticData.getVersion(), StaticData.getRegion());//
                 }
 
                 @Override
