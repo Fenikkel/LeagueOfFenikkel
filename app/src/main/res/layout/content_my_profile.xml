@@ -12,6 +12,27 @@
     tools:context="com.al286752.fenikkel.leagueoffenikkel.myProfile.MyProfileActivity"
     tools:showIn="@layout/activity_my_profile">
 
+    <ImageView
+        android:id="@+id/gradient"
+        android:layout_width="500dp"
+        android:layout_height="500dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileFrame"
+        app:layout_constraintEnd_toEndOf="@+id/profileFrame"
+        app:layout_constraintStart_toStartOf="@+id/profileFrame"
+        app:layout_constraintTop_toTopOf="@+id/profileFrame"
+        app:srcCompat="@drawable/gradient_circle" />
+
+    <ImageView
+        android:id="@+id/gradientPickButton"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/getMasteriesButton"
+        app:layout_constraintEnd_toEndOf="@+id/statsImage"
+        app:layout_constraintStart_toStartOf="@+id/statsImage"
+        app:layout_constraintTop_toTopOf="@+id/statsImage"
+        app:srcCompat="@drawable/gradient_circle" />
+
     <TextView
         android:id="@+id/nicknameText"
         android:layout_width="wrap_content"
