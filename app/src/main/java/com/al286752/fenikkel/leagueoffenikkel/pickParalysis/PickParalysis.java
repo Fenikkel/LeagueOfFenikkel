@@ -845,7 +845,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         dialog.show();*/
 
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_LOCKED);
-        bgElement.setBackgroundColor(0xFF000000);
+        bgElement.setBackgroundResource(R.drawable.black_gradient_background);
+        //bgElement.setBackgroundColor(0xFF000000);
 
         ArrayList<String> masteryID = StaticData.getMasteriesIds();//de 0 a n tiene por orden los id de los campeones con mas puntuacion de maestria (contador serviria tambien para el que tiene el JSON)
 

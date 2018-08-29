@@ -9,4 +9,19 @@
     <color name="oxfordBlueBackground">#000D4D</color>
     <color name="royalBlue">#001166</color>
     <color name="darkMidnight">#003366</color>
+    <color name="darkerMidnight">#00264d</color>
+    <color name="moreDarkerMidnight">#001a33</color>
+    <color name="paleGold">#fafad2</color>
+    <color name="goldenRod">#daa520</color>
+    <color name="darkGoldenRod">#b8860b</color>
+    <color name="whiteSmoke">#f5f5f5</color>
+    <color name="moreWhiteSmoke">#f2f2f2</color>
+    <color name="whiteGray">#cfcfcf</color>
+    <color name="darkWhiteGray">#c2c2c2</color>
+    <color name="darkerWhiteGray">#b6b6b6</color>
+    <color name="whiteGoldenRod">#e5bb50</color>
+    <color name="whiterGoldenRod">#efd594</color>
+
+
+
 </resources>
