@@ -42,7 +42,10 @@ public class ChampMastery extends AppCompatActivity {
     TextView lastTimePlayed;
     ProgressBar experienceBar;
 
+
     ImageView champImage;
+    ImageView band;
+    ImageView shield;
 
     //ChampionMaestries allData;
 
@@ -77,13 +80,20 @@ public class ChampMastery extends AppCompatActivity {
         experienceBar.setProgressDrawable(draw);
         championName = findViewById(R.id.nameChamMastery);
 
+        band = findViewById(R.id.band);
+        shield = findViewById(R.id.shieldOnFlag);
+
         ArrayList<ChampionMaestries> copia =  StaticData.getMasteries();
         long id = Long.valueOf(champId);
+
+        int masteryLevel=0;
+
         for(ChampionMaestries actual : copia){
 
             if(actual.getChampionId() == id){
                 //championName.setText(String.valueOf(actual.getChampionId()));
 
+                masteryLevel = actual.getChampionLevel();
                 championLevel.setText(String.valueOf(actual.getChampionLevel()));
 
 
@@ -131,7 +141,68 @@ public class ChampMastery extends AppCompatActivity {
             }
         });
 
+        switch (masteryLevel){
+            case 1:
 
+                band.setImageResource(R.drawable.band1);
+                band.setVisibility(View.VISIBLE);
+                shield.setVisibility(View.GONE);
+                break;
+
+            case 2:
+
+                shield.setImageResource(R.drawable.m2);
+                band.setImageResource(R.drawable.band2);
+                shield.setVisibility(View.VISIBLE);
+                band.setVisibility(View.VISIBLE);
+                break;
+
+            case 3:
+
+                shield.setImageResource(R.drawable.m3);
+                band.setImageResource(R.drawable.band3);
+                shield.setVisibility(View.VISIBLE);
+                band.setVisibility(View.VISIBLE);
+                break;
+
+            case 4:
+
+                shield.setImageResource(R.drawable.m4);
+                band.setImageResource(R.drawable.band4);
+                shield.setVisibility(View.VISIBLE);
+                band.setVisibility(View.VISIBLE);
+                break;
+
+            case 5:
+
+                shield.setImageResource(R.drawable.m5);
+                band.setImageResource(R.drawable.band5);
+                shield.setVisibility(View.VISIBLE);
+                band.setVisibility(View.VISIBLE);
+                break;
+
+            case 6:
+
+                shield.setImageResource(R.drawable.m6);
+                band.setImageResource(R.drawable.band6);
+                shield.setVisibility(View.VISIBLE);
+                band.setVisibility(View.VISIBLE);
+                break;
+
+            case 7:
+
+                shield.setImageResource(R.drawable.m7);
+                band.setImageResource(R.drawable.band7);
+                shield.setVisibility(View.VISIBLE);
+                band.setVisibility(View.VISIBLE);
+                break;
+
+            default:
+
+                shield.setVisibility(View.GONE);
+                band.setVisibility(View.GONE);
+                break;
+        }
 
         //allData = new ChampionMaestries();
 

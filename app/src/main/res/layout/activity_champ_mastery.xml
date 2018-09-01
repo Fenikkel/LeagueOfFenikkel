@@ -24,7 +24,7 @@
         android:id="@+id/band"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="55dp"
         app:layout_constraintEnd_toEndOf="@+id/imageMastery"
         app:layout_constraintStart_toStartOf="@+id/imageMastery"
         app:layout_constraintTop_toTopOf="@+id/imageMastery"
@@ -37,7 +37,7 @@
         android:layout_marginTop="16dp"
         android:text="nameChamMastery"
         android:textColor="@color/antiflashWhite"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,8 +57,8 @@
 
     <ImageView
         android:id="@+id/imageMastery"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:layout_marginTop="16dp"
         android:contentDescription="imageMastery"
         app:layout_constraintEnd_toEndOf="@+id/nameChamMastery"
@@ -109,9 +109,9 @@
         android:text="chestAvaliable"
         android:textColor="@color/antiflashWhite"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/levelMastery"
-        app:layout_constraintStart_toStartOf="@+id/levelMastery"
-        app:layout_constraintTop_toBottomOf="@+id/levelMastery" />
+        app:layout_constraintEnd_toEndOf="@+id/miniChest"
+        app:layout_constraintStart_toStartOf="@+id/miniChest"
+        app:layout_constraintTop_toBottomOf="@+id/miniChest" />
 
     <TextView
         android:id="@+id/tokensMastery"
@@ -174,6 +174,27 @@
         app:layout_constraintStart_toStartOf="@+id/imageMastery"
         app:layout_constraintTop_toTopOf="@+id/experienceBar"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/miniChest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/levelMastery"
+        app:layout_constraintStart_toStartOf="@+id/levelMastery"
+        app:layout_constraintTop_toBottomOf="@+id/levelMastery"
+        app:srcCompat="@drawable/hextech_crafting_chest" />
+
+    <ImageView
+        android:id="@+id/shieldOnFlag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="@+id/band"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="@+id/band"
+        app:layout_constraintTop_toTopOf="@+id/band"
+        app:srcCompat="@drawable/m7" />
 
 
 </android.support.constraint.ConstraintLayout>

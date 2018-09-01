@@ -101,7 +101,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/helmet_bro" />
+            app:srcCompat="@drawable/circle_fill_edited" />
 
         <ImageView
             android:id="@+id/adImage"
@@ -155,7 +155,7 @@
             app:layout_constraintStart_toEndOf="@+id/helmetBro"
             app:layout_constraintTop_toBottomOf="@+id/helmetBro"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/time_wasted_thresh" />
+            app:srcCompat="@drawable/role_icon_mix_fixed" />
 
         <ImageView
             android:id="@+id/defenseImage"
@@ -328,7 +328,7 @@
             android:id="@+id/mostPlayedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="@string/most_played"
             android:textColor="@color/antiflashWhite"
             android:textSize="18sp"
@@ -385,7 +385,7 @@
             android:id="@+id/lessPlayedText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif"
             android:text="@string/less_played"
             android:textColor="@color/antiflashWhite"
@@ -439,7 +439,7 @@
             android:id="@+id/easiestText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif"
             android:text="@string/easiest"
             android:textColor="@color/antiflashWhite"
@@ -494,7 +494,7 @@
             android:id="@+id/skilledText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif"
             android:text="@string/skilled"
             android:textColor="@color/antiflashWhite"
