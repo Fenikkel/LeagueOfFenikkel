@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.al286752.fenikkel.leagueoffenikkel.InfoActivity;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
@@ -195,7 +197,12 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
             });
         }
 
-
+        Button angryButton = (Button) findViewById(R.id.info_button);
+        angryButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                switchToInfoActivity();
+            }
+        });
 
         //dialog.hide();
 
@@ -203,8 +210,11 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
     }
 
+    private void switchToInfoActivity() {
+        Intent intent = new Intent(this, InfoActivity.class);
 
-
+        startActivity(intent);
+    }
 
 
     private void processChampions(JSONObject jChampions) {
@@ -224,6 +234,8 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         }
 
     }
+
+
 
     public void onProfileImageClick(View view){
 

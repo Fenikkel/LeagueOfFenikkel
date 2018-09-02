@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/antiflashWhite">
 
 
     <EditText
@@ -17,13 +17,13 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textColorLink="@android:color/holo_orange_light"
+        android:textColorLink="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:background="@android:color/holo_green_dark"
-        tools:backgroundTint="@android:color/holo_red_light" />
+        tools:background="@color/darkMidnight"
+        tools:backgroundTint="@color/darkWhiteGray" />
 
     <TextView
         android:id="@+id/titleAskNickName"

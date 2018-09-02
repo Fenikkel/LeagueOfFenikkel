@@ -12,6 +12,7 @@ import android.util.Pair;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -404,6 +405,9 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         if(StaticData.getMasteriesIds().isEmpty()){
             findMaestries();
         }
+
+
+
 
         bestRoleImage1.setOnClickListener(new View.OnClickListener() {
             @Override
