@@ -2,6 +2,7 @@ package com.al286752.fenikkel.leagueoffenikkel;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class SplashScreen extends AppCompatActivity {
     IMyProfileModel myProfileModel;
 
     JSONObject champListByName;
+    MediaPlayer mp;
 
 
 
@@ -38,6 +40,8 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        mp = MediaPlayer.create(this, R.raw.load);
 
         showStatsModel = ShowStatsModel.getInstance(getApplicationContext());
 
@@ -138,15 +142,29 @@ public class SplashScreen extends AppCompatActivity {
                         startApp();
                     }
                 },
-                2000);
+                2500);
     }
 
     private void runAnimation()
     {
+
+
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        Log.i("tag", "This'll run 3000 milliseconds later");
+
+                        mp.start();
+                    }
+                },
+                900);
+
+
         @SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.splash_animation_text);
         a.reset();
         TextView tv = (TextView) findViewById(R.id.fenikkel);
         tv.clearAnimation();
+
         tv.startAnimation(a);
 
         @SuppressLint("ResourceType") Animation b = AnimationUtils.loadAnimation(this, R.animator.splash_animation_principal_circle);
@@ -154,6 +172,12 @@ public class SplashScreen extends AppCompatActivity {
         ImageView tv2 = (ImageView) findViewById(R.id.splashCircle);
         tv2.clearAnimation();
         tv2.startAnimation(b);
+
+        @SuppressLint("ResourceType") Animation traslate = AnimationUtils.loadAnimation(this, R.animator.particle1);
+        traslate.reset();
+        ImageView particle1 = (ImageView) findViewById(R.id.particle1);
+        particle1.clearAnimation();
+        particle1.startAnimation(traslate);
     }
 
     void startApp(){
