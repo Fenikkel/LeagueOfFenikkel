@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <scale
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:fromXScale="0.0"
+        android:toXScale="1.2"
+        android:fromYScale="0.0"
+        android:toYScale="1.2"
+        android:duration="700"/>
+    <scale
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="700"
+
+        android:fromXScale="1.2"
+        android:toXScale="0.833"
+        android:fromYScale="1.2"
+        android:toYScale="0.833"
+        android:duration="200"/>
+    <!--Funciona de forma que si amplies un 50%, despres 1.0 no significa el tamany original, sino desde la ultima modificacio! (osiga un 50% mes del original)-->
+
+</set>

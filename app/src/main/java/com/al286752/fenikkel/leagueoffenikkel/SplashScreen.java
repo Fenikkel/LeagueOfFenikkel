@@ -178,6 +178,12 @@ public class SplashScreen extends AppCompatActivity {
         ImageView particle1 = (ImageView) findViewById(R.id.particle1);
         particle1.clearAnimation();
         particle1.startAnimation(traslate);
+
+        @SuppressLint("ResourceType") Animation traslate2 = AnimationUtils.loadAnimation(this, R.animator.particle2);
+        traslate2.reset();
+        ImageView particle2 = (ImageView) findViewById(R.id.particle2);
+        particle2.clearAnimation();
+        particle2.startAnimation(traslate2);
     }
 
     void startApp(){
