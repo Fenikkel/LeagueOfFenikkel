@@ -102,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="@+id/statsImage"
         app:layout_constraintStart_toStartOf="@+id/statsImage"
         app:layout_constraintTop_toTopOf="@+id/statsImage"
-        app:srcCompat="@drawable/definitive_pick_button" />
+        app:srcCompat="@drawable/button_pick_definitive" />
 
     <TextView
         android:id="@+id/region"
