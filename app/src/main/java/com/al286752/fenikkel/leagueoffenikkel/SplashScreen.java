@@ -142,7 +142,7 @@ public class SplashScreen extends AppCompatActivity {
                         startApp();
                     }
                 },
-                2500);
+                2800);
     }
 
     private void runAnimation()
@@ -184,6 +184,24 @@ public class SplashScreen extends AppCompatActivity {
         ImageView particle2 = (ImageView) findViewById(R.id.particle2);
         particle2.clearAnimation();
         particle2.startAnimation(traslate2);
+
+        @SuppressLint("ResourceType") Animation traslate3 = AnimationUtils.loadAnimation(this, R.animator.particle3);
+        traslate3.reset();
+        ImageView particle3 = (ImageView) findViewById(R.id.particle3);
+        particle3.clearAnimation();
+        particle3.startAnimation(traslate3);
+
+        @SuppressLint("ResourceType") Animation traslate4 = AnimationUtils.loadAnimation(this, R.animator.particle4);
+        traslate4.reset();
+        ImageView particle4 = (ImageView) findViewById(R.id.particle4);
+        particle4.clearAnimation();
+        particle4.startAnimation(traslate4);
+
+        @SuppressLint("ResourceType") Animation traslate5 = AnimationUtils.loadAnimation(this, R.animator.particle);
+        traslate5.reset();
+        ImageView particle = (ImageView) findViewById(R.id.particle);
+        particle.clearAnimation();
+        particle.startAnimation(traslate5);
     }
 
     void startApp(){

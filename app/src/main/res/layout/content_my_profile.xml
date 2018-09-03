@@ -150,14 +150,15 @@
         android:shadowColor="#A8A8A8"
         android:shadowDx="0"
         android:shadowDy="0"
+
         android:shadowRadius="5"
         android:text="Masteries"
-
         android:textAllCaps="false"
         android:textColor="#eeeeee"
         android:textSize="10sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/info_button"
-        app:layout_constraintEnd_toStartOf="@+id/info_button" />
+        app:layout_constraintBottom_toBottomOf="@+id/info_button"
+        app:layout_constraintEnd_toStartOf="@+id/info_button"
+        app:layout_constraintTop_toTopOf="@+id/info_button" />
 
     <ImageView
         android:id="@+id/profileFrame"
