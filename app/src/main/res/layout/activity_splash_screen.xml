@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context="com.al286752.fenikkel.leagueoffenikkel.SplashScreen">
 
+    <ImageView
+        android:id="@+id/splashCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/fenikkel"
+        app:layout_constraintEnd_toEndOf="@+id/fenikkel"
+        app:layout_constraintStart_toStartOf="@+id/fenikkel"
+        app:layout_constraintTop_toTopOf="@+id/fenikkel"
+        app:srcCompat="@drawable/splash_circle_shape" />
+
     <TextView
         android:id="@+id/fenikkel"
         android:layout_width="wrap_content"
@@ -15,8 +25,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Fenikkel"
-        android:textSize="36sp"
+        android:textColor="@color/antiflashWhite"
 
+        android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

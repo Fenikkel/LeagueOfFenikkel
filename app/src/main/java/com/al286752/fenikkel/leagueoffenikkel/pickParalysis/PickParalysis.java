@@ -838,6 +838,10 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         showMasteryFilter(linea,tipo);
     }
 
+    public void onHelmetClick(View view){
+        onBackPressed();
+    }
+
 
     private void showMasteryFilter(ArrayList<String> linea, String tipo) {
 

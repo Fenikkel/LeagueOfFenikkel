@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
@@ -142,11 +143,17 @@ public class SplashScreen extends AppCompatActivity {
 
     private void runAnimation()
     {
-        @SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.fenikkel_animation);
+        @SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.splash_animation_text);
         a.reset();
         TextView tv = (TextView) findViewById(R.id.fenikkel);
         tv.clearAnimation();
         tv.startAnimation(a);
+
+        @SuppressLint("ResourceType") Animation b = AnimationUtils.loadAnimation(this, R.animator.splash_animation_principal_circle);
+        b.reset();
+        ImageView tv2 = (ImageView) findViewById(R.id.splashCircle);
+        tv2.clearAnimation();
+        tv2.startAnimation(b);
     }
 
     void startApp(){
