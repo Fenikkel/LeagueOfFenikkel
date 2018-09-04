@@ -171,4 +171,16 @@
         app:layout_constraintTop_toTopOf="@+id/profileImage"
         app:srcCompat="@drawable/square_frame" />
 
+    <ImageView
+        android:id="@+id/helpfulCursor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/profileImage"
+        app:layout_constraintTop_toTopOf="@+id/profileImage"
+        app:srcCompat="@drawable/cursor" />
+
 </android.support.constraint.ConstraintLayout>

@@ -1,11 +1,15 @@
 package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -109,6 +113,25 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
             }
             else{
                 profileImage.setImageResource(R.drawable.evil_teemo);
+                @SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.click_teemo);
+                a.reset();
+                //a.setRepeatCount(Animation.INFINITE);
+                //a.setRepeatMode(Animation.INFINITE);
+                final ImageView tv = (ImageView) findViewById(R.id.helpfulCursor);
+                tv.setVisibility(View.VISIBLE);
+                tv.clearAnimation();
+
+                tv.startAnimation(a);
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                Log.i("tag", "je je");
+
+                                tv.setVisibility(View.GONE);
+                            }
+                        },
+                        7500);
             }
 
             if(StaticData.getIdSummoner()!=null){
@@ -195,6 +218,30 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
                     Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
                 }
             });
+
+
+
+            @SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.click_teemo);
+            a.reset();
+            //a.setRepeatCount(Animation.INFINITE);
+            //a.setRepeatMode(Animation.INFINITE);
+            final ImageView tv = (ImageView) findViewById(R.id.helpfulCursor);
+            tv.setVisibility(View.VISIBLE);
+            tv.clearAnimation();
+
+            tv.startAnimation(a);
+
+            new android.os.Handler().postDelayed(
+                    new Runnable() {
+                        public void run() {
+                            Log.i("tag", "je je");
+
+                            tv.setVisibility(View.GONE);
+                        }
+                    },
+                    7500);
+
+
         }
 
         Button angryButton = (Button) findViewById(R.id.info_button);
@@ -205,6 +252,12 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         });
 
         //dialog.hide();
+
+
+
+
+
+
 
 
 
@@ -274,7 +327,13 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
     @Override
     public void onNickNameInput(String nickname) { //aci li passem del dialogo que pregunta el nickname al presenter
-        myProfilePresenter.onNickNameRequested(nickname);
+
+        //levar espais
+
+        String y;
+        y = nickname.replaceAll(" ", "").trim(); //trim lleva els espais de davant i darrere i replaceAll els del mig
+
+        myProfilePresenter.onNickNameRequested(y);
     }
 
     @Override
