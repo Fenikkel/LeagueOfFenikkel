@@ -118,7 +118,10 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
     private ShowStatsPresenter presenter;
 
+    public void onCursorPickPressed(View view){
 
+       onBackPressed();
+    }
     @Override
     public void onBackPressed() {
 

@@ -257,6 +257,9 @@ public class ChampMastery extends AppCompatActivity {
 
     }
 
+    public void onCursorMasteryPressed(View view){
+        onBackPressed();
+    }
 
     private void setChampionImage(String urlIcon) {
 

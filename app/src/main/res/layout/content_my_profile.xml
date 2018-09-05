@@ -176,11 +176,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginTop="50dp"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/profileImage"
         app:layout_constraintTop_toTopOf="@+id/profileImage"
         app:srcCompat="@drawable/cursor" />
+
+    <TextView
+        android:id="@+id/simbolText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="▼"
+        android:onClick="onRegionClick"
+        android:textColor="@color/antiflashWhite"
+        app:layout_constraintStart_toEndOf="@+id/region"
+        app:layout_constraintTop_toTopOf="@+id/region" />
 
 </android.support.constraint.ConstraintLayout>

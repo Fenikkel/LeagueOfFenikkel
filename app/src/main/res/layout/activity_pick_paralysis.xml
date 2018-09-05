@@ -710,6 +710,17 @@
             app:layout_constraintTop_toTopOf="@+id/skilledImage1"
             app:srcCompat="@drawable/m3" />
 
+        <ImageView
+            android:id="@+id/backCursorPick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="onCursorPickPressed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back_cursor" />
+
     </android.support.constraint.ConstraintLayout>
 
 </ScrollView>

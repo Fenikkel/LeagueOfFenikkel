@@ -1,7 +1,9 @@
 package com.al286752.fenikkel.leagueoffenikkel.myProfile;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -303,7 +306,60 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
     }
 
     public void onRegionClick(View view){
-        //this.switchToShowStats(StaticData.getSummonerName());//myProfilePresenter.getNickName()
+
+
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(MyProfileActivity.this);
+        builderSingle.setIcon(R.drawable.ward);
+        builderSingle.setTitle("Regions:-");
+
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MyProfileActivity.this, android.R.layout.select_dialog_singlechoice);
+        arrayAdapter.add("Europe West");
+        arrayAdapter.add("Europe Nordic & East");
+        arrayAdapter.add("North America");
+        arrayAdapter.add("Latin America North");
+        arrayAdapter.add("Latin America South ");
+        arrayAdapter.add("Brazil");
+        arrayAdapter.add("Turkey");
+        arrayAdapter.add("Russia");
+        arrayAdapter.add("Korea");
+        arrayAdapter.add("Japan");
+        arrayAdapter.add("Oceania");
+
+
+
+        builderSingle.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builderSingle.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                String[] key = {"EUW1","EUN1","NA1","LA1","LA2","BR1","TR1","RU","KR","JP1","OC1"}; //newest use NA1 and oldest use NA?
+                String[] acronym = {"EUW","EUNE","NA","LAN","LAS","BR","TR","RU","KR","JP","OCE"};
+
+                region.setText(acronym[which]);
+                StaticData.setRegion(key[which]);
+
+                String strName = arrayAdapter.getItem(which);
+                AlertDialog.Builder builderInner = new AlertDialog.Builder(MyProfileActivity.this);
+                builderInner.setMessage(acronym[which]);
+                builderInner.setTitle("Your Selected Item is");
+                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builderInner.show();
+            }
+        });
+        builderSingle.show();
+
+
     }
     public void onMasteryListClick(View view){
         this.switchToShowStats(StaticData.getSummonerName());//myProfilePresenter.getNickName()

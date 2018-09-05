@@ -27,7 +27,8 @@ public class StaticData {
     private static String sumonerLVL = "∞";
     private static String version;
     private static String currentVersion;
-    private static String region = "EUW";
+    private static String region = "EUW1";
+    private static String regionName = "EUW1";
 
     private static Bitmap summonerIcon = BitmapFactory.decodeResource(Resources.getSystem(),
             R.drawable.evil_teemo);
@@ -130,6 +131,14 @@ data:
     tokensEarned:	0
 
 */
+
+    public static String getRegionName() {
+        return regionName;
+    }
+
+    public static void setRegionName(String regionName) {
+        StaticData.regionName = regionName;
+    }
 
     public static ArrayList<Pair<String, Integer>> getAllIndividualMasteries() {
         return individualMasteries;
