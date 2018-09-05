@@ -53,4 +53,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/teemo_profile" />
 
+    <ImageView
+        android:id="@+id/backCursorList"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="onBackListClick"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_cursor" />
+
 </android.support.constraint.ConstraintLayout>

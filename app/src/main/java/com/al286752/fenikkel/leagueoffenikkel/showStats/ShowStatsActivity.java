@@ -36,6 +36,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
     public static final String ID_SUMMONER = "idSummoner";
 
     ImageView errorImg;
+    ImageView backList;
 
     ListView listMaestries;
     private ShowStatsPresenter presenter;
@@ -57,6 +58,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         idSum = intent.getStringExtra(ID_SUMMONER);
 
         errorImg=findViewById(R.id.imageErrorShow);
+        backList = findViewById(R.id.backCursorList);
 
         listMaestries = findViewById(R.id.maestriesList);
         if(StaticData.getMasteries().isEmpty()){
@@ -205,6 +207,9 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
         intento.putExtra(ChampMastery.SUMMONER, StaticData.getIdSummoner());
 
         startActivity(intento);
+    }
+    public void onBackListClick(View view){
+        onBackPressed();
     }
 
 
