@@ -41,6 +41,7 @@ public class AskNickNameDialog extends DialogFragment{
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(nickNameListener != null){
                             nickNameListener.onNickNameInput(nickNameEditor.getText().toString()); //aço se suposa que va a parar al MyProfileActivity i al seu metodo .onNickNameInput
+
                         }
                     }
                 })

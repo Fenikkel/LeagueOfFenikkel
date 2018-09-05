@@ -124,6 +124,7 @@ public class SplashScreen extends AppCompatActivity {
             StaticData.setIdSummoner(lista.get(0));
             StaticData.setVersion(lista.get(1));
             StaticData.setRegion(lista.get(2));
+            StaticData.setRegionName(lista.get(3));
 
             /*if(StaticData.getVersion()== version actual){
                 no descargamos los campeones

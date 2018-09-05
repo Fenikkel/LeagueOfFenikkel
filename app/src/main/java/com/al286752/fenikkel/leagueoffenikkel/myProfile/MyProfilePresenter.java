@@ -69,7 +69,7 @@ public class MyProfilePresenter  {
 
         myProfileView.setSummonerIcon(urlIcon);
 
-        myProfileModel.insertCurrentSummoner((int)idSummoner,StaticData.getVersion(), StaticData.getRegion());//
+        myProfileModel.insertCurrentSummoner((int)idSummoner,StaticData.getVersion(), StaticData.getRegion(), StaticData.getRegionName());//
 
 
     }

@@ -22,6 +22,7 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
     private static final String INTEGER = "integer";
     private static final String LAST_VERSION = "LASTVERSION";
     private static final String REGION = "REGION";
+    private static final String REGION_NAME = "REGIONNAME";
     private static final String TEXT = "text";
     private static final String NOT_NULL = "not null";
     private static final String SUMMONER_ID = "SUMMONERID";
@@ -30,6 +31,7 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
 
     private static final String DB_NAME = "pickparalisis.db";
     private static final int DB_VERSION = 1;//para comprobar si ha habido cambios
+
 
     public DataBase(Context context){
         super(context, DB_NAME, null, DB_VERSION);
@@ -62,7 +64,8 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
         String create = CREATE_TABLE + " " + START + " ("
                         + SUMMONER_ID + " " + INTEGER+ " " + PRIMARY_KEY_NOT_NULL+ ", "
                         + LAST_VERSION + " " + TEXT + " " + NOT_NULL + ", "
-                        + REGION + " " + TEXT + " " + NOT_NULL + ");";
+                        + REGION + " " + TEXT + " " + NOT_NULL + ","
+                        + REGION_NAME + " " + TEXT + " " + NOT_NULL + ");";
 
         db.execSQL(create);
     }
@@ -89,11 +92,13 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
             String idSummoner = String.valueOf(cursor.getInt(0));
             String lastVersion = cursor.getString(1);
             String region = cursor.getString(2);
+            String regionName = cursor.getString(3);
 
 
             lista.add(idSummoner); //ho pase a String pero despres necessitare int a lo millor
             lista.add(lastVersion); //LASTVERSION
             lista.add(region); //REGION
+            lista.add(regionName); //REGIONNAME
 
             //deleteCurrentSummoner();
 
@@ -113,18 +118,18 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
 
     }
 
-    public void insertCurrentSummoner(int summonerID, String lastVersion, String region){
+    public void insertCurrentSummoner(int summonerID, String lastVersion, String region, String regionName){
         SQLiteDatabase db = getWritableDatabase();
 
         //miramos si ya esta insertado
         Cursor cursor = db.query(START,null,null,null,null,null, null);
         if(cursor!=null && cursor.getCount()==1){
             cursor.moveToNext();// cursor.moveToFirst()
-            if(cursor.getInt(0)== summonerID && cursor.getString(1)== lastVersion && cursor.getString(2)== region){
+            if(cursor.getInt(0)== summonerID && cursor.getString(1)== lastVersion && cursor.getString(2)== region && cursor.getString(3)== regionName){
                 return;
             }else{
                 deleteCurrentSummoner();
-                insertCurrentSummoner(summonerID,lastVersion,region);
+                insertCurrentSummoner(summonerID,lastVersion,region, regionName);
             }
         }
 
@@ -138,6 +143,7 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
             contentValues.put(SUMMONER_ID,summonerID); // han de ser las claves que hemos utilizado en la tabla
             contentValues.put(LAST_VERSION,lastVersion);
             contentValues.put(REGION,region);
+            contentValues.put(REGION_NAME,regionName);
 
             db.insertWithOnConflict(START,null,contentValues,SQLiteDatabase.CONFLICT_REPLACE); // tabla, a saber, lo que añadimos, si ya esta(la key) en db, remplazamos
         }

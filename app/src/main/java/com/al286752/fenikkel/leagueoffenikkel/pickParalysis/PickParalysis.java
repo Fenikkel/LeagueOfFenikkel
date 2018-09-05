@@ -2,10 +2,12 @@ package com.al286752.fenikkel.leagueoffenikkel.pickParalysis;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
@@ -621,8 +623,20 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
                 if(response.size()==0){
 
 
-                    View parentLayout = findViewById(android.R.id.content);
-                    Snackbar.make(parentLayout, "This summoner don't have any mastery", Snackbar.LENGTH_LONG).show();
+                    /*View parentLayout = findViewById(android.R.id.content);
+                    Snackbar.make(parentLayout, "This summoner don't have any mastery", Snackbar.LENGTH_LONG).show();*/
+
+                    AlertDialog.Builder builderInner = new AlertDialog.Builder(PickParalysis.this);
+                    builderInner.setMessage("This summoner don't have any mastery, he hasn't played for a long time ^^'");
+                    builderInner.setTitle("Sorry");
+                    builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog,int which) {
+                            dialog.dismiss();
+                            onBackPressed();
+                        }
+                    });
+                    builderInner.show();
 
                     //onBackPressed(); //demanaria massa vegades champ mastery i fotria la API
                     return; //si es algu que porta molt de temps sense jugar i no te maestria en res

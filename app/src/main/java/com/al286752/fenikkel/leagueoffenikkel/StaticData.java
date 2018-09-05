@@ -23,7 +23,7 @@ public class StaticData {
     //PROFILE
 
     private static String idSummoner;
-    private static String summonerName = "The evil";
+    private static String summonerName = "The evil"; //com esta ara mateixa, no tindra espais elsummonerName
     private static String sumonerLVL = "∞";
     private static String version;
     private static String currentVersion;

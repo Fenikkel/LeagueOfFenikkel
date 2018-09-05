@@ -167,7 +167,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
                     setSummonerIcon(urlIcon);
 
-                    myProfileModel.insertCurrentSummoner(Integer.parseInt(StaticData.getIdSummoner()),StaticData.getVersion(), StaticData.getRegion());//
+                    myProfileModel.insertCurrentSummoner(Integer.parseInt(StaticData.getIdSummoner()),StaticData.getVersion(), StaticData.getRegion(), StaticData.getRegionName());//
                 }
 
                 @Override
@@ -177,7 +177,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
             });
 
 
-            region.setText(StaticData.getRegion());
+            region.setText(StaticData.getRegionName());
 
 
             //si aço es tret per db tenim que traure campeons tambe CUIDAOOOOOOOOOOOOOOOO
@@ -310,7 +310,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
         AlertDialog.Builder builderSingle = new AlertDialog.Builder(MyProfileActivity.this);
         builderSingle.setIcon(R.drawable.ward);
-        builderSingle.setTitle("Regions:-");
+        builderSingle.setTitle("Regions:");
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MyProfileActivity.this, android.R.layout.select_dialog_singlechoice);
         arrayAdapter.add("Europe West");
@@ -338,12 +338,17 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                String[] key = {"EUW1","EUN1","NA1","LA1","LA2","BR1","TR1","RU","KR","JP1","OC1"}; //newest use NA1 and oldest use NA?
+                String[] key = {"euw1","eun1","na1","la1","la2","br1","tr1","ru","kr","jp1","oc1"}; //newest use NA1 and oldest use NA?
                 String[] acronym = {"EUW","EUNE","NA","LAN","LAS","BR","TR","RU","KR","JP","OCE"};
 
                 region.setText(acronym[which]);
+                StaticData.setRegionName(acronym[which]);
                 StaticData.setRegion(key[which]);
 
+                if(!(StaticData.getSummonerName().equals("The evil")) && StaticData.getSummonerName()!=null){
+                    myProfilePresenter.onNickNameRequested(StaticData.getSummonerName());
+                }
+/*
                 String strName = arrayAdapter.getItem(which);
                 AlertDialog.Builder builderInner = new AlertDialog.Builder(MyProfileActivity.this);
                 builderInner.setMessage(acronym[which]);
@@ -354,7 +359,9 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
                         dialog.dismiss();
                     }
                 });
-                builderInner.show();
+                builderInner.show();*/
+
+
             }
         });
         builderSingle.show();
@@ -388,6 +395,8 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
         String y;
         y = nickname.replaceAll(" ", "").trim(); //trim lleva els espais de davant i darrere i replaceAll els del mig
+
+        StaticData.setSummonerName(y);
 
         myProfilePresenter.onNickNameRequested(y);
     }
@@ -431,7 +440,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
             snackString = "Internal server error";
         }
         else if(error.equals("404")){
-            snackString = "This summoner doesn't exist(or is an inactive player)";
+            snackString = "This summoner doesn't exist(or is an inactive player). Try other region maybe?";
         }
         else if(error.equals("429")){
             snackString = "We reached the limit of requests! We are sorry :(";
@@ -476,7 +485,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         super.onSaveInstanceState(outState);
         outState.putString("SummonerName",StaticData.getSummonerName());
         outState.putString("SummonerLVL",StaticData.getSumonerLVL());
-        outState.putString("Region",StaticData.getRegion());
+        outState.putString("Region",StaticData.getRegionName());
 
 
     }

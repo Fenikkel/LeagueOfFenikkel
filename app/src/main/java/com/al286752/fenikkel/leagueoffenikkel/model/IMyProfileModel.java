@@ -16,7 +16,7 @@ public interface IMyProfileModel {
 
     void findSummoner(String nickname, ResponseReceiver<JSONObject> reciever);
     String getUrlIcon(int idIcon);
-    void insertCurrentSummoner(int summonerID, String lastVersion, String region);
+    void insertCurrentSummoner(int summonerID, String lastVersion, String region, String regionName);
     ArrayList<String> getCurrentSummoner();
     boolean deleteCurrentSummoner();
     void findSummonerByID(String summonerID, ResponseReceiver<JSONObject> responseReceiver);

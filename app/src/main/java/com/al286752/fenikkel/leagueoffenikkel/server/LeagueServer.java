@@ -27,7 +27,8 @@ public class LeagueServer implements ILeagueServer {
     //falta ficar la regio
 
     //private  String defaultRegion = "euw1";
-    private static final String BASE_URL = "https://euw1.api.riotgames.com";
+    private static final String HTTPS = "https://";
+    private static final String BASE_URL = ".api.riotgames.com";
     private static final String API_KEY = "?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae";
     private static final String SEARCH_SUMMONER = "/lol/summoner/v3/summoners/by-name/"; //aci falta sumarli el nickname + la API_KEY
     private static final String SEARCH_SUMMONER_BY_ID = "/lol/summoner/v3/summoners/";
@@ -97,7 +98,7 @@ public class LeagueServer implements ILeagueServer {
             nickEncoded = nickName;
         }
 
-        String urlPetition =BASE_URL+SEARCH_SUMMONER+nickEncoded+API_KEY;
+        String urlPetition =HTTPS+ StaticData.getRegion()+BASE_URL+SEARCH_SUMMONER+nickEncoded+API_KEY;
 
 
         DownloadTask downloadTask =  new DownloadTask(urlPetition, new DownloadCallback<String>() {
@@ -136,7 +137,7 @@ public class LeagueServer implements ILeagueServer {
 
     @Override
     public void findSummonerByID(String summonerId, final ResponseReceiver<JSONObject> responseReceiver) {
-        String urlPetition =BASE_URL+SEARCH_SUMMONER_BY_ID+summonerId+API_KEY;
+        String urlPetition =HTTPS+StaticData.getRegion()+BASE_URL+SEARCH_SUMMONER_BY_ID+summonerId+API_KEY;
 
 
         DownloadTask downloadTask =  new DownloadTask(urlPetition, new DownloadCallback<String>() {
@@ -180,7 +181,7 @@ public class LeagueServer implements ILeagueServer {
 
     @Override
     public void findMaestries(String sumID, final ResponseReceiver<JSONArray> reciever) {
-        String urlMaestries = BASE_URL+SEARCH_MAESTRIES+sumID+API_KEY;
+        String urlMaestries = HTTPS+StaticData.getRegion()+BASE_URL+SEARCH_MAESTRIES+sumID+API_KEY;
 
         DownloadTask downloadTask =  new DownloadTask(urlMaestries, new DownloadCallback<String>() {
             @Override
@@ -262,9 +263,9 @@ public class LeagueServer implements ILeagueServer {
 
 
     @Override
-    public void getChampions(final ResponseReceiver<JSONObject> responseReceiver) {
+    public void getChampions(final ResponseReceiver<JSONObject> responseReceiver) { //CUIDAU AÇO ESTA DEPRECATED! NO ESTA BEN FICAT LA REGIO EN "CHAMPIONS"
 
-        DownloadTask downloadTask =  new DownloadTask(CHAMPIONS, new DownloadCallback<String>() {
+        DownloadTask downloadTask =  new DownloadTask(CHAMPIONS, new DownloadCallback<String>() {//CUIDAO NO ESTA BEN FICA LA REGIO EN "CHAMPIONS"
             @Override
             public void updateFromDownload(String result) {
                 try {
@@ -302,7 +303,7 @@ public class LeagueServer implements ILeagueServer {
     public void getChampionMastery(String summId, String champId, final ResponseReceiver<JSONObject> receiver) {
         ///lol/champion-mastery/v3/champion-masteries/by-summoner/{summonerId}/by-champion/{championId}
 
-        String url = BASE_URL+SEARCH_MAESTRIES+summId+BY_CHAMPION+champId+API_KEY;
+        String url = HTTPS+ StaticData.getRegion()+BASE_URL+SEARCH_MAESTRIES+summId+BY_CHAMPION+champId+API_KEY;
 
 
         DownloadTask downloadTask =  new DownloadTask(url, new DownloadCallback<String>() {

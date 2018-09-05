@@ -56,9 +56,11 @@ public class MyProfileModel implements IMyProfileModel, IDataBase {
         return leagueServer.getUrlIcon(idIcon);
     }
 
+
+
     @Override
-    public void insertCurrentSummoner(int summonerID, String lastVersion, String region) {
-        dataBase.insertCurrentSummoner(summonerID,lastVersion,region);
+    public void insertCurrentSummoner(int summonerID, String lastVersion, String region,String regionName) {
+        dataBase.insertCurrentSummoner(summonerID,lastVersion,region, regionName);
     }
 
     @Override
