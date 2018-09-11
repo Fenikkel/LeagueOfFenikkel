@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -216,6 +217,11 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
 
+        setAlphaAnimation(supportImage);
+        setAlphaAnimation(marksmanImage);
+        setAlphaAnimation(topImage);
+        setAlphaAnimation(midImage);
+        setAlphaAnimation(jungleImage);
 
 
 
@@ -668,20 +674,36 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
     }
 
+    public static void setReverseAlphaAnimation(View v) {
+
+        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(v, "alpha", 1f, 0.0f);
+        fadeOut.setDuration(300);
+
+        final AnimatorSet mAnimationSet = new AnimatorSet();
+
+        mAnimationSet.play(fadeOut);//.after(fadeOut);
+
+        mAnimationSet.start();
+
+    }
+
     public static void setAlphaAnimation(View v) {
         /*ObjectAnimator fadeOut = ObjectAnimator.ofFloat(v, "alpha",  1f, .3f);
         fadeOut.setDuration(2000);*/
 
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1f);
-        fadeIn.setDuration(1000);
+        fadeIn.setDuration(400);
 
-        ObjectAnimator moveIn = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1f);
-        moveIn.setDuration(1500);
 
-        float targetY = 700f;
+        //v.setVisibility(View.VISIBLE);
 
-        ObjectAnimator y = ObjectAnimator.ofFloat(v,
-                "translationY", v.getY()-targetY, v.getY());
+        /*ObjectAnimator moveIn = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1f);
+        moveIn.setDuration(1500);*/
+
+        //float targetY = 700f;
+
+        /*ObjectAnimator y = ObjectAnimator.ofFloat(v,
+                "translationY", v.getY()-targetY, v.getY());*/
 
         /*ObjectAnimator x = ObjectAnimator.ofFloat(v,
                 "translationX", v.getX(), targetX);
@@ -691,8 +713,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         final AnimatorSet mAnimationSet = new AnimatorSet();
 
-        mAnimationSet.playTogether(fadeIn,y);//.after(fadeOut);
-        mAnimationSet.setInterpolator(new LinearInterpolator());
+        mAnimationSet.play(fadeIn);//.after(fadeOut);
+        //mAnimationSet.setInterpolator(new LinearInterpolator());
 
         /*mAnimationSet.addListener(new AnimatorListenerAdapter() { //QUE FER QUAN L'ANIMACIÓ ACABA
             @Override
@@ -702,6 +724,16 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             }
         });*/
         mAnimationSet.start();
+
+        /*
+        int targetY =(int)v.getY();
+
+        Animation animation = new TranslateAnimation(0,0,0,targetY);
+
+        animation.setDuration(1000);
+        //animation.setFillAfter(true);
+        v.startAnimation(animation);
+        */
     }
 
     private void switchToChampMastery(Pair<String,Integer> pareja) {
@@ -806,6 +838,24 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
         linea.add("Tank");
         linea.add("Fighter");
+
+        setReverseAlphaAnimation(midImage);
+        setReverseAlphaAnimation(jungleImage);
+        setReverseAlphaAnimation(topImage);
+        setReverseAlphaAnimation(marksmanImage);
+        setReverseAlphaAnimation(supportImage);
+
+        setAlphaAnimation(apImage);
+        setAlphaAnimation(adImage);
+        setAlphaAnimation(defenseImage);
+        setAlphaAnimation(mixImage);
+        setAlphaAnimation(helmetBro);
+
+        setAlphaAnimation(apText);
+        setAlphaAnimation(adText);
+        setAlphaAnimation(tankText);
+        setAlphaAnimation(mixText);
+
     }
 
     public void onMidClick(View view){
@@ -827,6 +877,23 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mixText.setVisibility(View.VISIBLE);
         linea.add("Mage");
         linea.add("Assassin");
+
+        setReverseAlphaAnimation(midImage);
+        setReverseAlphaAnimation(jungleImage);
+        setReverseAlphaAnimation(topImage);
+        setReverseAlphaAnimation(marksmanImage);
+        setReverseAlphaAnimation(supportImage);
+
+        setAlphaAnimation(apImage);
+        setAlphaAnimation(adImage);
+        setAlphaAnimation(defenseImage);
+        setAlphaAnimation(mixImage);
+        setAlphaAnimation(helmetBro);
+
+        setAlphaAnimation(apText);
+        setAlphaAnimation(adText);
+        setAlphaAnimation(tankText);
+        setAlphaAnimation(mixText);
     }
     public void onJungleClick(View view){
         marksmanImage.setVisibility(View.GONE);
@@ -847,6 +914,23 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mixText.setVisibility(View.VISIBLE);
         linea.add("Fighter");
         //linea.add("Assasin");
+
+        setReverseAlphaAnimation(midImage);
+        setReverseAlphaAnimation(jungleImage);
+        setReverseAlphaAnimation(topImage);
+        setReverseAlphaAnimation(marksmanImage);
+        setReverseAlphaAnimation(supportImage);
+
+        setAlphaAnimation(apImage);
+        setAlphaAnimation(adImage);
+        setAlphaAnimation(defenseImage);
+        setAlphaAnimation(mixImage);
+        setAlphaAnimation(helmetBro);
+
+        setAlphaAnimation(apText);
+        setAlphaAnimation(adText);
+        setAlphaAnimation(tankText);
+        setAlphaAnimation(mixText);
     }
 
     public void onMarksmanClick(View view){
@@ -869,6 +953,23 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
         linea.add("Marksman");
+
+        setReverseAlphaAnimation(midImage);
+        setReverseAlphaAnimation(jungleImage);
+        setReverseAlphaAnimation(topImage);
+        setReverseAlphaAnimation(marksmanImage);
+        setReverseAlphaAnimation(supportImage);
+
+        setAlphaAnimation(apImage);
+        setAlphaAnimation(adImage);
+        setAlphaAnimation(defenseImage);
+        setAlphaAnimation(mixImage);
+        setAlphaAnimation(helmetBro);
+
+        setAlphaAnimation(apText);
+        setAlphaAnimation(adText);
+        setAlphaAnimation(tankText);
+        setAlphaAnimation(mixText);
 
         //mostPlayedText.setText(StaticData.getChampMapByID().get("106").toString());
 
@@ -893,6 +994,23 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mixText.setVisibility(View.VISIBLE);
         linea.add("Support");
 
+        setReverseAlphaAnimation(midImage);
+        setReverseAlphaAnimation(jungleImage);
+        setReverseAlphaAnimation(topImage);
+        setReverseAlphaAnimation(marksmanImage);
+        setReverseAlphaAnimation(supportImage);
+
+        setAlphaAnimation(apImage);
+        setAlphaAnimation(adImage);
+        setAlphaAnimation(defenseImage);
+        setAlphaAnimation(mixImage);
+        setAlphaAnimation(helmetBro);
+
+        setAlphaAnimation(apText);
+        setAlphaAnimation(adText);
+        setAlphaAnimation(tankText);
+        setAlphaAnimation(mixText);
+
         //mostPlayedText.setText(StaticData.getChampMapByID().get("106").toString());
 
 
@@ -912,6 +1030,19 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mixText.setVisibility(View.GONE);
         tipo = "AP";
 
+
+
+        setReverseAlphaAnimation(apImage);
+        setReverseAlphaAnimation(adImage);
+        setReverseAlphaAnimation(defenseImage);
+        setReverseAlphaAnimation(mixImage);
+        setReverseAlphaAnimation(helmetBro);
+
+        setReverseAlphaAnimation(apText);
+        setReverseAlphaAnimation(adText);
+        setReverseAlphaAnimation(tankText);
+        setReverseAlphaAnimation(mixText);
+
         showMasteryFilter(linea,tipo);
     }
 
@@ -929,7 +1060,20 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mixText.setVisibility(View.GONE);
         tipo = "defense";
 
+        setReverseAlphaAnimation(apImage);
+        setReverseAlphaAnimation(adImage);
+        setReverseAlphaAnimation(defenseImage);
+        setReverseAlphaAnimation(mixImage);
+        setReverseAlphaAnimation(helmetBro);
+
+        setReverseAlphaAnimation(apText);
+        setReverseAlphaAnimation(adText);
+        setReverseAlphaAnimation(tankText);
+        setReverseAlphaAnimation(mixText);
+
         showMasteryFilter(linea,tipo);
+
+
     }
 
     public void onADClick(View view){
@@ -946,7 +1090,20 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mixText.setVisibility(View.GONE);
         tipo = "AD";
 
+        setReverseAlphaAnimation(apImage);
+        setReverseAlphaAnimation(adImage);
+        setReverseAlphaAnimation(defenseImage);
+        setReverseAlphaAnimation(mixImage);
+        setReverseAlphaAnimation(helmetBro);
+
+        setReverseAlphaAnimation(apText);
+        setReverseAlphaAnimation(adText);
+        setReverseAlphaAnimation(tankText);
+        setReverseAlphaAnimation(mixText);
+
         showMasteryFilter(linea,tipo);
+
+
     }
 
     public void onMixClick(View view){
@@ -963,7 +1120,20 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         mixText.setVisibility(View.GONE);
         tipo = "MIX";
 
+
+        setReverseAlphaAnimation(apImage);
+        setReverseAlphaAnimation(adImage);
+        setReverseAlphaAnimation(defenseImage);
+        setReverseAlphaAnimation(mixImage);
+        setReverseAlphaAnimation(helmetBro);
+
+        setReverseAlphaAnimation(apText);
+        setReverseAlphaAnimation(adText);
+        setReverseAlphaAnimation(tankText);
+        setReverseAlphaAnimation(mixText);
+
         showMasteryFilter(linea,tipo);
+
     }
 
     public void onHelmetClick(View view){
@@ -1391,6 +1561,44 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         skilledImage1.setVisibility(View.VISIBLE);
         skilledImage2.setVisibility(View.VISIBLE);
         skilledImage3.setVisibility(View.VISIBLE);
+
+        setAlphaAnimation(laneText);
+        setAlphaAnimation(bestRoleText);
+        setAlphaAnimation(lessPlayedText);
+        setAlphaAnimation(mostPlayedText);
+        setAlphaAnimation(easiestText);
+        setAlphaAnimation(skilledText);
+        setAlphaAnimation(bestRoleImage1);
+        setAlphaAnimation(bestRoleImage2);
+        setAlphaAnimation(bestRoleImage3);
+        setAlphaAnimation(mostPlayedImage1);
+        setAlphaAnimation(mostPlayedImage2);
+        setAlphaAnimation(mostPlayedImage3);
+        setAlphaAnimation(lessPlayedImage1);
+        setAlphaAnimation(lessPlayedImage2);
+        setAlphaAnimation(lessPlayedImage3);
+        setAlphaAnimation(easiestImage1);
+        setAlphaAnimation(easiestImage2);
+        setAlphaAnimation(easiestImage3);
+        setAlphaAnimation(skilledImage1);
+        setAlphaAnimation(skilledImage2);
+        setAlphaAnimation(skilledImage3);
+
+        setAlphaAnimation(bestRoleShield1);
+        setAlphaAnimation(bestRoleShield2);
+        setAlphaAnimation(bestRoleShield3);
+        setAlphaAnimation(mostPlayedShield1);
+        setAlphaAnimation(mostPlayedShield2);
+        setAlphaAnimation(mostPlayedShield3);
+        setAlphaAnimation(lessPlayedShield1);
+        setAlphaAnimation(lessPlayedShield2);
+        setAlphaAnimation(lessPlayedShield3);
+        setAlphaAnimation(easiestShield1);
+        setAlphaAnimation(easiestShield2);
+        setAlphaAnimation(easiestShield3);
+        setAlphaAnimation(skilledShield1);
+        setAlphaAnimation(skilledShield2);
+        setAlphaAnimation(skilledShield3);
 
 
 
