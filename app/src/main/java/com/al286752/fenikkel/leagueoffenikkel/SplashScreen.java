@@ -1,9 +1,14 @@
 package com.al286752.fenikkel.leagueoffenikkel;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +21,7 @@ import com.al286752.fenikkel.leagueoffenikkel.model.IMyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.myProfile.MyProfileActivity;
+import com.al286752.fenikkel.leagueoffenikkel.server.DownloadCallback;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
 
 import org.json.JSONException;
@@ -35,6 +41,9 @@ public class SplashScreen extends AppCompatActivity {
     JSONObject champListByName;
     MediaPlayer mp;
 
+    DownloadCallback<String> downloadCallback;
+
+    private static final String NETWORK_NOT_CONNECTED = "Network not connected";
 
 
     @Override
@@ -45,23 +54,51 @@ public class SplashScreen extends AppCompatActivity {
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         mp = MediaPlayer.create(this, R.raw.load);
+        //downloadCallback = new DownloadCallback<String>();
 
         showStatsModel = ShowStatsModel.getInstance(getApplicationContext());
 
         myProfileModel = MyProfileModel.getInstance(getApplicationContext());
 
 
-        showStatsModel.getVersion(new ResponseReceiver<String>() {
-            @Override
-            public void onResponseReceived(String response) {
-                StaticData.setCurrentVersion(response);
-            }
+        final boolean networkInfo = Utils.isConnected(getApplicationContext());//DownloadCallback.getActiveNetworkInfo();//.getActiveNetworkInfo();
 
-            @Override
-            public void onErrorReceived(String message) {
+        if (!networkInfo) {
 
-            }
-        });//ho guarda en static data (current version)
+            AlertDialog.Builder builderInner = new AlertDialog.Builder(this);
+            builderInner.setMessage(NETWORK_NOT_CONNECTED);
+            builderInner.setTitle("This app needs Internet for work sorry");
+            builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog,int which) {
+                    dialog.dismiss();
+                    System.exit(0);
+                }
+            });
+            //eliminar la database i que no sen vaja del splash screen
+            myProfileModel.deleteCurrentSummoner();
+            builderInner.show();
+
+        }
+        else{
+            /*showStatsModel.getVersion(new ResponseReceiver<String>() {
+                @Override
+                public void onResponseReceived(String response) {
+                    StaticData.setCurrentVersion(response);
+                }
+
+                @Override
+                public void onErrorReceived(String message) {
+
+                }
+            });//ho guarda en static data (current version)*/
+        }
+
+
+
+
+
+
 
 
 
@@ -142,8 +179,10 @@ public class SplashScreen extends AppCompatActivity {
                 new Runnable() {
                     public void run() {
                         Log.i("tag", "This'll run 3000 milliseconds later");
+                        if(networkInfo){
+                            startApp();
+                        }
 
-                        startApp();
                     }
                 },
                 2800);

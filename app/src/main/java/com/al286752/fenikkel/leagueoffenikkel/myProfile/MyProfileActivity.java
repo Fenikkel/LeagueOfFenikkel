@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.al286752.fenikkel.leagueoffenikkel.InfoActivity;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
+import com.al286752.fenikkel.leagueoffenikkel.Utils;
 import com.al286752.fenikkel.leagueoffenikkel.model.MyProfileModel;
 import com.al286752.fenikkel.leagueoffenikkel.model.ShowStatsModel;
 import com.al286752.fenikkel.leagueoffenikkel.pickParalysis.PickParalysis;
@@ -152,75 +153,123 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
 
             //SI STATIC DATA == NULL PUES POSEM -1 A IDSUMMONER SINO POSEM STATIC DATA
 
-            myProfileModel.findSummonerByID(StaticData.getIdSummoner(), new ResponseReceiver<JSONObject>() {
-                @Override
-                public void onResponseReceived(JSONObject response) {
-                    //nicknameText.setText(response.optString("name"));
-                    //StaticData.setSummonerName(response.optString("name"));
-                    //lvltext.setText(String.valueOf(response.optLong("summonerLevel")));
-                    //StaticData.setSumonerLVL(String.valueOf(response.optLong("summonerLevel")));
-                    //setSummonerIcon(String.valueOf(response.optInt("profileIconId")));
-                    setNicknameText(response.optString("name"),response.optLong("summonerLevel"), Long.parseLong(StaticData.getIdSummoner()));
 
 
-                    String urlIcon = myProfileModel.getUrlIcon(response.optInt("profileIconId"));
 
-                    setSummonerIcon(urlIcon);
+            boolean networkInfo = Utils.isConnected(getApplicationContext());//DownloadCallback.getActiveNetworkInfo();//.getActiveNetworkInfo();
 
-                    myProfileModel.insertCurrentSummoner(Integer.parseInt(StaticData.getIdSummoner()),StaticData.getVersion(), StaticData.getRegion(), StaticData.getRegionName());//
-                }
+            if (!networkInfo) {
 
-                @Override
-                public void onErrorReceived(String message) {
-                        showError(message);
-                }
-            });
-
-
-            region.setText(StaticData.getRegionName());
-
-
-            //si aço es tret per db tenim que traure campeons tambe CUIDAOOOOOOOOOOOOOOOO
-            showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
-                @Override
-                public void onResponseReceived(JSONObject response) {
-                    if(response!=null){
-                        processChampions(response);
-                    }else {
-                        View parentLayout = findViewById(android.R.id.content);
-                        Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
+                AlertDialog.Builder builderInner = new AlertDialog.Builder(this);
+                builderInner.setMessage("Network not connected");
+                builderInner.setTitle("This app needs Internet for work sorry");
+                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        dialog.dismiss();
+                        finishAffinity();
+                        //System.exit(0);
                     }
-                }
+                });
+                //eliminar la database i que no sen vaja del splash screen
+                myProfileModel.deleteCurrentSummoner();
+                builderInner.show();
 
-                @Override
-                public void onErrorReceived(String message) {
-                    View parentLayout = findViewById(android.R.id.content);
-                    Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
-                }
-            });
+            }else{
+
+                myProfileModel.findSummonerByID(StaticData.getIdSummoner(), new ResponseReceiver<JSONObject>() {
+                    @Override
+                    public void onResponseReceived(JSONObject response) {
+                        //nicknameText.setText(response.optString("name"));
+                        //StaticData.setSummonerName(response.optString("name"));
+                        //lvltext.setText(String.valueOf(response.optLong("summonerLevel")));
+                        //StaticData.setSumonerLVL(String.valueOf(response.optLong("summonerLevel")));
+                        //setSummonerIcon(String.valueOf(response.optInt("profileIconId")));
+                        setNicknameText(response.optString("name"),response.optLong("summonerLevel"), Long.parseLong(StaticData.getIdSummoner()));
+
+
+                        String urlIcon = myProfileModel.getUrlIcon(response.optInt("profileIconId"));
+
+                        setSummonerIcon(urlIcon);
+
+                        myProfileModel.insertCurrentSummoner(Integer.parseInt(StaticData.getIdSummoner()),StaticData.getVersion(), StaticData.getRegion(), StaticData.getRegionName());//
+                    }
+
+                    @Override
+                    public void onErrorReceived(String message) {
+                        showError(message);
+                    }
+                });
+
+
+                region.setText(StaticData.getRegionName());
+
+                //si aço es tret per db tenim que traure campeons tambe CUIDAOOOOOOOOOOOOOOOO
+                showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
+                    @Override
+                    public void onResponseReceived(JSONObject response) {
+                        if(response!=null){
+                            processChampions(response);
+                        }else {
+                            View parentLayout = findViewById(android.R.id.content);
+                            Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onErrorReceived(String message) {
+                        View parentLayout = findViewById(android.R.id.content);
+                        Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+
 
 
         }
         else{
             //(StaticData.getIdSummoner()==null)
             //fiquem teemo per primera vegada
-            showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
-                @Override
-                public void onResponseReceived(JSONObject response) {
-                    if(response!=null){
-                        processChampions(response);
-                    }else {
-                        View parentLayout = findViewById(android.R.id.content);
-                        Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
-                    }
-                }
+            boolean networkInfo = Utils.isConnected(getApplicationContext());
+            if (!networkInfo) {
 
-                @Override
-                public void onErrorReceived(String message) {
-                    View parentLayout = findViewById(android.R.id.content);
-                    Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
-                }
-            });
+                AlertDialog.Builder builderInner = new AlertDialog.Builder(this);
+                builderInner.setMessage("Network not connected");
+                builderInner.setTitle("This app needs Internet for work sorry");
+                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        dialog.dismiss();
+                        System.exit(0);
+                    }
+                });
+                //eliminar la database i que no sen vaja del splash screen
+                myProfileModel.deleteCurrentSummoner();
+                builderInner.show();
+
+            }
+            else{
+                showStatsModel.getChampionsByID(new ResponseReceiver<JSONObject>() {
+                    @Override
+                    public void onResponseReceived(JSONObject response) {
+                        if(response!=null){
+                            processChampions(response);
+                        }else {
+                            View parentLayout = findViewById(android.R.id.content);
+                            Snackbar.make(parentLayout, "Server error: Server busy", Snackbar.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onErrorReceived(String message) {
+                        View parentLayout = findViewById(android.R.id.content);
+                        Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+
 
 
 

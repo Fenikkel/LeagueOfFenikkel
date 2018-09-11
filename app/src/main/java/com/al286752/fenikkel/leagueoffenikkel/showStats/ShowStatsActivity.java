@@ -1,5 +1,7 @@
 package com.al286752.fenikkel.leagueoffenikkel.showStats;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
+import com.al286752.fenikkel.leagueoffenikkel.Utils;
 import com.al286752.fenikkel.leagueoffenikkel.champMastery.ChampMastery;
 
 import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
@@ -62,7 +65,30 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
         listMaestries = findViewById(R.id.maestriesList);
         if(StaticData.getMasteries().isEmpty()){
-            findMaestries();
+
+            boolean networkInfo = Utils.isConnected(getApplicationContext());//DownloadCallback.getActiveNetworkInfo();//.getActiveNetworkInfo();
+
+            if (!networkInfo) {
+
+                AlertDialog.Builder builderInner = new AlertDialog.Builder(this);
+                builderInner.setMessage("Network not connected");
+                builderInner.setTitle("This app needs Internet for work sorry");
+                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        dialog.dismiss();
+                        System.exit(0);
+                    }
+                });
+                //eliminar la database i que no sen vaja del splash screen
+                //myProfileModel.deleteCurrentSummoner();
+                builderInner.show();
+
+            }else{
+                findMaestries();
+            }
+
+
         }else{
             fillList(StaticData.getMasteriesIds());
         }
@@ -145,7 +171,7 @@ public class ShowStatsActivity  extends AppCompatActivity implements IShowStatsA
 
                 //mirem quin champ es en champslistbyname y enviem a una altra activity els maestries on les mostrarem tote
 
-                Toast.makeText(getApplicationContext(),champSelected + " selected",Toast.LENGTH_LONG).show();//this, item + " selected", Toast.LENGTH_LONG
+                //Toast.makeText(getApplicationContext(),champSelected + " selected",Toast.LENGTH_LONG).show();//this, item + " selected", Toast.LENGTH_LONG
 
                 //CHANGE TO MAESTRY
                 switchToChampMastery(StaticData.getTheChampionNameKeys(champSelected));

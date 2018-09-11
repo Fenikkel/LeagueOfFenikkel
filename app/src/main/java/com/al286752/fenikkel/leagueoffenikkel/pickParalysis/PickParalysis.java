@@ -25,6 +25,7 @@ import com.al286752.fenikkel.leagueoffenikkel.ChampionMaestries;
 import com.al286752.fenikkel.leagueoffenikkel.R;
 import com.al286752.fenikkel.leagueoffenikkel.SkillComparator;
 import com.al286752.fenikkel.leagueoffenikkel.StaticData;
+import com.al286752.fenikkel.leagueoffenikkel.Utils;
 import com.al286752.fenikkel.leagueoffenikkel.champMastery.ChampMastery;
 import com.al286752.fenikkel.leagueoffenikkel.myProfile.DownloadImageTask;
 import com.al286752.fenikkel.leagueoffenikkel.server.ResponseReceiver;
@@ -140,8 +141,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         if(marksmanImage.getVisibility() == View.VISIBLE){
             super.onBackPressed();
         }
-
-        bgElement.setBackgroundColor(0xFF003366);
+        bgElement.setBackgroundResource(R.drawable.gradient_background);
+        //bgElement.setBackgroundColor(0xFF003366);
         marksmanImage.setVisibility(View.VISIBLE);
         supportImage.setVisibility(View.VISIBLE);
         topImage.setVisibility(View.VISIBLE);
@@ -408,7 +409,31 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
 
 
         if(StaticData.getMasteriesIds().isEmpty()){
-            findMaestries();
+
+            boolean networkInfo = Utils.isConnected(getApplicationContext());//DownloadCallback.getActiveNetworkInfo();//.getActiveNetworkInfo();
+
+            if (!networkInfo) {
+
+                android.app.AlertDialog.Builder builderInner = new android.app.AlertDialog.Builder(this);
+                builderInner.setMessage("Network not connected");
+                builderInner.setTitle("This app needs Internet for work sorry");
+                builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                        dialog.dismiss();
+                        //System.exit(0);
+                        finishAffinity();
+                    }
+                });
+                //eliminar la database i que no sen vaja del splash screen
+                //myProfileModel.deleteCurrentSummoner();
+                builderInner.show();
+
+            }
+            else{
+                findMaestries();
+            }
+
         }
 
 
@@ -588,6 +613,37 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             }
         });
 
+        @SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.light_show);
+        a.reset();
+        ImageView tv = (ImageView) findViewById(R.id.midImage);
+        tv.clearAnimation();
+
+        tv.startAnimation(a);
+
+
+        a.reset();
+        ImageView tv2 = (ImageView) findViewById(R.id.topImage);
+        tv2.clearAnimation();
+
+        tv2.startAnimation(a);
+
+        a.reset();
+        ImageView tv3 = (ImageView) findViewById(R.id.marksmanImage);
+        tv3.clearAnimation();
+
+        tv3.startAnimation(a);
+
+        a.reset();
+        ImageView tv4 = (ImageView) findViewById(R.id.jungleImage);
+        tv4.clearAnimation();
+
+        tv4.startAnimation(a);
+
+        a.reset();
+        ImageView tv5 = (ImageView) findViewById(R.id.jungleImage);
+        tv5.clearAnimation();
+
+        tv5.startAnimation(a);
 
     }
 

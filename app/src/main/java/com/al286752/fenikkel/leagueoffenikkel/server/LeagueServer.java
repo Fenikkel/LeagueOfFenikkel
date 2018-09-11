@@ -82,7 +82,7 @@ public class LeagueServer implements ILeagueServer {
 
     public LeagueServer(Context context){
         this.context = context;
-        getIconVersion();
+        getIconVersion(); //era per a tindre la versio nomes entrar a la aplicació
 
     }
 
@@ -401,6 +401,7 @@ public class LeagueServer implements ILeagueServer {
                     String extracto = jsonArray.optString(0);
                     iconVersion = extracto;
                     StaticData.setVersion(iconVersion);
+                    StaticData.setCurrentVersion(iconVersion);
 
                 }catch (JSONException e){
                     //responseReceiver.onErrorReceived(BAD_JSON_IN_SERVER_RESPONSE);

@@ -1,5 +1,8 @@
 package com.al286752.fenikkel.leagueoffenikkel.server;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -50,6 +53,7 @@ public class DownloadTask extends AsyncTask<Void, Void, String> {
                 (networkInfo.getType() != ConnectivityManager.TYPE_WIFI
                         && networkInfo.getType() != ConnectivityManager.TYPE_MOBILE)) {
             downloadCallback.onError(NETWORK_NOT_CONNECTED);
+
             cancel(true);
         }
     }
