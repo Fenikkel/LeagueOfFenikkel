@@ -1,5 +1,9 @@
 package com.al286752.fenikkel.leagueoffenikkel.pickParalysis;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -14,6 +18,7 @@ import android.util.Pair;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -613,41 +618,91 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             }
         });
 
-        @SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.light_show);
+        //supressLint serveix per eliminar l'ultim dibuixat que deixes en l'animacio?? NOPE
+        /*@SuppressLint("ResourceType") Animation a = AnimationUtils.loadAnimation(this, R.animator.light_show);
         a.reset();
         ImageView tv = (ImageView) findViewById(R.id.midImage);
         tv.clearAnimation();
 
         tv.startAnimation(a);
 
-
-        a.reset();
+        @SuppressLint("ResourceType") Animation b = AnimationUtils.loadAnimation(this, R.animator.light_show);
+        b.reset();
         ImageView tv2 = (ImageView) findViewById(R.id.topImage);
         tv2.clearAnimation();
 
-        tv2.startAnimation(a);
+        tv2.startAnimation(b);
 
-        a.reset();
+        @SuppressLint("ResourceType") Animation c = AnimationUtils.loadAnimation(this, R.animator.light_show);
+        c.reset();
         ImageView tv3 = (ImageView) findViewById(R.id.marksmanImage);
         tv3.clearAnimation();
 
-        tv3.startAnimation(a);
+        tv3.startAnimation(c);
 
-        a.reset();
+        @SuppressLint("ResourceType") Animation d = AnimationUtils.loadAnimation(this, R.animator.light_show);
+        d.reset();
         ImageView tv4 = (ImageView) findViewById(R.id.jungleImage);
         tv4.clearAnimation();
 
-        tv4.startAnimation(a);
+        tv4.startAnimation(d);
 
-        a.reset();
-        ImageView tv5 = (ImageView) findViewById(R.id.jungleImage);
-        tv5.clearAnimation();
 
-        tv5.startAnimation(a);
+        @SuppressLint("ResourceType") Animation e = AnimationUtils.loadAnimation(this, R.animator.light_show);
+        e.reset();
+
+        supportImage.clearAnimation();
+        supportImage.startAnimation(e);
+        //ImageView tv5 = (ImageView) findViewById(R.id.supportImage);
+        //tv5.clearAnimation();
+
+        //tv5.startAnimation(e);
+        */
+
+        setAlphaAnimation(supportImage);
+        setAlphaAnimation(marksmanImage);
+        setAlphaAnimation(topImage);
+        setAlphaAnimation(midImage);
+        setAlphaAnimation(jungleImage);
+
 
     }
 
+    public static void setAlphaAnimation(View v) {
+        /*ObjectAnimator fadeOut = ObjectAnimator.ofFloat(v, "alpha",  1f, .3f);
+        fadeOut.setDuration(2000);*/
 
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1f);
+        fadeIn.setDuration(500);
+
+        ObjectAnimator moveIn = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1f);
+        moveIn.setDuration(500);
+
+        float targetY = 0.2f;
+
+        ObjectAnimator y = ObjectAnimator.ofFloat(v,
+                "translationY", v.getY()-targetY, v.getY());
+
+        /*ObjectAnimator x = ObjectAnimator.ofFloat(v,
+                "translationX", v.getX(), targetX);
+
+        animSetXY.playTogether(x, y);
+        animSetXY.setInterpolator(new LinearInterpolator(1f));*/
+
+        final AnimatorSet mAnimationSet = new AnimatorSet();
+
+        mAnimationSet.playTogether(fadeIn,y);//.after(fadeOut);
+        //mAnimationSet.setInterpolator(new LinearInterpolator(1f));
+
+        /*mAnimationSet.addListener(new AnimatorListenerAdapter() { //QUE FER QUAN L'ANIMACIÓ ACABA
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                mAnimationSet.start();
+            }
+        });*/
+        mAnimationSet.start();
+    }
 
     private void switchToChampMastery(Pair<String,Integer> pareja) {
 
