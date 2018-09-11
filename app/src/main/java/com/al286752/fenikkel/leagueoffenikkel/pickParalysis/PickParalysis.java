@@ -678,7 +678,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         ObjectAnimator moveIn = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1f);
         moveIn.setDuration(1500);
 
-        float targetY = 200f;
+        float targetY = 700f;
 
         ObjectAnimator y = ObjectAnimator.ofFloat(v,
                 "translationY", v.getY()-targetY, v.getY());
