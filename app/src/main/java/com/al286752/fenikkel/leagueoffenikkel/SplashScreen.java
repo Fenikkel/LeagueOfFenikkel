@@ -66,8 +66,8 @@ public class SplashScreen extends AppCompatActivity {
         if (!networkInfo) {
 
             AlertDialog.Builder builderInner = new AlertDialog.Builder(this);
-            builderInner.setMessage(NETWORK_NOT_CONNECTED);
-            builderInner.setTitle("This app needs Internet for work sorry");
+            builderInner.setMessage("This app needs Internet for work sorry");
+            builderInner.setTitle(NETWORK_NOT_CONNECTED);
             builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog,int which) {

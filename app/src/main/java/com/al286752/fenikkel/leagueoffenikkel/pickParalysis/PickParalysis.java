@@ -420,8 +420,8 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
             if (!networkInfo) {
 
                 android.app.AlertDialog.Builder builderInner = new android.app.AlertDialog.Builder(this);
-                builderInner.setMessage("Network not connected");
-                builderInner.setTitle("This app needs Internet for work sorry");
+                builderInner.setMessage("This app needs Internet for work sorry");
+                builderInner.setTitle("Network not connected");
                 builderInner.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog,int which) {
@@ -673,12 +673,12 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         fadeOut.setDuration(2000);*/
 
         ObjectAnimator fadeIn = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1f);
-        fadeIn.setDuration(500);
+        fadeIn.setDuration(1000);
 
         ObjectAnimator moveIn = ObjectAnimator.ofFloat(v, "alpha", 0.0f, 1f);
-        moveIn.setDuration(500);
+        moveIn.setDuration(1500);
 
-        float targetY = 0.2f;
+        float targetY = 200f;
 
         ObjectAnimator y = ObjectAnimator.ofFloat(v,
                 "translationY", v.getY()-targetY, v.getY());
@@ -692,7 +692,7 @@ public class PickParalysis extends AppCompatActivity implements IShowStatsActivi
         final AnimatorSet mAnimationSet = new AnimatorSet();
 
         mAnimationSet.playTogether(fadeIn,y);//.after(fadeOut);
-        //mAnimationSet.setInterpolator(new LinearInterpolator(1f));
+        mAnimationSet.setInterpolator(new LinearInterpolator());
 
         /*mAnimationSet.addListener(new AnimatorListenerAdapter() { //QUE FER QUAN L'ANIMACIÓ ACABA
             @Override
