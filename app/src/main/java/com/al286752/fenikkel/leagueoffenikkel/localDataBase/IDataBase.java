@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public interface IDataBase {
-    void insertCurrentSummoner(int summonerID, String lastVersion, String region, String regionName);
+    void insertCurrentSummoner(String summonerID, String lastVersion, String region, String regionName);
     ArrayList<String> getCurrentSummoner();
     boolean deleteCurrentSummoner();
 }

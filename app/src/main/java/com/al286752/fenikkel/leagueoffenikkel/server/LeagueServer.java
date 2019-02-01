@@ -30,8 +30,8 @@ public class LeagueServer implements ILeagueServer {
     private static final String HTTPS = "https://";
     private static final String BASE_URL = ".api.riotgames.com";
     private static final String API_KEY = "?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae";
-    private static final String SEARCH_SUMMONER = "/lol/summoner/v3/summoners/by-name/"; //aci falta sumarli el nickname + la API_KEY
-    private static final String SEARCH_SUMMONER_BY_ID = "/lol/summoner/v3/summoners/";
+    private static final String SEARCH_SUMMONER = "/lol/summoner/v4/summoners/by-name/"; //aci falta sumarli el nickname + la API_KEY
+    private static final String SEARCH_SUMMONER_BY_ID = "/lol/summoner/v4/summoners/";
 
     //ICONO CHAMP
     //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/Aatrox.png
@@ -56,7 +56,7 @@ public class LeagueServer implements ILeagueServer {
     //MAESTRIA
     //https://euw1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/22339646?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
 
-    private static final String SEARCH_MAESTRIES ="/lol/champion-mastery/v3/champion-masteries/by-summoner/";
+    private static final String SEARCH_MAESTRIES ="/lol/champion-mastery/v4/champion-masteries/by-summoner/";
     private String summonerId;
     private static final String BY_CHAMPION = "/by-champion/";
 
@@ -67,7 +67,8 @@ public class LeagueServer implements ILeagueServer {
 
 
     //https://euw1.api.riotgames.com/lol/static-data/v3/champions?api_key=RGAPI-1b4973bd-cc49-4833-b9cf-6711ea3412ae
-    private static final String CHAMPIONS = BASE_URL+"/lol/static-data/v3/champions"+API_KEY;  //ESTE NO TIENE PARAMETROS
+    //private static final String CHAMPIONS = "http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json"; //BASE_URL+"/lol/static-data/v4/champions"+API_KEY;  //ESTE NO TIENE PARAMETROS
+    //
 
 
     //https://euw1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=tags&tags=info&dataById=true&api_key=RGAPI-4471689c-b44c-4021-bcaa-0812fde93338
@@ -265,7 +266,9 @@ public class LeagueServer implements ILeagueServer {
     @Override
     public void getChampions(final ResponseReceiver<JSONObject> responseReceiver) { //CUIDAU AÇO ESTA DEPRECATED! NO ESTA BEN FICAT LA REGIO EN "CHAMPIONS"
 
-        DownloadTask downloadTask =  new DownloadTask(CHAMPIONS, new DownloadCallback<String>() {//CUIDAO NO ESTA BEN FICA LA REGIO EN "CHAMPIONS"
+        String champ = "http://ddragon.leagueoflegends.com/cdn/"+ StaticData.getCurrentVersion() +"/data/en_US/champion.json";
+
+        DownloadTask downloadTask =  new DownloadTask(champ, new DownloadCallback<String>() {//CUIDAO NO ESTA BEN FICA LA REGIO EN "CHAMPIONS"
             @Override
             public void updateFromDownload(String result) {
                 try {

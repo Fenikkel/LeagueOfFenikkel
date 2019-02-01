@@ -10,9 +10,7 @@ import android.os.AsyncTask;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by jcamen on 27/02/18.
- */
+
 
 public class DownloadTask extends AsyncTask<Void, Void, String> {
 

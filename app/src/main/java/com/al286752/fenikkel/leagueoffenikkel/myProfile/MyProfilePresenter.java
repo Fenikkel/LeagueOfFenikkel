@@ -20,7 +20,7 @@ public class MyProfilePresenter  {
     private IMyProfileView myProfileView;
     private IMyProfileModel myProfileModel;
 
-    private long idSummoner;
+    private String idSummoner;
     private long summonerLevel;
 
     private String nickNamePresenter;
@@ -58,7 +58,7 @@ public class MyProfilePresenter  {
 
         nickNamePresenter = response.optString("name");
         iconIDPresenter =response.optInt("profileIconId");
-        idSummoner = response.optLong("id");
+        idSummoner = response.optString("id");
         summonerLevel = response.optLong("summonerLevel");
 
 
@@ -69,7 +69,7 @@ public class MyProfilePresenter  {
 
         myProfileView.setSummonerIcon(urlIcon);
 
-        myProfileModel.insertCurrentSummoner((int)idSummoner,StaticData.getVersion(), StaticData.getRegion(), StaticData.getRegionName());//
+        myProfileModel.insertCurrentSummoner(idSummoner,StaticData.getVersion(), StaticData.getRegion(), StaticData.getRegionName());//
 
 
     }

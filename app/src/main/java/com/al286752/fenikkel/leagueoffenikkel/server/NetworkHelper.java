@@ -12,10 +12,6 @@ import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by jcamen on 23/02/18.
- */
-
 public class NetworkHelper {
     private static String TAG = NetworkHelper.class.getSimpleName();
     private static int CHUNK_SIZE = 4096;

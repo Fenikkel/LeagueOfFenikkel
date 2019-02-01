@@ -48,7 +48,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
     //private ShowStatsPresenter presenter;
 
 
-    long idSummoner = -1;
+    String idSummoner = null;
 
 
     @Override
@@ -139,9 +139,9 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
             }
 
             if(StaticData.getIdSummoner()!=null){
-                idSummoner = Long.parseLong(StaticData.getIdSummoner());
+                idSummoner = StaticData.getIdSummoner();
             }else {
-                idSummoner = -1;
+                idSummoner = null;
             }
 
 
@@ -185,14 +185,14 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
                         //lvltext.setText(String.valueOf(response.optLong("summonerLevel")));
                         //StaticData.setSumonerLVL(String.valueOf(response.optLong("summonerLevel")));
                         //setSummonerIcon(String.valueOf(response.optInt("profileIconId")));
-                        setNicknameText(response.optString("name"),response.optLong("summonerLevel"), Long.parseLong(StaticData.getIdSummoner()));
+                        setNicknameText(response.optString("name"),response.optLong("summonerLevel"), StaticData.getIdSummoner());
 
 
                         String urlIcon = myProfileModel.getUrlIcon(response.optInt("profileIconId"));
 
                         setSummonerIcon(urlIcon);
 
-                        myProfileModel.insertCurrentSummoner(Integer.parseInt(StaticData.getIdSummoner()),StaticData.getVersion(), StaticData.getRegion(), StaticData.getRegionName());//
+                        myProfileModel.insertCurrentSummoner(StaticData.getIdSummoner(),StaticData.getVersion(), StaticData.getRegion(), StaticData.getRegionName());//
                     }
 
                     @Override
@@ -422,7 +422,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
     }
 
     private void switchToShowPickParalysis() {
-        if(idSummoner == -1){
+        if(idSummoner == null){
             View parentLayout = findViewById(android.R.id.content);
             Snackbar.make(parentLayout, "Please insert your summoner name to start", Snackbar.LENGTH_LONG).show();
             return;
@@ -453,7 +453,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
     @Override
     public void switchToShowStats(String nickName) {
 
-        if(idSummoner == -1){
+        if(idSummoner == null){
             View parentLayout = findViewById(android.R.id.content);
             Snackbar.make(parentLayout, "Please insert your summoner name to start", Snackbar.LENGTH_LONG).show();
             return;
@@ -502,7 +502,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         //https://developer.riotgames.com/response-codes.html
     }
 
-    public void setNicknameText(String nicknam, long lvl, long sumId) {
+    public void setNicknameText(String nicknam, long lvl, String sumId) {
         this.nicknameText.setText(nicknam);
 
         StaticData.setIdSummoner(String.valueOf(sumId));

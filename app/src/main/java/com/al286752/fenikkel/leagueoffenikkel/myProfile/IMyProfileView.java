@@ -12,7 +12,7 @@ public interface IMyProfileView {
 
     void showError(String message);
 
-    void setNicknameText(String text, long lvl, long sumId);
+    void setNicknameText(String text, long lvl, String sumId);
 
     void setSummonerIcon(String urlIcon);
 }

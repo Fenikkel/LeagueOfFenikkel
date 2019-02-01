@@ -59,7 +59,7 @@ public class MyProfileModel implements IMyProfileModel, IDataBase {
 
 
     @Override
-    public void insertCurrentSummoner(int summonerID, String lastVersion, String region,String regionName) {
+    public void insertCurrentSummoner(String summonerID, String lastVersion, String region,String regionName) {
         dataBase.insertCurrentSummoner(summonerID,lastVersion,region, regionName);
     }
 

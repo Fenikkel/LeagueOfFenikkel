@@ -62,7 +62,7 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
     private void createCurrentSummoner(SQLiteDatabase db) {
 
         String create = CREATE_TABLE + " " + START + " ("
-                        + SUMMONER_ID + " " + INTEGER+ " " + PRIMARY_KEY_NOT_NULL+ ", "
+                        + SUMMONER_ID + " " + TEXT+ " " + PRIMARY_KEY_NOT_NULL+ ", "
                         + LAST_VERSION + " " + TEXT + " " + NOT_NULL + ", "
                         + REGION + " " + TEXT + " " + NOT_NULL + ","
                         + REGION_NAME + " " + TEXT + " " + NOT_NULL + ");";
@@ -118,14 +118,14 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
 
     }
 
-    public void insertCurrentSummoner(int summonerID, String lastVersion, String region, String regionName){
+    public void insertCurrentSummoner(String summonerID, String lastVersion, String region, String regionName){
         SQLiteDatabase db = getWritableDatabase();
 
         //miramos si ya esta insertado
         Cursor cursor = db.query(START,null,null,null,null,null, null);
         if(cursor!=null && cursor.getCount()==1){
             cursor.moveToNext();// cursor.moveToFirst()
-            if(cursor.getInt(0)== summonerID && cursor.getString(1)== lastVersion && cursor.getString(2)== region && cursor.getString(3)== regionName){
+            if(cursor.getString(0)== summonerID && cursor.getString(1)== lastVersion && cursor.getString(2)== region && cursor.getString(3)== regionName){
                 return;
             }else{
                 deleteCurrentSummoner();
