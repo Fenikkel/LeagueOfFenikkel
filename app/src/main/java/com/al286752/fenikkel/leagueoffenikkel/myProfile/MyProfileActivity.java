@@ -219,6 +219,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
                     @Override
                     public void onErrorReceived(String message) {
                         View parentLayout = findViewById(android.R.id.content);
+                        System.out.print("showStatsModel.getChampionsByID");
                         Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
                     }
                 });
@@ -264,6 +265,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
                     @Override
                     public void onErrorReceived(String message) {
                         View parentLayout = findViewById(android.R.id.content);
+                        System.out.print("showStatsModel.getChampionsByID");
                         Snackbar.make(parentLayout, message, Snackbar.LENGTH_LONG).show();
                     }
                 });
@@ -496,6 +498,7 @@ public class MyProfileActivity extends AppCompatActivity implements IShowStatsAc
         }
         else {
             snackString = message;
+            System.out.print("ONError");
         }
        Snackbar.make(parentLayout, snackString, Snackbar.LENGTH_LONG).show();
 

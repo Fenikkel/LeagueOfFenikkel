@@ -89,7 +89,7 @@ public class DataBase extends SQLiteOpenHelper implements IDataBase {
 
         while (cursor.moveToNext()){// el primer move te porta a la primera fila? es com si estiguera fora de la tabla
 
-            String idSummoner = String.valueOf(cursor.getInt(0));
+            String idSummoner = cursor.getString(0);//String.valueOf(cursor.getInt(0));
             String lastVersion = cursor.getString(1);
             String region = cursor.getString(2);
             String regionName = cursor.getString(3);
